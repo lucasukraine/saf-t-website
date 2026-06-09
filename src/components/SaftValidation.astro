@@ -1,0 +1,473 @@
+---
+// SaftValidation.astro — XML generation and validation UI mockup section
+---
+
+<section class="s-validation" id="validation" aria-labelledby="validation-h2">
+  <div class="container">
+
+    <div class="val-layout">
+
+      <!-- Left: text -->
+      <div class="val-text">
+        <div class="eyebrow on-dark">Валідація XML</div>
+        <h2 id="validation-h2" class="val-h2">
+          XSD-валідація SAF-T до подачі до ДПС
+        </h2>
+        <p class="val-lead">
+          SAF-T Connector перевіряє кожен сформований XML-файл за офіційною
+          XSD-схемою ДПС України перед відправкою. Помилка, виявлена до подачі,
+          не є порушенням. Помилка після — є.
+        </p>
+
+        <div class="val-points">
+          <div class="val-point">
+            <div class="val-point-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="2" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.2" fill="rgba(59,130,246,.08)"/>
+                <path d="M6 10 L8.5 12.5 L14 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="val-point-h3">Валідація за XSD-схемою ДПС</h3>
+              <p>Перевірка відповідності офіційній специфікації SAF-T UA v2.0, включаючи всі обов'язкові елементи та типи даних.</p>
+            </div>
+          </div>
+          <div class="val-point">
+            <div class="val-point-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.2" fill="rgba(59,130,246,.08)"/>
+                <path d="M10 6 L10 11 M10 13.5 L10 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="val-point-h3">Детальний звіт помилок</h3>
+              <p>Кожна помилка описується з указівкою XPath-шляху до елемента, типу порушення та рекомендованого виправлення.</p>
+            </div>
+          </div>
+          <div class="val-point">
+            <div class="val-point-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="M4 10 H16 M4 6 H12 M4 14 H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M15 12 L18 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                <circle cx="15" cy="11" r="3" stroke="currentColor" stroke-width="1.2" fill="rgba(59,130,246,.08)"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="val-point-h3">Перевірка стороннього XML</h3>
+              <p>Модуль валідації перевіряє будь-який XML-файл SAF-T, сформований іншими системами або вручну.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: validation UI mockup -->
+      <div class="val-mockup" aria-hidden="true">
+        <div class="vm-card">
+
+          <!-- Header -->
+          <div class="vm-header">
+            <div class="vm-header-left">
+              <span class="vm-title">Звіт валідації XSD</span>
+              <span class="vm-file">SAF-T_UA_2024_Q4.xml</span>
+            </div>
+            <div class="vm-result pass">
+              <span class="vm-res-dot"></span>
+              PASSED
+            </div>
+          </div>
+
+          <!-- Summary row -->
+          <div class="vm-summary">
+            <div class="vm-sum-item ok">
+              <span class="vm-sum-val">147</span>
+              <span class="vm-sum-lbl">перевірок</span>
+            </div>
+            <div class="vm-sum-item ok">
+              <span class="vm-sum-val">0</span>
+              <span class="vm-sum-lbl">критичних</span>
+            </div>
+            <div class="vm-sum-item ok">
+              <span class="vm-sum-val">0</span>
+              <span class="vm-sum-lbl">попереджень</span>
+            </div>
+            <div class="vm-sum-item">
+              <span class="vm-sum-val">4.2 MB</span>
+              <span class="vm-sum-lbl">розмір файлу</span>
+            </div>
+          </div>
+
+          <!-- Check groups -->
+          <div class="vm-groups">
+
+            <div class="vm-group">
+              <div class="vm-group-head">
+                <span class="vm-group-icon ok">✓</span>
+                <span class="vm-group-name">Header</span>
+                <span class="vm-group-count">12 / 12</span>
+              </div>
+              <div class="vm-group-items">
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AuditFileVersion = 2.0</span></div>
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TaxEntity ЄДРПОУ формат</span></div>
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">FiscalYear діапазон дат</span></div>
+                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 9 перевірок</span></div>
+              </div>
+            </div>
+
+            <div class="vm-group">
+              <div class="vm-group-head">
+                <span class="vm-group-icon ok">✓</span>
+                <span class="vm-group-name">MasterFiles — Accounts</span>
+                <span class="vm-group-count">38 / 38</span>
+              </div>
+              <div class="vm-group-items">
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountID унікальність</span></div>
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountType допустимі значення</span></div>
+                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 36 перевірок</span></div>
+              </div>
+            </div>
+
+            <div class="vm-group">
+              <div class="vm-group-head">
+                <span class="vm-group-icon ok">✓</span>
+                <span class="vm-group-name">GeneralLedger Entries</span>
+                <span class="vm-group-count">62 / 62</span>
+              </div>
+              <div class="vm-group-items">
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TransactionDate ISO 8601</span></div>
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">Debit/Credit balance</span></div>
+                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 60 перевірок</span></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Footer action -->
+          <div class="vm-footer">
+            <div class="vm-schema-ref">
+              <span class="vm-schema-lbl">XSD-схема:</span>
+              <span class="vm-schema-val">SAF-T_UA_v2.0_ДПС.xsd</span>
+            </div>
+            <div class="vm-export-btn">
+              <span>↓</span> Завантажити XML
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Error example card (dimmed — no errors in this case) -->
+        <div class="vm-err-example">
+          <div class="vee-head">
+            <span class="vee-icon warn">⚠</span>
+            <span class="vee-label">Приклад повідомлення про помилку</span>
+          </div>
+          <div class="vee-body">
+            <span class="vee-path">/SAFTFile/GeneralLedger/Entry[1042]/TransactionDate</span>
+            <span class="vee-msg">cvc-datatype-valid: значення '03-14-2024' не відповідає типу xs:date</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.s-validation {
+  background: var(--dark-section);
+  color: var(--on-dark);
+  padding: var(--section-py) 0;
+  position: relative;
+}
+.s-validation::before {
+  content: "";
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 300px;
+  background: radial-gradient(ellipse, rgba(29,78,216,.14), transparent 65%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.val-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Text */
+.val-text { display: flex; flex-direction: column; gap: 32px; }
+.val-text .eyebrow { margin-bottom: 0; }
+.val-h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(26px, 2.6vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+}
+.val-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--on-dark-soft);
+  max-width: 54ch;
+}
+
+.val-points { display: flex; flex-direction: column; gap: 24px; }
+.val-point {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.val-point-icon {
+  width: 28px; height: 28px;
+  color: var(--accent-light);
+  flex: none;
+  margin-top: 2px;
+}
+.val-point-h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.018em;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.val-point p {
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--on-dark-soft);
+}
+
+/* === Validation Mockup === */
+.val-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vm-card {
+  background: rgba(13,20,45,.70);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,.45);
+}
+
+.vm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(0,0,0,.20);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.vm-header-left { display: flex; flex-direction: column; gap: 1px; }
+.vm-title {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(238,242,255,.55);
+}
+.vm-file {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(238,242,255,.75);
+}
+.vm-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  flex: none;
+}
+.vm-result.pass {
+  background: rgba(22,163,74,.12);
+  border: 1px solid rgba(22,163,74,.25);
+  color: #4ade80;
+}
+.vm-res-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.vm-summary {
+  display: flex;
+  gap: 0;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.vm-sum-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: 16px;
+  border-right: 1px solid rgba(255,255,255,.06);
+  margin-right: 16px;
+}
+.vm-sum-item:last-child { border-right: none; margin-right: 0; }
+.vm-sum-val {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1;
+}
+.vm-sum-item.ok .vm-sum-val { color: #4ade80; }
+.vm-sum-lbl {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: rgba(238,242,255,.35);
+  text-transform: uppercase;
+}
+
+.vm-groups {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.vm-group {
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.vm-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,.15);
+}
+.vm-group-icon {
+  font-size: 11px;
+  font-weight: 700;
+  width: 16px;
+  text-align: center;
+}
+.vm-group-icon.ok { color: #4ade80; }
+.vm-group-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(238,242,255,.70);
+  flex: 1;
+}
+.vm-group-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(238,242,255,.35);
+}
+.vm-group-items {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.vm-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+}
+.vm-check.dim { opacity: .45; }
+.vc-icon { font-size: 10px; font-weight: 700; width: 14px; text-align: center; flex: none; }
+.vm-check.ok .vc-icon { color: #4ade80; }
+.vc-name { font-family: var(--mono); font-size: 11.5px; color: rgba(238,242,255,.60); }
+
+.vm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: rgba(0,0,0,.12);
+}
+.vm-schema-ref { display: flex; gap: 6px; align-items: center; }
+.vm-schema-lbl {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: rgba(238,242,255,.30);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.vm-schema-val {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: rgba(238,242,255,.55);
+}
+.vm-export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-light);
+  cursor: default;
+}
+
+/* Error example */
+.vm-err-example {
+  background: rgba(13,20,45,.50);
+  border: 1px solid rgba(240,90,30,.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.vee-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.vee-icon { font-size: 12px; }
+.vee-icon.warn { color: rgba(240,90,30,.65); }
+.vee-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(238,242,255,.30);
+}
+.vee-body { display: flex; flex-direction: column; gap: 4px; }
+.vee-path {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: rgba(240,90,30,.65);
+  word-break: break-all;
+}
+.vee-msg {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: rgba(238,242,255,.40);
+  line-height: 1.5;
+}
+
+@media (max-width: 1080px) {
+  .val-layout { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 720px) {
+  .val-layout { gap: 36px; }
+  .vm-summary { flex-wrap: wrap; }
+  .vm-sum-item { min-width: 40%; }
+}
+</style>

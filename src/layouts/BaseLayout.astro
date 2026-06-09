@@ -1,0 +1,143 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  schemaExtra?: string;
+}
+
+const {
+  title = 'SAF-T Connector — формування та валідація SAF-T UA файлів',
+  description = 'SAF-T Connector формує XML-файли SAF-T UA з SAP, BAS/1C, Odoo та Excel. Вбудована XSD-валідація за схемою ДПС. Готовий стандартний аудиторський файл для ДПС України.',
+  canonical,
+  noIndex = false,
+  schemaExtra,
+} = Astro.props;
+
+// Dynamic site URL — driven by astro.config.mjs `site` value.
+// GitHub Pages: 'https://YOUR-USERNAME.github.io'  → siteUrl = 'https://YOUR-USERNAME.github.io'
+// Production:   'https://saf-t.com.ua'             → siteUrl = 'https://saf-t.com.ua'
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://saf-t.com.ua';
+const base = import.meta.env.BASE_URL; // e.g. '/saf-t-website/' or '/'
+
+const canonicalUrl = canonical ?? (siteUrl + Astro.url.pathname.replace(/\/$/, '') + '/').replace(/\/\/$/, '/');
+const ogImage = Astro.props.ogImage ?? `${siteUrl}/og-image.jpg`;
+
+// Automatically add noindex when deployed to GitHub Pages.
+// On production (saf-t.com.ua) noindex is never added unless explicitly set.
+const isGithubPages = Astro.site?.hostname.endsWith('.github.io') ?? false;
+const effectiveNoIndex = noIndex || isGithubPages;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'SAF-T Connector',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: ogImage,
+    width: 1200,
+    height: 630,
+  },
+  description: 'Програмне рішення для автоматичного формування, валідації та експорту файлів SAF-T UA відповідно до вимог ДПС України.',
+  areaServed: 'UA',
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'LUCAS',
+    url: 'https://www.lucasua.com',
+  },
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${siteUrl}/#software`,
+  name: 'SAF-T Connector',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Cloud, Windows',
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+  },
+  description: 'SAF-T Connector — програмне рішення для автоматичного формування XML-файлів SAF-T UA, XSD-валідації та подачі до ДПС України. Підтримує SAP, BAS/1C, Oracle, Microsoft Dynamics, Odoo та інші ERP-системи.',
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'uk',
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'Бухгалтери, IT-директори, фінансові директори великих та середніх підприємств',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: 'SAF-T Connector',
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'uk',
+};
+
+const combinedSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [orgSchema, softwareSchema, websiteSchema],
+});
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {effectiveNoIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SAF-T Connector" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon — base-aware so it works under any subpath -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+
+    <!-- Font preload — Cyrillic subsets are LCP-critical -->
+    <link rel="preload" href={`${base}fonts/onest/onest-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href={`${base}fonts/manrope/manrope-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" is:inline set:html={combinedSchema} />
+    {schemaExtra && <script type="application/ld+json" is:inline set:html={schemaExtra} />}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти до основного вмісту</a>
+    <div class="page-scrim" id="page-scrim" aria-hidden="true"></div>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

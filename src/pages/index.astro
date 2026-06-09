@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SaftHero from '../components/SaftHero.astro';
+import SaftExplainer from '../components/SaftExplainer.astro';
+import SaftBenefits from '../components/SaftBenefits.astro';
+import SaftErpGrid from '../components/SaftErpGrid.astro';
+import SaftHowItWorks from '../components/SaftHowItWorks.astro';
+import SaftValidation from '../components/SaftValidation.astro';
+import SaftTrust from '../components/SaftTrust.astro';
+import SaftFaq from '../components/SaftFaq.astro';
+import SaftCta from '../components/SaftCta.astro';
+
+const title = 'SAF-T Connector — формування та валідація SAF-T UA файлів';
+const description = 'SAF-T Connector формує XML-файли SAF-T UA з SAP, BAS/1C, Odoo та Excel. Вбудована XSD-валідація за схемою ДПС. Готовий стандартний аудиторський файл для ДПС України.';
+
+const faqSchemaItems = [
+  {
+    q: "Що таке SAF-T і для чого він потрібен в Україні?",
+    a: "SAF-T (Standard Audit File for Tax) — стандартний електронний файл у форматі XML, який підприємства передають до ДПС на вимогу для перевірки облікових даних. В Україні застосовується формат SAF-T UA, затверджений Міністерством фінансів.",
+  },
+  {
+    q: "Хто зобов'язаний подавати SAF-T UA і з якого року?",
+    a: "З 2025 року зобов'язання поширюється на великих платників ПДВ. З 2026 року — на підприємства середнього розміру.",
+  },
+  {
+    q: "Що робить SAF-T Connector?",
+    a: "SAF-T Connector автоматично витягує облікові дані з ERP-системи (SAP, BAS/1C, Odoo або Excel), трансформує їх у структуру SAF-T UA v2.0 та формує готовий XML-файл з XSD-валідацією за офіційною схемою ДПС.",
+  },
+  {
+    q: "Які ERP-системи підтримує SAF-T Connector?",
+    a: "SAF-T Connector підтримує SAP ERP та S/4HANA, BAS та 1C Бухгалтерія, Odoo 16 та 17, Oracle ERP, Microsoft Dynamics, JD Edwards, Scala, Парус і Фінколекцію, а також будь-яку систему через SQL, API або CSV/Excel-експорт.",
+  },
+  {
+    q: "Що таке XSD-валідація SAF-T?",
+    a: "XSD-валідація перевіряє XML-файл SAF-T на відповідність офіційній XSD-схемі ДПС України: правильність структури, типи даних, формати дат, обов'язкові поля. Файл, що не проходить валідацію, буде відхилений ДПС.",
+  },
+  {
+    q: "Скільки часу займає впровадження SAF-T Connector?",
+    a: "Стандартний проєкт займає від 4 до 8 тижнів: аналіз ERP (1–2 тижні), розробка та налаштування (2–4 тижні), тестування (1–2 тижні).",
+  },
+  {
+    q: "Чи потребує SAF-T Connector змін в ERP-системі?",
+    a: "Ні. SAF-T Connector підключається через стандартні інтерфейси ERP і не вносить змін до облікової конфігурації.",
+  },
+  {
+    q: "Що відбувається при зміні XSD-схеми ДПС?",
+    a: "SAF-T Connector підтримується відповідно до чинної XSD-схеми. Клієнти на технічній підтримці отримують оновлення при кожній зміні офіційної специфікації ДПС.",
+  },
+];
+
+const faqPageSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqSchemaItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a,
+    },
+  })),
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemaExtra={faqPageSchema}
+>
+  <SaftHero />
+  <SaftExplainer />
+  <SaftBenefits />
+  <SaftErpGrid />
+  <SaftHowItWorks />
+  <SaftValidation />
+  <SaftTrust />
+  <SaftFaq />
+  <SaftCta />
+</BaseLayout>

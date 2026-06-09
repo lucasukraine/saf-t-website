@@ -1,0 +1,192 @@
+---
+// SaftFaq.astro — FAQ accordion with AEO-optimized Q&A structure
+// Question text is in the DOM for crawlers and AI answer engines.
+
+const faqs = [
+  {
+    q: "Що таке SAF-T і для чого він потрібен в Україні?",
+    a: "SAF-T (Standard Audit File for Tax) — стандартний електронний файл у форматі XML, який підприємства передають до ДПС на вимогу для перевірки облікових даних. В Україні застосовується формат SAF-T UA, затверджений Міністерством фінансів. Файл містить дані про план рахунків, журнал проводок, реєстри ПДВ, необоротні активи та іншу бухгалтерську інформацію за звітний період.",
+  },
+  {
+    q: "Хто зобов'язаний подавати SAF-T UA і з якого року?",
+    a: "З 2025 року зобов'язання поширюється на великих платників ПДВ, внесених до Реєстру великих платників ДПС. З 2026 року — на підприємства середнього розміру. Конкретні критерії визначаються відповідно до наказу Міністерства фінансів України та переліку ДПС.",
+  },
+  {
+    q: "Що робить SAF-T Connector і чим він відрізняється від ручного формування?",
+    a: "SAF-T Connector автоматично витягує облікові дані з ERP-системи (SAP, BAS/1C, Odoo або Excel), трансформує їх у структуру SAF-T UA v2.0 та формує готовий XML-файл. На відміну від ручного підходу, інструмент усуває необхідність ручної конвертації, зменшує ризик помилок і скорочує час підготовки звіту з кількох тижнів до кількох годин. Вбудований модуль XSD-валідації перевіряє файл перед поданням до ДПС.",
+  },
+  {
+    q: "Які ERP-системи підтримує SAF-T Connector?",
+    a: "SAF-T Connector підтримує SAP ERP та S/4HANA (через RFC/BAPI), BAS та 1C Бухгалтерія (українські конфігурації), Odoo 16 та 17, Oracle ERP, Microsoft Dynamics, JD Edwards, Scala, Парус і Фінколекцію. Для систем без готового конектора інтеграція виконується через API, SQL-запит до бази даних або CSV/Excel-експорт.",
+  },
+  {
+    q: "Що таке XSD-валідація SAF-T і чому вона важлива?",
+    a: "XSD (XML Schema Definition) — офіційна специфікація структури файлу SAF-T UA, яку публікує ДПС України. XSD-валідація перевіряє, чи відповідає XML-файл цій специфікації: правильність назв елементів, типи даних, формати дат, обов'язкові поля. Файл, що не проходить XSD-валідацію, буде відхилений ДПС. SAF-T Connector перевіряє файл автоматично та видає детальний звіт з переліком кожної помилки.",
+  },
+  {
+    q: "Скільки часу займає впровадження SAF-T Connector?",
+    a: "Стандартний проєкт займає від 4 до 8 тижнів: 1–2 тижні на аналіз структури облікової системи, 2–4 тижні на розробку та налаштування конектора, 1–2 тижні на тестування та валідацію першого файлу. Для SAP та Odoo терміни зазвичай коротші — завдяки наявним стандартним конекторам.",
+  },
+  {
+    q: "Чи потребує SAF-T Connector змін в ERP-системі або обліковій конфігурації?",
+    a: "Ні. SAF-T Connector підключається до ERP через стандартні інтерфейси (RFC для SAP, COM/HTTP для BAS, API для Odoo) і не вносить змін до облікової конфігурації. Налаштування виконуються на стороні коннектора, а не в самій ERP-системі.",
+  },
+  {
+    q: "Що відбувається при зміні XSD-схеми ДПС?",
+    a: "Схема SAF-T UA оновлюється ДПС України при зміні вимог. SAF-T Connector підтримується відповідно до чинної версії схеми. Клієнти, що перебувають на технічній підтримці, отримують оновлення при кожній зміні офіційної XSD-специфікації. Це виключає ситуацію, коли файл відповідав схемі рік тому, але вже не відповідає поточній.",
+  },
+];
+---
+
+<section class="s-faq" id="faq" aria-labelledby="faq-h2">
+  <div class="container">
+
+    <div class="faq-intro">
+      <div class="eyebrow on-dark">Запитання та відповіді</div>
+      <h2 id="faq-h2" class="faq-h2">
+        Відповіді на ключові питання<br>
+        <span class="faq-h2-sub">про SAF-T та SAF-T Connector</span>
+      </h2>
+    </div>
+
+    <div class="faq-list" role="list">
+      {faqs.map((item, i) => (
+        <div class="faq-item" role="listitem">
+          <button
+            class="faq-q"
+            type="button"
+            aria-expanded="false"
+            aria-controls={`faq-a-${i}`}
+            id={`faq-q-${i}`}
+          >
+            {item.q}
+          </button>
+          <div
+            class="faq-a"
+            id={`faq-a-${i}`}
+            role="region"
+            aria-labelledby={`faq-q-${i}`}
+          >
+            <div class="faq-a-inner">{item.a}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(item => {
+      const btn = item.querySelector('.faq-q');
+      const ans = item.querySelector('.faq-a');
+      if (!btn || !ans) return;
+      btn.addEventListener('click', () => {
+        const open = item.classList.contains('is-open');
+        items.forEach(i => {
+          i.classList.remove('is-open');
+          const b = i.querySelector('.faq-q');
+          const a = i.querySelector('.faq-a');
+          if (b) b.setAttribute('aria-expanded', 'false');
+          if (a) a.style.maxHeight = null;
+        });
+        if (!open) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+.s-faq {
+  background: var(--dark-section);
+  padding: var(--section-py) 0;
+  position: relative;
+}
+
+.faq-intro {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+.faq-intro .eyebrow { margin-bottom: var(--eyebrow-mb); }
+.faq-h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(30px, 3vw, 48px);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  color: #fff;
+}
+.faq-h2-sub {
+  color: rgba(238,242,255,.50);
+  font-weight: 400;
+}
+
+.faq-list {
+  max-width: 820px;
+  border-top: 1px solid rgba(238,242,255,.10);
+}
+
+.faq-item { border-bottom: 1px solid rgba(238,242,255,.10); }
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 26px 48px 26px 0;
+  position: relative;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(16px, 1.4vw, 20px);
+  letter-spacing: -0.018em;
+  line-height: 1.35;
+  color: rgba(238,242,255,.85);
+  transition: color .2s var(--ease);
+}
+.faq-q:hover { color: #fff; }
+.faq-q:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* +/× icon */
+.faq-q::after {
+  content: "";
+  position: absolute;
+  right: 6px; top: 50%;
+  width: 12px; height: 12px;
+  margin-top: -6px;
+  background:
+    linear-gradient(rgba(238,242,255,.55), rgba(238,242,255,.55)) center / 100% 1.5px no-repeat,
+    linear-gradient(rgba(238,242,255,.55), rgba(238,242,255,.55)) center / 1.5px 100% no-repeat;
+  transition: transform .3s var(--ease), opacity .2s;
+}
+.faq-item.is-open .faq-q::after { transform: rotate(135deg); }
+.faq-item.is-open .faq-q { color: #fff; }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .38s var(--ease);
+}
+.faq-a-inner {
+  padding: 0 60px 24px 0;
+  font-family: var(--body);
+  font-size: 15.5px;
+  line-height: 1.72;
+  color: rgba(238,242,255,.55);
+}
+
+@media (max-width: 720px) {
+  .faq-q { padding: 20px 40px 20px 0; font-size: 16px; }
+  .faq-a-inner { padding-right: 24px; font-size: 14.5px; }
+}
+</style>
