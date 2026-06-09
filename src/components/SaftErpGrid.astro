@@ -11,10 +11,10 @@
         Підтримувані облікові системи
       </h2>
       <p class="erp-lead">
-        SAF-T Connector підключається до SAP, BAS/1C, Oracle, Microsoft Dynamics,
-        JD Edwards, Scala, Парус, Фінколекції та будь-якої іншої системи через API,
-        SQL або CSV/Excel-експорт. Для SAP, BAS та Odoo доступні готові конектори —
-        для решти систем виконується індивідуальна інтеграція без змін в обліковій конфігурації.
+        SAF-T Connector отримує облікові дані з різних ERP-систем, баз даних та структурованих
+        вивантажень: SAP, BAS/1C, Oracle, Microsoft Dynamics, JD Edwards, Scala, Парус,
+        Фінколекція, Odoo та інших. Підхід до інтеграції залежить від конфігурації системи
+        та структури даних клієнта.
       </p>
     </div>
 
@@ -28,7 +28,7 @@
             </div>
             <div class="erp-src-info">
               <span class="erp-src-name">SAP ERP / S/4HANA</span>
-              <span class="erp-src-sub">Готовий коннектор</span>
+              <span class="erp-src-sub">Типова інтеграція</span>
             </div>
           </div>
         </div>
@@ -49,8 +49,8 @@
               <span>Odoo</span>
             </div>
             <div class="erp-src-info">
-              <span class="erp-src-name">Odoo 16 / 17</span>
-              <span class="erp-src-sub">Модуль локалізації UA</span>
+              <span class="erp-src-name">Odoo</span>
+              <span class="erp-src-sub">Типова інтеграція</span>
             </div>
           </div>
         </div>
@@ -95,16 +95,16 @@
               XSD валідний
             </span>
           </div>
-          <div class="erp-out-name">SAF-T UA_2024_Q4.xml</div>
-          <div class="erp-out-meta">Готовий до подачі у ДПС України</div>
+          <div class="erp-out-name">SAF-T_UA_звітний_період.xml</div>
+          <div class="erp-out-meta">Готовий до подання до ДПС України</div>
           <div class="erp-out-stats">
             <div class="erp-stat">
-              <span class="erp-stat-val">48 203</span>
-              <span class="erp-stat-lbl">проводок</span>
+              <span class="erp-stat-val">✓</span>
+              <span class="erp-stat-lbl">проводки</span>
             </div>
             <div class="erp-stat">
-              <span class="erp-stat-val">2 341</span>
-              <span class="erp-stat-lbl">субрахунків</span>
+              <span class="erp-stat-val">✓</span>
+              <span class="erp-stat-lbl">субрахунки</span>
             </div>
             <div class="erp-stat">
               <span class="erp-stat-val">0</span>
@@ -123,9 +123,9 @@
           <h3 class="erp-detail-h3">SAP ERP та S/4HANA</h3>
         </div>
         <p>
-          Коннектор використовує стандартні RFC/BAPI-виклики та ABAP-звіти для витягування
-          даних плану рахунків, журналу проводок FI, реєстрів ПДВ та основних засобів
-          без модифікацій ядра системи.
+          Інтеграція з SAP забезпечує доступ до даних плану рахунків, журналу проводок,
+          реєстрів ПДВ та основних засобів. Конкретний метод підключення визначається
+          відповідно до конфігурації системи клієнта.
         </p>
       </div>
       <div class="erp-detail">
@@ -135,19 +135,18 @@
         </div>
         <p>
           Підтримуються актуальні версії BAS Бухгалтерія та 1C Бухгалтерія для України.
-          Коннектор інтегрується через COM/HTTP або зовнішнє підключення
-          і не потребує зміни конфігурацій.
+          Метод підключення визначається відповідно до конфігурації та доступних
+          способів отримання даних конкретної системи.
         </p>
       </div>
       <div class="erp-detail">
         <div class="erp-detail-head">
           <span class="erp-detail-badge odoo">Odoo</span>
-          <h3 class="erp-detail-h3">Odoo 16 та 17</h3>
+          <h3 class="erp-detail-h3">Odoo</h3>
         </div>
         <p>
-          Нативний модуль локалізації для Odoo забезпечує прямий доступ до журналів,
-          плану рахунків та аналітики. Сумісний з типовими та кастомними
-          конфігураціями Ukrainian Accounting.
+          Інтеграція з Odoo забезпечує доступ до журналів обліку, плану рахунків
+          та аналітики. Підхід залежить від конфігурації та версії системи клієнта.
         </p>
       </div>
       <div class="erp-detail">

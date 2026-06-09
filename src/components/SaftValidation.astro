@@ -11,11 +11,11 @@
       <div class="val-text">
         <div class="eyebrow on-dark">Валідація XML</div>
         <h2 id="validation-h2" class="val-h2">
-          XSD-валідація SAF-T до подачі до ДПС
+          XSD-валідація SAF-T до подання до ДПС
         </h2>
         <p class="val-lead">
           SAF-T Connector перевіряє кожен сформований XML-файл за офіційною
-          XSD-схемою ДПС України перед відправкою. Помилка, виявлена до подачі,
+          XSD-схемою ДПС України до подання. Помилка, виявлена до подання,
           не є порушенням. Помилка після — є.
         </p>
 
@@ -29,7 +29,7 @@
             </div>
             <div>
               <h3 class="val-point-h3">Валідація за XSD-схемою ДПС</h3>
-              <p>Перевірка відповідності офіційній специфікації SAF-T UA v2.0, включаючи всі обов'язкові елементи та типи даних.</p>
+              <p>Перевірка відповідності офіційній XSD-схемі ДПС, включаючи обов'язкові елементи, типи даних та формати.</p>
             </div>
           </div>
           <div class="val-point">
@@ -79,10 +79,6 @@
           <!-- Summary row -->
           <div class="vm-summary">
             <div class="vm-sum-item ok">
-              <span class="vm-sum-val">147</span>
-              <span class="vm-sum-lbl">перевірок</span>
-            </div>
-            <div class="vm-sum-item ok">
               <span class="vm-sum-val">0</span>
               <span class="vm-sum-lbl">критичних</span>
             </div>
@@ -90,9 +86,13 @@
               <span class="vm-sum-val">0</span>
               <span class="vm-sum-lbl">попереджень</span>
             </div>
-            <div class="vm-sum-item">
-              <span class="vm-sum-val">4.2 MB</span>
-              <span class="vm-sum-lbl">розмір файлу</span>
+            <div class="vm-sum-item ok">
+              <span class="vm-sum-val">✓</span>
+              <span class="vm-sum-lbl">структура</span>
+            </div>
+            <div class="vm-sum-item ok">
+              <span class="vm-sum-val">✓</span>
+              <span class="vm-sum-lbl">типи даних</span>
             </div>
           </div>
 
@@ -103,13 +103,11 @@
               <div class="vm-group-head">
                 <span class="vm-group-icon ok">✓</span>
                 <span class="vm-group-name">Header</span>
-                <span class="vm-group-count">12 / 12</span>
               </div>
               <div class="vm-group-items">
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AuditFileVersion = 2.0</span></div>
+                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AuditFileVersion — формат</span></div>
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TaxEntity ЄДРПОУ формат</span></div>
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">FiscalYear діапазон дат</span></div>
-                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 9 перевірок</span></div>
               </div>
             </div>
 
@@ -117,12 +115,10 @@
               <div class="vm-group-head">
                 <span class="vm-group-icon ok">✓</span>
                 <span class="vm-group-name">MasterFiles — Accounts</span>
-                <span class="vm-group-count">38 / 38</span>
               </div>
               <div class="vm-group-items">
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountID унікальність</span></div>
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountType допустимі значення</span></div>
-                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 36 перевірок</span></div>
               </div>
             </div>
 
@@ -130,12 +126,10 @@
               <div class="vm-group-head">
                 <span class="vm-group-icon ok">✓</span>
                 <span class="vm-group-name">GeneralLedger Entries</span>
-                <span class="vm-group-count">62 / 62</span>
               </div>
               <div class="vm-group-items">
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TransactionDate ISO 8601</span></div>
                 <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">Debit/Credit balance</span></div>
-                <div class="vm-check ok dim"><span class="vc-icon">✓</span><span class="vc-name">+ 60 перевірок</span></div>
               </div>
             </div>
 
@@ -145,7 +139,7 @@
           <div class="vm-footer">
             <div class="vm-schema-ref">
               <span class="vm-schema-lbl">XSD-схема:</span>
-              <span class="vm-schema-val">SAF-T_UA_v2.0_ДПС.xsd</span>
+              <span class="vm-schema-val">XSD-схема ДПС</span>
             </div>
             <div class="vm-export-btn">
               <span>↓</span> Завантажити XML
