@@ -4,6 +4,29 @@ This document defines the multi-agent quality framework used during the design, 
 
 ---
 
+## Global Rule — No Fabricated Details
+
+**This rule overrides all agent instructions and applies to every piece of content on the site.**
+
+Never invent or assume the following — even if a plausible value would make the copy stronger:
+
+- Product versions (e.g. "v2.4", "SAF-T UA v2.0" — unless confirmed by a source)
+- Regulatory versions, order numbers, or effective dates (e.g. "наказ Мінфіну №…", "з 2025 року" — unless the exact requirement is verified)
+- Technical protocols or integration methods (e.g. "RFC/BAPI", "COM/HTTP", "API" — unless confirmed for that specific system)
+- Validation rule counts, check totals, or error counts (e.g. "147 перевірок", "0 критичних" — these are product metrics, not copy)
+- File sizes, record counts, or processing statistics (e.g. "48 203 проводок", "4.2 MB" — unless from a real client case)
+- Implementation timelines (e.g. "4–8 тижнів" — only if this is a verified typical range)
+- Client names, industries, or project outcomes
+- ERP-specific technical details not confirmed for the current connector implementation
+
+**If a detail is not provided or verified:**
+- Use a safe general formulation: "стандартні інтерфейси ERP", "відповідно до XSD-схеми ДПС", "типовий термін впровадження"
+- Or mark it explicitly for human confirmation with a comment: `<!-- TODO: confirm with product team -->`
+
+**Existing copy that contains specific figures** (versions, counts, timelines) was created during initial build and must be verified against the actual product before the site goes live on the production domain.
+
+---
+
 ## Agent 1 — Web Design
 
 **Responsible for:** Layout, visual hierarchy, typography, spacing, premium look and feel, responsiveness, motion restraint, and overall visual impression.
@@ -39,7 +62,7 @@ This document defines the multi-agent quality framework used during the design, 
 - CTAs are action-specific: "Замовити демо", "Обговорити проєкт" — not "Submit" or "Contact".
 - Every section answers an implicit buyer question.
 - Trust signals (experience, compliance background, named ERP integrations) appear early.
-- Social proof or specificity replaces vague claims: use numbers, named systems, regulatory references.
+- Social proof or specificity replaces vague claims: use numbers, named systems, regulatory references — but only figures that have been confirmed (see Global Rule above). Do not invent specific numbers to fill a credibility gap.
 
 **Review checklist:**
 - [ ] Is the value proposition clear within 5 seconds?
@@ -144,7 +167,7 @@ This document defines the multi-agent quality framework used during the design, 
 **Common issues to hunt for:**
 - Headings used as visual styling (h2 where h3 is correct)
 - CTA that says "more" with no context of what "more" means
-- Numbers or dates that are wrong or fictional but look authoritative
+- Numbers, versions, dates, counts, or technical details that were invented to sound authoritative but were not confirmed by the product team (see Global Rule — No Fabricated Details)
 - FAQ answers that are too vague ("it depends") without specifics
 - Mobile text that overflows or is too small
 - `alt=""` on decorative images that should be `role="presentation"`
