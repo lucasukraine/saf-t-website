@@ -69,19 +69,24 @@
   (() => {
     const header = document.getElementById('header');
     if (!header) return;
-    const scrim  = document.getElementById('page-scrim');
+    const scrim = document.getElementById('page-scrim');
 
-    const onScroll = () => {
-      const hero = document.querySelector('.s-hero');
-      const threshold = hero ? hero.getBoundingClientRect().bottom : 80;
-      const past = threshold <= 60;
-      header.classList.toggle('scrolled', past);
-      if (scrim) scrim.classList.toggle('light', past);
+    const lightSectionIds = ['explainer', 'how-it-works', 'benefits', 'trust'];
+    const lightSections = lightSectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    const HEADER_ZONE = 80;
+
+    const updateHeader = () => {
+      const overLight = lightSections.some(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= HEADER_ZONE && rect.bottom > HEADER_ZONE;
+      });
+      header.classList.toggle('scrolled', overLight);
+      if (scrim) scrim.classList.toggle('light', overLight);
     };
 
-    if (window.scrollY > 0) requestAnimationFrame(onScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('resize', updateHeader);
+    updateHeader();
   })();
 
   (() => {

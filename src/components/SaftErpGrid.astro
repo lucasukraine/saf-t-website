@@ -6,7 +6,7 @@
   <div class="container">
 
     <div class="erp-intro">
-      <div class="eyebrow">Інтеграції</div>
+      <div class="eyebrow on-dark">Інтеграції</div>
       <h2 id="erp-h2" class="erp-h2">
         Інтеграція з обліковими системами
       </h2>
@@ -166,9 +166,9 @@
 
 <style>
 .s-erp {
-  background: var(--paper);
+  background: var(--dark-section);
   padding: var(--section-py) 0;
-  border-top: 1px solid var(--line-strong);
+  border-top: rgba(255,255,255,.08);
   overflow: hidden;
 }
 
@@ -183,13 +183,13 @@
   font-size: clamp(28px, 2.8vw, 44px);
   letter-spacing: -0.03em;
   line-height: 1.08;
-  color: var(--ink);
+  color: var(--on-dark);
   margin-bottom: 18px;
 }
 .erp-lead {
   font-size: 16px;
   line-height: 1.65;
-  color: var(--ink-soft);
+  color: var(--on-dark-soft);
   max-width: 60ch;
 }
 
@@ -199,8 +199,8 @@
   align-items: center;
   gap: 0;
   margin-bottom: 64px;
-  background: linear-gradient(135deg, rgba(3,169,244,.04), rgba(3,169,244,.02));
-  border: 1px solid var(--line-strong);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 20px;
   padding: 36px 40px;
   overflow-x: auto;
@@ -219,8 +219,8 @@
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
-  background: var(--paper);
-  border: 1px solid var(--line-strong);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 10px;
   transition: border-color .2s var(--ease);
 }
@@ -236,14 +236,14 @@
   letter-spacing: 0.04em;
   flex: none;
 }
-.erp-src-mark.sap   { background: rgba(3,169,244,.12);  color: var(--accent);  border: 1px solid rgba(3,169,244,.20); }
-.erp-src-mark.bas   { background: rgba(255,152,0,.10);  color: var(--orange);  border: 1px solid rgba(255,152,0,.20); }
-.erp-src-mark.odoo  { background: rgba(133,77,14,.10);  color: #92400e;        border: 1px solid rgba(133,77,14,.20); }
-.erp-src-mark.other { background: rgba(100,116,139,.10); color: #475569;       border: 1px solid rgba(100,116,139,.22); font-size: 14px; }
+.erp-src-mark.sap   { background: rgba(255,152,0,.15);    color: #ffb74d;    border: 1px solid rgba(255,152,0,.30); }
+.erp-src-mark.bas   { background: rgba(3,169,244,.15);    color: var(--accent); border: 1px solid rgba(3,169,244,.30); }
+.erp-src-mark.odoo  { background: rgba(133,77,14,.20);    color: #fbbf24;    border: 1px solid rgba(217,119,6,.30); }
+.erp-src-mark.other { background: rgba(100,116,139,.15);  color: #94a3b8;    border: 1px solid rgba(100,116,139,.30); font-size: 14px; }
 
 .erp-src-info { display: flex; flex-direction: column; gap: 1px; }
-.erp-src-name { font-family: var(--body); font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-.erp-src-sub  { font-family: var(--mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.04em; }
+.erp-src-name { font-family: var(--body); font-size: 13px; font-weight: 600; color: var(--on-dark); line-height: 1.3; }
+.erp-src-sub  { font-family: var(--mono); font-size: 10px; color: var(--on-dark-soft); letter-spacing: 0.04em; }
 
 /* Connector node */
 .erp-connector {
@@ -315,7 +315,7 @@
 /* Output */
 .erp-output { flex: none; min-width: 220px; }
 .erp-out-card {
-  background: var(--paper);
+  background: rgba(3,169,244,.10);
   border: 1.5px solid rgba(3,169,244,.25);
   border-radius: 12px;
   padding: 16px 18px;
@@ -345,47 +345,47 @@
   font-family: var(--mono);
   font-size: 9.5px;
   font-weight: 600;
-  color: #15803d;
+  color: #4ade80;
   letter-spacing: 0.04em;
 }
 .erp-out-dot {
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #4ade80;
   flex: none;
 }
 .erp-out-name {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--on-dark);
   margin-bottom: 3px;
 }
 .erp-out-meta {
   font-family: var(--body);
   font-size: 11.5px;
-  color: var(--ink-mute);
+  color: var(--on-dark-soft);
   margin-bottom: 14px;
 }
 .erp-out-stats {
   display: flex;
   gap: 16px;
   padding-top: 12px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 .erp-stat { display: flex; flex-direction: column; gap: 1px; }
 .erp-stat-val {
   font-family: var(--display);
   font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--on-dark);
   letter-spacing: -0.02em;
   line-height: 1;
 }
 .erp-stat-lbl {
   font-family: var(--mono);
   font-size: 9px;
-  color: var(--ink-mute);
+  color: var(--on-dark-soft);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -398,13 +398,15 @@
 }
 .erp-detail {
   padding: 24px 20px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 12px;
-  background: var(--warm);
+  background: rgba(255,255,255,.04);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: border-color .2s var(--ease);
 }
+.erp-detail:hover { border-color: rgba(3,169,244,.25); }
 .erp-detail-head { display: flex; align-items: center; gap: 10px; }
 .erp-detail-badge {
   font-family: var(--mono);
@@ -415,23 +417,23 @@
   border-radius: 5px;
   flex: none;
 }
-.erp-detail-badge.sap   { background: rgba(3,169,244,.10);   color: var(--accent); border: 1px solid rgba(3,169,244,.20); }
-.erp-detail-badge.bas   { background: rgba(255,152,0,.10);   color: var(--orange); border: 1px solid rgba(255,152,0,.20); }
-.erp-detail-badge.odoo  { background: rgba(133,77,14,.10);   color: #92400e;       border: 1px solid rgba(133,77,14,.20); }
-.erp-detail-badge.other { background: rgba(100,116,139,.10); color: #475569;       border: 1px solid rgba(100,116,139,.22); }
+.erp-detail-badge.sap   { background: rgba(255,152,0,.15);    color: #ffb74d;    border: 1px solid rgba(255,152,0,.30); }
+.erp-detail-badge.bas   { background: rgba(3,169,244,.15);    color: var(--accent); border: 1px solid rgba(3,169,244,.30); }
+.erp-detail-badge.odoo  { background: rgba(133,77,14,.20);    color: #fbbf24;    border: 1px solid rgba(217,119,6,.30); }
+.erp-detail-badge.other { background: rgba(100,116,139,.15);  color: #94a3b8;    border: 1px solid rgba(100,116,139,.30); }
 .erp-detail-h3 {
   font-family: var(--display);
   font-weight: 500;
   font-size: 15px;
   letter-spacing: -0.018em;
   line-height: 1.2;
-  color: var(--ink);
+  color: var(--on-dark);
 }
 .erp-detail p {
   font-family: var(--body);
   font-size: 13.5px;
   line-height: 1.65;
-  color: var(--ink-soft);
+  color: var(--on-dark-soft);
 }
 
 @media (max-width: 1200px) {
