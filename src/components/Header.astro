@@ -9,7 +9,7 @@
     <!-- Logo — base-aware href works under any subpath or root -->
     <a href={import.meta.env.BASE_URL} class="logo" aria-label="SAF-T Connector — на головну">
       <img src={`${import.meta.env.BASE_URL}logo-white.svg`} class="logo-img logo-img-white" alt="SAF-T Connector" width="133" height="36" fetchpriority="high" />
-      <img src={`${import.meta.env.BASE_URL}logo.svg`} class="logo-img logo-img-color" alt="SAF-T Connector" width="133" height="36" />
+      <img src={`${import.meta.env.BASE_URL}logo.svg`} class="logo-img logo-img-color" alt="" width="133" height="36" />
     </a>
 
     <!-- Desktop nav — fragment-only hrefs work under any base path -->
@@ -91,6 +91,7 @@
       overlay.classList.add('is-open');
       menu.removeAttribute('inert');
       btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Закрити меню');
       document.body.style.overflow = 'hidden';
     };
     const close = () => {
@@ -99,6 +100,7 @@
       overlay.classList.remove('is-open');
       menu.setAttribute('inert', '');
       btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Відкрити меню');
       document.body.style.overflow = '';
     };
 

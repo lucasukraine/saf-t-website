@@ -1,5 +1,6 @@
 ---
 // Footer.astro — SAF-T Connector
+const currentYear = new Date().getFullYear();
 ---
 <footer class="footer">
   <div class="footer-inner">
@@ -8,7 +9,7 @@
       <!-- Brand column -->
       <div class="footer-brand">
         <a href={import.meta.env.BASE_URL} class="footer-logo" aria-label="SAF-T Connector — на головну">
-          <img src={`${import.meta.env.BASE_URL}logo-white.svg`} class="footer-logo-img" alt="SAF-T Connector" width="111" height="30" />
+          <img src={`${import.meta.env.BASE_URL}logo-white.svg`} class="footer-logo-img" alt="" width="111" height="30" />
         </a>
         <p class="footer-tagline">
           Формування XML-файлу та XSD-валідація відповідно до вимог е-аудиту ДПС України.
@@ -55,14 +56,14 @@
         </div>
         <div class="footer-contact-row">
           <span class="footer-contact-lbl">Адреса</span>
-          <span class="footer-contact-val">Київ, БЦ Гулівер, вежа А, 17 поверх</span>
+          <span class="footer-contact-val">Київ, БЦ Гулівер, вежа А, 17-й поверх</span>
         </div>
       </div>
     </div>
 
     <div class="footer-bot">
-      <span class="footer-bot-copy">© 2025 LUCAS. SAF-T Connector. Усі права захищені.</span>
-      <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent">lucasua.com →</a>
+      <span class="footer-bot-copy">© {currentYear} LUCAS. SAF-T Connector. Усі права захищені.</span>
+      <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent" aria-label="lucasua.com — зовнішній сайт">lucasua.com →</a>
     </div>
   </div>
 </footer>
