@@ -63,15 +63,15 @@
 
 /* ── CSS Custom Properties ─────────────────────────────────── */
 :root {
-  /* Brand accent: deep institutional blue */
-  --accent:      #1d4ed8;
-  --accent-light: #3b82f6;
-  --accent-dim:  rgba(29, 78, 216, .10);
-  --accent-glow: rgba(29, 78, 216, .22);
+  /* Brand accent: primary blue (#03A9F4 — sky blue from brand palette) */
+  --accent:      #03a9f4;
+  --accent-light: #0288d1;
+  --accent-dim:  rgba(3, 169, 244, .10);
+  --accent-glow: rgba(3, 169, 244, .22);
 
-  /* CTA accent: orange — drives urgency and action */
-  --orange: #f05a1e;
-  --orange-dim: rgba(240, 90, 30, .12);
+  /* CTA accent: brand orange */
+  --orange: #ff9800;
+  --orange-dim: rgba(255, 152, 0, .12);
 
   /* Backgrounds */
   --dark:          #070c1a;
@@ -80,16 +80,16 @@
   --paper:         #ffffff;
 
   /* Text */
-  --ink:          #0a0f1e;
-  --ink-soft:     #4a5068;
-  --ink-mute:     #717690;
-  --on-dark:      #eef2ff;
-  --on-dark-soft: rgba(238, 242, 255, .65);
-  --on-dark-mute: rgba(238, 242, 255, .38);
+  --ink:          #212121;
+  --ink-soft:     #757575;
+  --ink-mute:     #9e9e9e;
+  --on-dark:      #ffffff;
+  --on-dark-soft: rgba(255, 255, 255, .70);
+  --on-dark-mute: rgba(255, 255, 255, .38);
 
   /* Lines / borders */
-  --line:        rgba(10, 15, 30, .07);
-  --line-strong: rgba(10, 15, 30, .13);
+  --line:        rgba(33, 33, 33, .08);
+  --line-strong: rgba(33, 33, 33, .14);
   --line-dark:   rgba(255, 255, 255, .09);
 
   /* Glass utility — dark panels */
@@ -212,42 +212,27 @@ section { padding: var(--section-py) 0; position: relative; }
 }
 
 /* =============================================================
-   LOGO MARK
+   LOGO
    ============================================================= */
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: currentColor;
   text-decoration: none;
   transition: opacity .2s ease;
-}
-.logo:hover { opacity: .78; }
-
-.logo-mark {
-  width: 28px; height: 28px;
-  background: var(--accent);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex: none;
-  transition: background .2s var(--ease);
 }
-.logo-mark svg { width: 16px; height: 16px; fill: #fff; }
-.logo:hover .logo-mark { background: var(--orange); }
+.logo:hover { opacity: .80; }
 
-.logo-text {
-  font-family: var(--display);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: currentColor;
-  white-space: nowrap;
+.logo-img {
+  display: block;
+  height: 36px;
+  width: auto;
 }
-.logo-text .sep { color: var(--accent); margin: 0 2px; }
-.header.scrolled .logo-text .sep { color: var(--accent); }
+/* Show white variant on dark (default); show color on scrolled light bg */
+.logo-img-white { display: block; }
+.logo-img-color { display: none; }
+.header.scrolled .logo-img-white { display: none; }
+.header.scrolled .logo-img-color { display: block; }
 
 /* =============================================================
    NAV
@@ -418,24 +403,16 @@ section { padding: var(--section-py) 0; position: relative; }
 .footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
-  color: #fff;
 }
-.footer-logo-mark {
-  width: 32px; height: 32px;
-  background: var(--accent);
-  border-radius: 7px;
-  display: flex; align-items: center; justify-content: center;
-  flex: none;
+.footer-logo-img {
+  display: block;
+  height: 30px;
+  width: auto;
+  opacity: .90;
+  transition: opacity .2s ease;
 }
-.footer-logo-mark svg { width: 18px; height: 18px; fill: #fff; }
-.footer-logo-text {
-  font-family: var(--display);
-  font-size: 15px; font-weight: 600;
-  letter-spacing: -0.02em; line-height: 1;
-  color: rgba(238,242,255,.90);
-}
+.footer-logo:hover .footer-logo-img { opacity: 1; }
 
 .footer-tagline {
   font-family: var(--body);

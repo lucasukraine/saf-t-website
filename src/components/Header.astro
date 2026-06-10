@@ -8,16 +8,8 @@
 
     <!-- Logo — base-aware href works under any subpath or root -->
     <a href={import.meta.env.BASE_URL} class="logo" aria-label="SAF-T Connector — на головну">
-      <div class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 16 16" aria-hidden="true">
-          <rect x="2" y="3" width="5" height="1.5" rx=".5"/>
-          <rect x="2" y="6" width="8" height="1.5" rx=".5"/>
-          <rect x="2" y="9" width="7" height="1.5" rx=".5"/>
-          <rect x="2" y="12" width="9" height="1.5" rx=".5"/>
-          <path d="M12 4 L15 8 L12 12" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-      </div>
-      <span class="logo-text">SAF-T<span class="sep"> </span>Connector</span>
+      <img src={`${import.meta.env.BASE_URL}logo-white.svg`} class="logo-img logo-img-white" alt="SAF-T Connector" width="133" height="36" fetchpriority="high" />
+      <img src={`${import.meta.env.BASE_URL}logo.svg`} class="logo-img logo-img-color" alt="SAF-T Connector" width="133" height="36" />
     </a>
 
     <!-- Desktop nav — fragment-only hrefs work under any base path -->
