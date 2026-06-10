@@ -159,12 +159,13 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light);
   text-decoration: none;
-  transition: opacity .2s var(--ease);
+  transition: color .2s var(--ease);
   margin-top: 4px;
 }
-.trust-link:hover { opacity: .65; }
+.trust-link:hover { color: var(--accent); }
+.trust-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
 /* Credentials */
 .trust-creds {

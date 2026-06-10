@@ -53,10 +53,15 @@
 <div class="mob-overlay" id="mob-overlay"></div>
 
 <style>
-  .mob-cta-link {
-    color: #fff !important;
-    font-weight: 600 !important;
+  .mob-menu .mob-cta-link {
+    color: #fff;
+    font-weight: 600;
     letter-spacing: -0.01em;
+  }
+  .mob-menu .mob-cta-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 </style>
 
