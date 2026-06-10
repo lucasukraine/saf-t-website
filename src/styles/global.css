@@ -136,7 +136,6 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--ink);
-  background: var(--warm);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -630,73 +629,48 @@ a.footer-contact-val:hover { color: #fff; }
   }
 }
 
-/* ── Scroll-driven theme overlays ─────────────────────────────────────── */
+/* ── Scroll-driven theme transitions ──────────────────────────────────── */
+/*
+   Each light section animates its own background-color using
+   animation-timeline: view() — no named timelines, no cross-element refs.
+   Dark sections keep their own explicit backgrounds.
+   Body is dark so the dissolve between dark and light sections is visible.
+*/
 
-/* Base: overlays are fixed, invisible by default */
-.theme-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
+/* Dark base so the fade effect is visible during transitions */
+body { background: var(--dark-section); }
+
+@keyframes section-bg-paper {
+  0%, 100% { background-color: transparent; }
+  22%, 78% { background-color: var(--paper); }
 }
 
-/* Background colors for each light section overlay */
-#overlay-explainer { background: var(--paper); }
-#overlay-how       { background: var(--warm); }
-#overlay-benefits  { background: var(--warm); }
-#overlay-trust     { background: var(--warm); }
-
-/* @keyframes for fade-in / hold / fade-out */
-@keyframes theme-overlay-fade {
-  0%   { opacity: 0; }
-  22%  { opacity: 1; }
-  78%  { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes section-bg-warm {
+  0%, 100% { background-color: transparent; }
+  22%, 78% { background-color: var(--warm); }
 }
 
-/* Scroll-driven animation — only for supporting browsers */
 @supports (animation-timeline: view()) {
-  /* Named view timelines on each light section */
-  #explainer    { view-timeline-name: --vt-explainer; view-timeline-axis: block; }
-  #how-it-works { view-timeline-name: --vt-how;       view-timeline-axis: block; }
-  #benefits     { view-timeline-name: --vt-benefits;  view-timeline-axis: block; }
-  #trust        { view-timeline-name: --vt-trust;     view-timeline-axis: block; }
+  .s-explainer {
+    animation: section-bg-paper linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
 
-  /* Remove section background colors — overlays provide the background */
-  .s-explainer,
   .s-hiw,
   .s-benefits,
-  .s-trust { background: transparent !important; }
-
-  /* Wire up each overlay to its section's view timeline */
-  #overlay-explainer {
-    animation: theme-overlay-fade linear both;
-    animation-timeline: --vt-explainer;
-    animation-range: entry 0% exit 100%;
-  }
-  #overlay-how {
-    animation: theme-overlay-fade linear both;
-    animation-timeline: --vt-how;
-    animation-range: entry 0% exit 100%;
-  }
-  #overlay-benefits {
-    animation: theme-overlay-fade linear both;
-    animation-timeline: --vt-benefits;
-    animation-range: entry 0% exit 100%;
-  }
-  #overlay-trust {
-    animation: theme-overlay-fade linear both;
-    animation-timeline: --vt-trust;
+  .s-trust {
+    animation: section-bg-warm linear both;
+    animation-timeline: view();
     animation-range: entry 0% exit 100%;
   }
 }
 
-/* Fallback + reduced motion: restore section backgrounds, disable overlays */
+/* Reduced motion: keep static backgrounds, no animation */
 @media (prefers-reduced-motion: reduce) {
-  .theme-overlay { animation: none !important; opacity: 0 !important; }
-  .s-explainer  { background: var(--paper) !important; }
-  .s-hiw        { background: var(--warm) !important; }
-  .s-benefits   { background: var(--warm) !important; }
-  .s-trust      { background: var(--warm) !important; }
+  .s-explainer  { animation: none !important; background: var(--paper) !important; }
+  .s-hiw        { animation: none !important; background: var(--warm)  !important; }
+  .s-benefits   { animation: none !important; background: var(--warm)  !important; }
+  .s-trust      { animation: none !important; background: var(--warm)  !important; }
+  body          { background: var(--paper); }
 }
