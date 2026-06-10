@@ -8,12 +8,12 @@
     <div class="hiw-intro">
       <div class="eyebrow">Реалізація</div>
       <h2 id="hiw-h2" class="hiw-h2">
-        Як працює SAF-T Connector
+        Етапи впровадження SAF-T Connector
       </h2>
       <p class="hiw-lead">
-        Від підписання договору до першого готового SAF-T файлу — структурований
-        процес: аналіз даних, мапування рахунків, інтеграція з ERP, валідація
-        та тестування. Стандартний термін: 4–8 тижнів.
+        Типовий термін впровадження — приблизно 3–4 місяці залежно від кількості
+        юридичних осіб, складності облікової системи, якості даних та доступності
+        IT-команди клієнта.
       </p>
     </div>
 
@@ -23,41 +23,41 @@
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">01</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">Аналіз та підключення до ERP</h3>
+          <h3 class="hiw-step-h3">Аналіз та мапінг</h3>
           <p>
-            Аналізуємо структуру облікової системи: план рахунків, субрахунки,
-            налаштування ПДВ та активів. Виконуємо мапування рахунків на
-            структуру SAF-T UA, визначаємо спосіб інтеграції та налаштовуємо
-            підключення до SAP, BAS, Odoo або іншої системи.
+            Аналізуємо якість і достатність облікових даних клієнта: чи вистачає
+            наявних даних для SAF-T UA, де є прогалини. Розробляємо мапінг —
+            відповідність між обліковою структурою клієнта та елементами SAF-T UA.
+            Узгоджуємо джерела даних.
           </p>
           <div class="hiw-tags">
             <span class="hiw-tag">Аналіз даних</span>
-            <span class="hiw-tag">Підключення до ERP</span>
-            <span class="hiw-tag">Мапування рахунків</span>
+            <span class="hiw-tag">Розробка мапінгу</span>
+            <span class="hiw-tag">Узгодження джерел</span>
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
           <div class="hsv-card">
             <div class="hsv-row hsv-head">
-              <span class="hsv-lbl">Конфігурація джерела</span>
+              <span class="hsv-lbl">Аналіз даних</span>
               <span class="hsv-chip done">✓ Готово</span>
             </div>
             <div class="hsv-items">
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Підключення до джерела даних</span>
+                <span>Аналіз якості даних</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Plan of Accounts</span>
+                <span>Визначення джерел даних</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Журнал проводок</span>
+                <span>Розробка мапінгу</span>
               </div>
               <div class="hsv-item active">
                 <span class="hsv-icon spin-icon">⟳</span>
-                <span>ПДВ-реєстри — верифікація</span>
+                <span>Узгодження прогалин</span>
               </div>
             </div>
           </div>
@@ -67,17 +67,16 @@
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">02</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">Трансформація та генерація XML</h3>
+          <h3 class="hiw-step-h3">Налаштування та інтеграція</h3>
           <p>
-            SAF-T Connector читає дані через сконфігурований інтеграційний шар
-            та трансформує їх у структуру SAF-T UA. Формується XML-файл
-            з усіма обов'язковими блоками: Header, MasterFiles,
-            GeneralLedgerEntries, SourceDocuments, Assets.
+            Налаштовуємо SAF-T Connector: логіку трансформації, підключення до джерел
+            даних. Розгортаємо систему на інфраструктурі клієнта, налаштовуємо доступи
+            та авторизації. Погоджуємо з IT-командою підхід до вивантаження даних.
           </p>
           <div class="hiw-tags">
+            <span class="hiw-tag">Налаштування трансформації</span>
             <span class="hiw-tag">Інтеграція з ERP</span>
-            <span class="hiw-tag">Трансформація даних</span>
-            <span class="hiw-tag">Формування XML</span>
+            <span class="hiw-tag">Розгортання</span>
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
@@ -91,7 +90,7 @@
               <div class="hsv-block done"><span>MasterFiles</span><span class="hsv-ok">✓</span></div>
               <div class="hsv-block done"><span>GLEntries</span><span class="hsv-ok">✓</span></div>
               <div class="hsv-block active"><span>SourceDocs</span><span class="hsv-pend">···</span></div>
-              <div class="hsv-block pend"><span>Assets</span><span class="hsv-pend">—</span></div>
+              <div class="hsv-block pend"><span>TaxDiff</span><span class="hsv-pend">—</span></div>
             </div>
           </div>
         </div>
@@ -100,17 +99,16 @@
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">03</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">XSD-валідація та готовий файл</h3>
+          <h3 class="hiw-step-h3">Тестування та запуск</h3>
           <p>
-            Після генерації XML-файл автоматично проходить XSD-валідацію
-            та функціональне тестування на реальних даних клієнта.
-            Якщо є помилки — видається детальний звіт з зазначенням елемента,
-            типу та шляху. Підтверджений файл готовий до подачі до ДПС.
+            Генеруємо тестові SAF-T файли на реальних даних. Виконуємо XSD-валідацію,
+            математичні та міжсекційні перевірки. Усуваємо виявлені проблеми з даними
+            та мапінгом. Навчаємо користувачів і передаємо процес команді клієнта.
           </p>
           <div class="hiw-tags">
             <span class="hiw-tag">XSD-валідація</span>
-            <span class="hiw-tag">Тестування</span>
-            <span class="hiw-tag">Готовий файл ДПС</span>
+            <span class="hiw-tag">Тестування на реальних даних</span>
+            <span class="hiw-tag">Навчання та запуск</span>
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
@@ -126,11 +124,11 @@
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Формати дат — ISO 8601</span>
+                <span>Математичні контролі — пройдено</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Обов'язкові поля — всі присутні</span>
+                <span>Міжсекційні перевірки — пройдено</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
@@ -139,7 +137,7 @@
             </div>
             <div class="hsv-export">
               <span class="hsv-export-icon">↓</span>
-              <span>SAF-T_UA_30789012_2024Q4.xml</span>
+              <span>SAF-T_UA_звітний_період.xml</span>
               <span class="hsv-export-size">XML</span>
             </div>
           </div>
@@ -154,19 +152,19 @@
         <span class="hiw-tl-label">Типовий термін проєкту</span>
         <div class="hiw-tl-bar">
           <div class="hiw-tl-seg" style="width:30%">
-            <span class="hiw-tl-seg-label">Аналіз</span>
-            <span class="hiw-tl-seg-time">1–2 тижні</span>
+            <span class="hiw-tl-seg-label">Аналіз і мапінг</span>
+            <span class="hiw-tl-seg-time">~1 міс.</span>
           </div>
           <div class="hiw-tl-seg accent" style="width:40%">
-            <span class="hiw-tl-seg-label">Розробка</span>
-            <span class="hiw-tl-seg-time">2–4 тижні</span>
+            <span class="hiw-tl-seg-label">Налаштування</span>
+            <span class="hiw-tl-seg-time">~1.5 міс.</span>
           </div>
           <div class="hiw-tl-seg light" style="width:30%">
-            <span class="hiw-tl-seg-label">Тестування</span>
-            <span class="hiw-tl-seg-time">1–2 тижні</span>
+            <span class="hiw-tl-seg-label">Тестування і запуск</span>
+            <span class="hiw-tl-seg-time">~1 міс.</span>
           </div>
         </div>
-        <span class="hiw-tl-total">Загалом: 4–8 тижнів</span>
+        <span class="hiw-tl-total">Загалом: ~3–4 місяці</span>
       </div>
     </div>
 

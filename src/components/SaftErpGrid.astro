@@ -8,13 +8,13 @@
     <div class="erp-intro">
       <div class="eyebrow">Інтеграції</div>
       <h2 id="erp-h2" class="erp-h2">
-        Підтримувані облікові системи
+        Інтеграція з обліковими системами
       </h2>
       <p class="erp-lead">
-        SAF-T Connector отримує облікові дані з різних ERP-систем, баз даних та структурованих
-        вивантажень: SAP, BAS/1C, Oracle, Microsoft Dynamics, JD Edwards, Scala, Парус,
-        Фінколекція, Odoo та інших. Підхід до інтеграції залежить від конфігурації системи
-        та структури даних клієнта.
+        SAF-T Connector не прив'язаний до конкретної ERP-системи. Він може бути налаштований
+        для роботи з різними обліковими системами, базами даних та структурованими вивантаженнями.
+        Конкретний підхід до інтеграції залежить від архітектури системи клієнта, вимог безпеки
+        та доступних методів отримання даних.
       </p>
     </div>
 
@@ -28,7 +28,7 @@
             </div>
             <div class="erp-src-info">
               <span class="erp-src-name">SAP ERP / S/4HANA</span>
-              <span class="erp-src-sub">Типова інтеграція</span>
+              <span class="erp-src-sub">Погоджений метод інтеграції</span>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="erp-src-info">
               <span class="erp-src-name">BAS / 1C Бухгалтерія</span>
-              <span class="erp-src-sub">Українські конфігурації</span>
+              <span class="erp-src-sub">Погоджений метод інтеграції</span>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="erp-src-info">
               <span class="erp-src-name">Odoo</span>
-              <span class="erp-src-sub">Типова інтеграція</span>
+              <span class="erp-src-sub">Погоджений метод інтеграції</span>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="erp-src-info">
               <span class="erp-src-name">Інші ERP, БД, експорти</span>
-              <span class="erp-src-sub">Oracle · MS Dynamics · Парус · SQL</span>
+              <span class="erp-src-sub">Oracle · MS Dynamics · Excel / CSV</span>
             </div>
           </div>
         </div>
@@ -100,11 +100,11 @@
           <div class="erp-out-stats">
             <div class="erp-stat">
               <span class="erp-stat-val">✓</span>
-              <span class="erp-stat-lbl">проводки</span>
+              <span class="erp-stat-lbl">XML</span>
             </div>
             <div class="erp-stat">
               <span class="erp-stat-val">✓</span>
-              <span class="erp-stat-lbl">субрахунки</span>
+              <span class="erp-stat-lbl">Excel-перегляд</span>
             </div>
             <div class="erp-stat">
               <span class="erp-stat-val">0</span>
@@ -123,20 +123,19 @@
           <h3 class="erp-detail-h3">SAP ERP та S/4HANA</h3>
         </div>
         <p>
-          Інтеграція з SAP забезпечує доступ до даних плану рахунків, журналу проводок,
-          реєстрів ПДВ та основних засобів. Конкретний метод підключення визначається
-          відповідно до конфігурації системи клієнта.
+          Метод інтеграції з SAP погоджується з IT-командою клієнта і залежить від
+          версії SAP, конфігурації, рівня авторизацій та архітектури даних.
         </p>
       </div>
       <div class="erp-detail">
         <div class="erp-detail-head">
           <span class="erp-detail-badge bas">BAS</span>
-          <h3 class="erp-detail-h3">BAS та 1C Бухгалтерія</h3>
+          <h3 class="erp-detail-h3">BAS та 1C (українські конфігурації)</h3>
         </div>
         <p>
-          Підтримуються актуальні версії BAS Бухгалтерія та 1C Бухгалтерія для України.
-          Метод підключення визначається відповідно до конфігурації та доступних
-          способів отримання даних конкретної системи.
+          SAF-T UA за структурою ближчий до вимог українського бухгалтерського обліку,
+          тому для BAS/1C-систем зазвичай потрібно менше трансформаційних функцій,
+          ніж для систем із суттєво іншою обліковою логікою.
         </p>
       </div>
       <div class="erp-detail">
@@ -145,19 +144,19 @@
           <h3 class="erp-detail-h3">Odoo</h3>
         </div>
         <p>
-          Інтеграція з Odoo забезпечує доступ до журналів обліку, плану рахунків
-          та аналітики. Підхід залежить від конфігурації та версії системи клієнта.
+          Інтеграція з Odoo налаштовується залежно від конфігурації та версії системи
+          клієнта. Метод доступу до даних погоджується на етапі аналізу.
         </p>
       </div>
       <div class="erp-detail">
         <div class="erp-detail-head">
-          <span class="erp-detail-badge other">Інші</span>
-          <h3 class="erp-detail-h3">Oracle, MS Dynamics та інші</h3>
+          <span class="erp-detail-badge other">Excel</span>
+          <h3 class="erp-detail-h3">Excel та структуровані вивантаження</h3>
         </div>
         <p>
-          Для систем без готового конектора (Oracle ERP, Microsoft Dynamics, JD Edwards,
-          Scala, Парус, Фінколекція) виконується індивідуальна інтеграція: через API,
-          прямий SQL-запит до бази даних або структурований CSV/Excel-експорт.
+          Excel-файли з фіксованою структурою можуть використовуватися як додаткові
+          джерела даних — наприклад, таблиці МСФЗ-трансформації. Підходить для випадків,
+          коли частина даних ведеться поза основною ERP-системою.
         </p>
       </div>
     </div>
