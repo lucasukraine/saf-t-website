@@ -145,15 +145,15 @@ const combinedSchema = JSON.stringify({
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         var sections = Array.from(document.querySelectorAll('.s-explainer, .s-hiw, .s-benefits, .s-trust'));
         if (!sections.length) return;
-        var vh = window.innerHeight;
+        var mid = window.innerHeight * 0.5;
         sections.forEach(function (s) {
           var r = s.getBoundingClientRect();
-          if (r.top < vh && r.bottom > 0) s.classList.add('is-visible');
+          if (r.top < mid && r.bottom > 0) s.classList.add('is-visible');
         });
         document.body.classList.add('scroll-anim-ready');
         var observer = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { e.target.classList.toggle('is-visible', e.isIntersecting); });
-        }, { threshold: 0 });
+        }, { threshold: 0, rootMargin: '0px 0px -50% 0px' });
         sections.forEach(function (s) { observer.observe(s); });
       })();
     </script>
