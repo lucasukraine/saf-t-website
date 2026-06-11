@@ -70,23 +70,31 @@
     const header = document.getElementById('header');
     if (!header) return;
     const scrim = document.getElementById('page-scrim');
-
-    const lightSectionIds = ['explainer', 'how-it-works', 'benefits', 'trust'];
-    const lightSections = lightSectionIds.map(id => document.getElementById(id)).filter(Boolean);
     const HEADER_ZONE = 80;
+    let lightSections = [];
 
     const updateHeader = () => {
-      const overLight = lightSections.some(section => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= HEADER_ZONE && rect.bottom > HEADER_ZONE;
+      const overLight = lightSections.some(s => {
+        const r = s.getBoundingClientRect();
+        return r.top <= HEADER_ZONE && r.bottom > HEADER_ZONE;
       });
       header.classList.toggle('scrolled', overLight);
       if (scrim) scrim.classList.toggle('light', overLight);
     };
 
-    window.addEventListener('scroll', updateHeader, { passive: true });
-    window.addEventListener('resize', updateHeader);
-    updateHeader();
+    const init = () => {
+      lightSections = ['explainer', 'how-it-works', 'benefits', 'trust']
+        .map(id => document.getElementById(id)).filter(Boolean);
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      window.addEventListener('resize', updateHeader);
+      updateHeader();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   })();
 
   (() => {

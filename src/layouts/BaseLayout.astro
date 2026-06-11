@@ -140,5 +140,23 @@ const combinedSchema = JSON.stringify({
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      (function () {
+        if (window.innerWidth < 769) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var sections = Array.from(document.querySelectorAll('.s-explainer, .s-hiw, .s-benefits, .s-trust'));
+        if (!sections.length) return;
+        var vh = window.innerHeight;
+        sections.forEach(function (s) {
+          var r = s.getBoundingClientRect();
+          if (r.top < vh && r.bottom > 0) s.classList.add('is-visible');
+        });
+        document.body.classList.add('scroll-anim-ready');
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { e.target.classList.toggle('is-visible', e.isIntersecting); });
+        }, { threshold: 0 });
+        sections.forEach(function (s) { observer.observe(s); });
+      })();
+    </script>
   </body>
 </html>
