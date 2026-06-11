@@ -730,6 +730,17 @@ body.theme-light .signal-tag {
 }
 body.theme-light .signal-label,
 body.theme-light .signal-sep { color: var(--ink-mute) !important; }
+/* Validation section in light theme */
+body.theme-light .s-validation::before { opacity: 0; }
+body.theme-light .val-lead              { color: var(--ink-soft) !important; }
+body.theme-light .val-point p           { color: var(--ink-soft) !important; }
+body.theme-light .vm-card {
+  box-shadow: 0 12px 56px rgba(0,0,0,.22), 0 2px 8px rgba(0,0,0,.10) !important;
+  border-color: rgba(0,0,0,.12) !important;
+}
+body.theme-light .vm-err-example {
+  background: rgba(10,15,30,.45) !important;
+}
 /* ERP diagram in light theme */
 body.theme-light .erp-diagram {
   background:   rgba(10,15,30,.03) !important;
