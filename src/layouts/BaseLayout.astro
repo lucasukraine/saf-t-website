@@ -149,8 +149,17 @@ const combinedSchema = JSON.stringify({
         var updateTheme = function () {
           var mid = window.innerHeight * 0.5;
           var active = 'hero';
+          var found = false;
+          // Primary: section that contains the midpoint (top ≤ mid < bottom)
           for (var i = 0; i < zones.length; i++) {
-            if (zones[i].el.getBoundingClientRect().top <= mid) active = zones[i].id;
+            var r = zones[i].el.getBoundingClientRect();
+            if (r.top <= mid && r.bottom > mid) { active = zones[i].id; found = true; break; }
+          }
+          // Fallback: last section whose top crossed midpoint (handles gaps / very end of page)
+          if (!found) {
+            for (var j = 0; j < zones.length; j++) {
+              if (zones[j].el.getBoundingClientRect().top <= mid) active = zones[j].id;
+            }
           }
           var light = LIGHT_IDS.indexOf(active) !== -1;
           document.body.classList.toggle('theme-light', light);
