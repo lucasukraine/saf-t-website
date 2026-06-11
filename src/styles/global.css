@@ -629,28 +629,27 @@ a.footer-contact-val:hover { color: #fff; }
   }
 }
 
-/* ── Scroll-reveal transitions — desktop only (IntersectionObserver) ───── */
-@media (min-width: 769px) {
-  body.scroll-anim-ready { background: var(--dark-section); }
+/* ── Scroll-reveal transitions (IntersectionObserver) ──────────────────── */
+/* JS adds .scroll-anim-ready to body; skipped if prefers-reduced-motion */
+body.scroll-anim-ready { background: var(--dark-section); }
 
-  .s-explainer,
-  .s-hiw,
-  .s-benefits,
-  .s-trust {
-    transition: opacity 0.5s ease;
-  }
+.s-explainer,
+.s-hiw,
+.s-benefits,
+.s-trust {
+  transition: opacity 0.5s ease;
+}
 
-  body.scroll-anim-ready .s-explainer,
-  body.scroll-anim-ready .s-hiw,
-  body.scroll-anim-ready .s-benefits,
-  body.scroll-anim-ready .s-trust {
-    opacity: 0;
-  }
+body.scroll-anim-ready .s-explainer,
+body.scroll-anim-ready .s-hiw,
+body.scroll-anim-ready .s-benefits,
+body.scroll-anim-ready .s-trust {
+  opacity: 0;
+}
 
-  body.scroll-anim-ready .s-explainer.is-visible,
-  body.scroll-anim-ready .s-hiw.is-visible,
-  body.scroll-anim-ready .s-benefits.is-visible,
-  body.scroll-anim-ready .s-trust.is-visible {
-    opacity: 1;
-  }
+body.scroll-anim-ready .s-explainer.is-visible,
+body.scroll-anim-ready .s-hiw.is-visible,
+body.scroll-anim-ready .s-benefits.is-visible,
+body.scroll-anim-ready .s-trust.is-visible {
+  opacity: 1;
 }
