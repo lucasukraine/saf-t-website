@@ -71,13 +71,10 @@
       <div class="erp-connector" aria-hidden="true">
         <div class="erp-conn-line"></div>
         <div class="erp-conn-node">
-          <div class="erp-conn-icon">
-            <svg viewBox="0 0 28 28" fill="none">
-              <rect x="5" y="7" width="12" height="15" rx="2" fill="rgba(3,169,244,.15)" stroke="rgba(3,169,244,.50)" stroke-width="1.2"/>
-              <rect x="7" y="10" width="5" height="1.2" rx=".4" fill="rgba(3,169,244,.60)"/>
-              <rect x="7" y="13" width="8" height="1.2" rx=".4" fill="rgba(3,169,244,.45)"/>
-              <rect x="7" y="16" width="6" height="1.2" rx=".4" fill="rgba(3,169,244,.35)"/>
-              <path d="M19 14 L24 14" stroke="rgba(255,152,0,.55)" stroke-width="1.4" stroke-dasharray="2 1.5" stroke-linecap="round"/>
+          <div class="erp-conn-favicon">
+            <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="38" height="18" rx="9" fill="rgba(255,255,255,.22)" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+              <circle cx="30" cy="10" r="7" fill="rgba(255,255,255,.92)" stroke="none"/>
             </svg>
           </div>
           <span class="erp-conn-label">SAF-T<br>Connector</span>
@@ -270,14 +267,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 12px 16px;
-  background: var(--accent);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(3,169,244,.30);
+  gap: 8px;
+  padding: 16px 22px;
+  background: linear-gradient(145deg, #29b6f6 0%, #039be5 55%, #0288d1 100%);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(3,169,244,.50),
+    0 0 0 1px rgba(255,255,255,.20) inset,
+    0 0 0 8px rgba(3,169,244,.12);
   flex: none;
 }
-.erp-conn-icon { width: 28px; height: 28px; }
+.erp-conn-favicon { width: 44px; height: 22px; }
 .erp-conn-label {
   font-family: var(--mono);
   font-size: 9.5px;
