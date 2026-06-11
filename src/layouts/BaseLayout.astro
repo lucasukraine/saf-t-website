@@ -132,7 +132,7 @@ const combinedSchema = JSON.stringify({
 
     <slot name="head" />
   </head>
-  <body>
+  <body class="theme-dark">
     <a class="skip-link" href="#main-content">Перейти до основного вмісту</a>
     <div class="page-scrim" id="page-scrim" aria-hidden="true"></div>
     <Header />
@@ -142,19 +142,36 @@ const combinedSchema = JSON.stringify({
     <Footer />
     <script is:inline>
       (function () {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var sections = Array.from(document.querySelectorAll('.s-explainer, .s-hiw, .s-benefits, .s-trust'));
-        if (!sections.length) return;
-        var mid = window.innerHeight * 0.5;
-        sections.forEach(function (s) {
-          var r = s.getBoundingClientRect();
-          if (r.top < mid && r.bottom > 0) s.classList.add('is-visible');
-        });
-        document.body.classList.add('scroll-anim-ready');
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { e.target.classList.toggle('is-visible', e.isIntersecting); });
-        }, { threshold: 0, rootMargin: '0px 0px -50% 0px' });
-        sections.forEach(function (s) { observer.observe(s); });
+        var LIGHT_IDS = ['explainer', 'how-it-works', 'benefits', 'trust'];
+        var ZONE_IDS  = ['hero', 'explainer', 'how-it-works', 'benefits', 'validation', 'erp', 'trust', 'faq', 'contact'];
+        var zones = [];
+
+        var updateTheme = function () {
+          var mid = window.innerHeight * 0.5;
+          var active = 'hero';
+          for (var i = 0; i < zones.length; i++) {
+            if (zones[i].el.getBoundingClientRect().top <= mid) active = zones[i].id;
+          }
+          var light = LIGHT_IDS.indexOf(active) !== -1;
+          document.body.classList.toggle('theme-light', light);
+          document.body.classList.toggle('theme-dark',  !light);
+        };
+
+        var init = function () {
+          zones = ZONE_IDS.map(function (id) {
+            var el = document.getElementById(id);
+            return el ? { id: id, el: el } : null;
+          }).filter(Boolean);
+          window.addEventListener('scroll', updateTheme, { passive: true });
+          window.addEventListener('resize', updateTheme);
+          updateTheme();
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
       })();
     </script>
   </body>

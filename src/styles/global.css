@@ -139,6 +139,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
+  background: var(--dark);
+  transition: background-color 0.5s ease;
 }
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
@@ -629,27 +631,111 @@ a.footer-contact-val:hover { color: #fff; }
   }
 }
 
-/* ── Scroll-reveal transitions (IntersectionObserver) ──────────────────── */
-/* JS adds .scroll-anim-ready to body; skipped if prefers-reduced-motion */
-body.scroll-anim-ready { background: var(--dark-section); }
+/* ── Theme system ───────────────────────────────────────────────────────
+   body.theme-dark  → whole page dark  (JS default)
+   body.theme-light → whole page light
+   All sections are transparent; body background provides the visual ground.
+──────────────────────────────────────────────────────────────────────── */
 
-.s-explainer,
-.s-hiw,
-.s-benefits,
-.s-trust {
-  transition: opacity 0.5s ease;
+body.theme-light { background: var(--warm); }
+
+/* Sections transparent — no individual background borders */
+.s-hero, .s-explainer, .s-hiw, .s-benefits,
+.s-validation, .s-erp, .s-trust, .s-faq, .s-cta {
+  background: transparent !important;
+}
+.s-hiw, .s-trust, .s-cta { border-top: none !important; }
+
+/* ── DARK THEME: remap light-section tokens to dark equivalents ── */
+body.theme-dark {
+  --ink:         var(--on-dark);
+  --ink-soft:    var(--on-dark-soft);
+  --ink-mute:    var(--on-dark-mute);
+  --paper:       rgba(255,255,255,.04);
+  --warm:        rgba(255,255,255,.03);
+  --line-strong: rgba(255,255,255,.09);
+  --line:        rgba(255,255,255,.06);
+  --accent-light: #29b6f6;
+}
+/* Chips/blocks that use hardcoded dark-green: unreadable on dark bg */
+body.theme-dark .hsv-chip.done,
+body.theme-dark .hsv-chip.valid   { color: #4ade80 !important; }
+body.theme-dark .hsv-block.done   { color: #4ade80 !important; }
+/* Timeline segments (non-accent) need visible bg on dark */
+body.theme-dark .hiw-tl-seg:not(.accent) {
+  background:   rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.10) !important;
 }
 
-body.scroll-anim-ready .s-explainer,
-body.scroll-anim-ready .s-hiw,
-body.scroll-anim-ready .s-benefits,
-body.scroll-anim-ready .s-trust {
-  opacity: 0;
+/* ── LIGHT THEME: remap dark-section tokens to light equivalents ── */
+body.theme-light {
+  --on-dark:      var(--ink);
+  --on-dark-soft: var(--ink-soft);
+  --on-dark-mute: var(--ink-mute);
+  --line-dark:    rgba(10,15,30,.08);
 }
-
-body.scroll-anim-ready .s-explainer.is-visible,
-body.scroll-anim-ready .s-hiw.is-visible,
-body.scroll-anim-ready .s-benefits.is-visible,
-body.scroll-anim-ready .s-trust.is-visible {
-  opacity: 1;
+/* Hardcoded white/near-white text in dark sections → dark on light bg */
+body.theme-light .hero-h1                            { color: var(--ink)       !important; }
+body.theme-light .val-h2,
+body.theme-light .val-point-h3                       { color: var(--ink)       !important; }
+body.theme-light .faq-h2                             { color: var(--ink)       !important; }
+body.theme-light .faq-h2-sub                         { color: var(--ink-soft)  !important; }
+body.theme-light .faq-q                              { color: var(--ink)       !important; }
+body.theme-light .faq-q:hover,
+body.theme-light .faq-item.is-open .faq-q            { color: var(--accent)    !important; }
+body.theme-light .faq-a-inner                        { color: var(--ink-soft)  !important; }
+body.theme-light .cta-h2                             { color: var(--ink)       !important; }
+/* FAQ list borders */
+body.theme-light .faq-list   { border-top-color:    var(--line-strong) !important; }
+body.theme-light .faq-item   { border-bottom-color: var(--line-strong) !important; }
+/* FAQ +/– icon */
+body.theme-light .faq-q::after {
+  background:
+    linear-gradient(var(--ink-mute), var(--ink-mute)) center / 100% 1.5px no-repeat,
+    linear-gradient(var(--ink-mute), var(--ink-mute)) center / 1.5px 100% no-repeat !important;
+}
+/* CTA ghost button */
+body.theme-light .btn-ghost-light {
+  background:   rgba(10,15,30,.06) !important;
+  color:        var(--ink)         !important;
+  border-color: rgba(10,15,30,.14) !important;
+}
+body.theme-light .btn-ghost-light:hover { background: rgba(10,15,30,.12) !important; }
+/* CTA meta / contacts */
+body.theme-light .cta-contact-val         { color: var(--ink-soft) !important; }
+body.theme-light .cta-contact-val:hover   { color: var(--ink)      !important; }
+body.theme-light .cta-contact-lbl         { color: var(--ink-mute) !important; }
+body.theme-light .cta-meta                { color: var(--ink-mute) !important; }
+body.theme-light .cta-meta a              { color: var(--ink-soft) !important; }
+body.theme-light .cta-meta a:hover        { color: var(--ink)      !important; }
+body.theme-light .cta-sep                 { color: var(--ink-mute) !important; }
+body.theme-light .cta-inner .eyebrow      { color: var(--ink-soft) !important; }
+/* on-dark eyebrows (erp, validation, faq) in light theme */
+body.theme-light .eyebrow.on-dark         { color: var(--ink-mute) !important; }
+body.theme-light .eyebrow.on-dark::before { background: var(--accent) !important; }
+/* Hero ghost button and signal tags */
+body.theme-light .btn-ghost {
+  background:   rgba(10,15,30,.06) !important;
+  color:        var(--ink)         !important;
+  border-color: rgba(10,15,30,.16) !important;
+}
+body.theme-light .btn-ghost:hover {
+  background: rgba(10,15,30,.12) !important;
+  color:      var(--ink)          !important;
+}
+body.theme-light .signal-tag {
+  background:   rgba(10,15,30,.06) !important;
+  border-color: rgba(10,15,30,.10) !important;
+  color:        var(--ink-soft)    !important;
+}
+body.theme-light .signal-label,
+body.theme-light .signal-sep { color: var(--ink-mute) !important; }
+/* ERP diagram in light theme */
+body.theme-light .erp-diagram {
+  background:   rgba(10,15,30,.03) !important;
+  border-color: rgba(10,15,30,.08) !important;
+}
+body.theme-light .erp-src-card {
+  background:   rgba(255,255,255,.75) !important;
+  border-color: rgba(10,15,30,.09)   !important;
 }
