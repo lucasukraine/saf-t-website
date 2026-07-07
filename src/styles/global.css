@@ -274,7 +274,7 @@ section { padding: var(--section-py) 0; position: relative; }
     color .2s var(--ease),
     border-color .2s var(--ease);
 }
-.header-cta:hover { background: #fff; color: var(--ink); border-color: #fff; }
+.header-cta:hover { background: #fff; color: var(--dark); border-color: #fff; }
 .header-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .header.scrolled .header-cta {
   background: var(--accent);
