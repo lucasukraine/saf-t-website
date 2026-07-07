@@ -185,5 +185,24 @@ const combinedSchema = JSON.stringify({
         }
       })();
     </script>
+    <script is:inline>
+      // Anti-spam email reveal: address is split into data-user/data-domain
+      // in the markup and only assembled into a real mailto link on click,
+      // so it never appears as plain text in the server-rendered HTML.
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.email-reveal');
+        if (!btn) return;
+        var user = btn.dataset.user;
+        var domain = btn.dataset.domain;
+        if (!user || !domain) return;
+        var email = user + '@' + domain;
+        var link = document.createElement('a');
+        link.href = 'mailto:' + email;
+        link.className = btn.className.replace('email-reveal', '').trim();
+        link.textContent = email;
+        btn.replaceWith(link);
+        link.focus();
+      });
+    </script>
   </body>
 </html>
