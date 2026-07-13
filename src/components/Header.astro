@@ -69,12 +69,10 @@
   (() => {
     const header = document.getElementById('header');
     if (!header) return;
-    const scrim = document.getElementById('page-scrim');
 
     const syncHeader = () => {
       const light = document.body.classList.contains('theme-light');
       header.classList.toggle('scrolled', light);
-      if (scrim) scrim.classList.toggle('light', light);
     };
 
     // Watch body class changes (set by theme-zone script in BaseLayout)

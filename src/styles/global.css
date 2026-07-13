@@ -333,43 +333,28 @@ section { position: relative; }
 .btn-ghost-light:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* =============================================================
-   PAGE SCRIM — soft gradient behind fixed header over dark
-   ============================================================= */
-.page-scrim {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 110px;
-  z-index: 70;
-  pointer-events: none;
-  background: linear-gradient(to bottom,
-    rgba(5,7,13,.62) 0%,
-    rgba(5,7,13,.22) 55%,
-    transparent 100%);
-  opacity: 1;
-  transition: opacity .4s var(--ease);
-}
-.page-scrim.light { opacity: 0; }
-
-/* =============================================================
-   HEADER
+   HEADER — liquid glass in both themes
    ============================================================= */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 80;
   color: #fff;
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  background: rgba(9, 12, 20, .55);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  border-bottom: 1px solid rgba(215,228,248,.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,.045) inset;
   transition:
     background .35s var(--ease),
     color .35s var(--ease),
-    border-color .35s var(--ease);
+    border-color .35s var(--ease),
+    box-shadow .35s var(--ease);
 }
 .header.scrolled {
-  background: rgba(243, 242, 237, .82);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(243, 242, 237, .78);
   border-bottom: 1px solid rgba(23,26,33,.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,.55) inset;
   color: #171a21;
 }
 
@@ -534,7 +519,6 @@ section { position: relative; }
 
 @media (max-width: 720px) {
   :root { --gut: 20px; --section-py: 72px; }
-  .page-scrim { height: 92px; }
 }
 
 /* =============================================================
