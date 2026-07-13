@@ -5,38 +5,39 @@
 <section class="s-explainer" id="explainer" aria-labelledby="explainer-h2">
   <div class="container">
 
-    <!-- AEO: definitional intro — this block is designed to be quoted by AI answer engines -->
-    <div class="expl-intro">
-      <div class="eyebrow">Регуляторний контекст</div>
-      <h2 id="explainer-h2" class="expl-h2">
-        Що таке SAF-T UA?
-      </h2>
-      <p class="expl-lead">
-        <strong>SAF-T UA (Standard Audit File for Tax)</strong> — стандартний аудиторський файл для цілей
-        оподаткування в Україні. Це XML-файл із визначеною структурою, який містить облікові дані,
-        вивантажені з облікової системи за встановлений звітний період. Структура включає блоки
-        <strong>Header</strong>, <strong>MasterFiles</strong> (зокрема TaxDifferences),
-        <strong>GeneralLedgerEntries</strong> та <strong>SourceDocuments</strong>.
-        Формат і структура визначені вимогами Міністерства фінансів / ДПС України.
+    <div class="sect-rule">
+      <span class="sect-no">01</span>
+      <span class="sect-label">Регуляторний контекст</span>
+    </div>
+
+    <!-- AEO: definitional intro — designed to be quoted by AI answer engines -->
+    <div class="sect-cols">
+      <h2 id="explainer-h2" class="sect-h2">Що таке SAF-T UA?</h2>
+      <p class="sect-lead">
+        Формат і структура файлу визначені вимогами Міністерства фінансів
+        та ДПС України. Нижче — визначення, регуляторні факти та роль
+        SAF-T Connector у цьому процесі.
       </p>
     </div>
+
+    <!-- Definition — editorial pull-quote treatment -->
+    <p class="expl-def">
+      <strong>SAF-T UA (Standard Audit File for Tax)</strong> — стандартний аудиторський
+      файл для цілей оподаткування в Україні. Це XML-файл із визначеною структурою,
+      який містить облікові дані, вивантажені з облікової системи за встановлений
+      звітний період. Структура включає блоки <strong>Header</strong>,
+      <strong>MasterFiles</strong> (зокрема TaxDifferences),
+      <strong>GeneralLedgerEntries</strong> та <strong>SourceDocuments</strong>.
+    </p>
 
     <!-- Two columns: context + connector -->
     <div class="expl-cols">
 
-      <div class="expl-col expl-col-left">
-        <div class="expl-col-icon" aria-hidden="true">
-          <svg viewBox="0 0 40 40" fill="none">
-            <path d="M6 3h18l10 10v25H6V3z" fill="rgba(3,169,244,.09)" stroke="rgba(3,169,244,.35)" stroke-width="1.3" stroke-linejoin="round"/>
-            <path d="M24 3v10h10" stroke="rgba(3,169,244,.35)" stroke-width="1.3" stroke-linejoin="round"/>
-            <path d="M11 19h14" stroke="rgba(3,169,244,.50)" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M11 24h18" stroke="rgba(3,169,244,.35)" stroke-width="1.3" stroke-linecap="round"/>
-            <path d="M11 29h11" stroke="rgba(3,169,244,.25)" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="32" cy="33" r="6.5" fill="rgba(3,169,244,.12)" stroke="rgba(3,169,244,.40)" stroke-width="1.3"/>
-            <path d="M29 33l2.5 2.5 4-4" stroke="rgba(3,169,244,.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <div class="expl-col">
+        <div class="expl-col-head">
+          <span class="expl-col-no">A</span>
+          <h3 class="expl-col-h3">SAF-T UA в Україні</h3>
         </div>
-        <h3 class="expl-col-h3">SAF-T UA в Україні</h3>
         <p>
           Файл SAF-T UA подається <strong>великими платниками податків</strong> на запит
           контролюючого органу. Конкретні вимоги залежать від поточного законодавства,
@@ -60,19 +61,11 @@
         </div>
       </div>
 
-      <div class="expl-col expl-col-right">
-        <div class="expl-col-icon" aria-hidden="true">
-          <svg viewBox="0 0 40 40" fill="none">
-            <path d="M6 3h18l10 10v25H6V3z" fill="rgba(3,169,244,.09)" stroke="rgba(3,169,244,.35)" stroke-width="1.3" stroke-linejoin="round"/>
-            <path d="M24 3v10h10" stroke="rgba(3,169,244,.35)" stroke-width="1.3" stroke-linejoin="round"/>
-            <path d="M11 17h10" stroke="rgba(3,169,244,.28)" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M11 21h14" stroke="rgba(3,169,244,.20)" stroke-width="1.1" stroke-linecap="round"/>
-            <!-- favicon mark: pill + circle -->
-            <rect x="11" y="27" width="18" height="9" rx="4.5" fill="rgba(3,169,244,.75)" stroke="rgba(3,169,244,.85)" stroke-width=".8"/>
-            <circle cx="24.5" cy="31.5" r="3.5" fill="rgba(255,255,255,.85)" stroke="none"/>
-          </svg>
+      <div class="expl-col">
+        <div class="expl-col-head">
+          <span class="expl-col-no">B</span>
+          <h3 class="expl-col-h3">Що робить SAF-T Connector</h3>
         </div>
-        <h3 class="expl-col-h3">Що робить SAF-T Connector</h3>
         <p>
           <strong>SAF-T Connector</strong> — програмне рішення LUCAS для формування аудитного
           файлу SAF-T UA. Система зчитує дані з облікових систем та інших узгоджених джерел,
@@ -130,112 +123,123 @@
 </section>
 
 <style>
-.s-explainer {
-  background: var(--paper);
-  padding: var(--section-py) 0;
-}
-
-.expl-intro {
-  max-width: 760px;
-  margin-bottom: 64px;
-}
-.expl-intro .eyebrow { margin-bottom: var(--eyebrow-mb); }
-.expl-h2 {
+/* Definition pull-quote */
+.expl-def {
+  position: relative;
+  max-width: 62ch;
+  padding-left: 28px;
+  border-left: 2px solid var(--accent);
   font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(30px, 3vw, 46px);
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  color: var(--ink);
-  margin-bottom: 24px;
-}
-.expl-lead {
-  font-size: clamp(16px, 1.1vw, 18px);
-  line-height: 1.7;
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 23px);
+  letter-spacing: -0.015em;
+  line-height: 1.55;
   color: var(--ink-soft);
-  max-width: 72ch;
+  margin-bottom: 88px;
 }
-.expl-lead strong { color: var(--ink); font-weight: 600; }
+.expl-def strong { color: var(--ink); font-weight: 600; }
 
-/* Two columns */
+/* Two columns, hairline-divided */
 .expl-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 56px;
-  padding-top: 48px;
-  border-top: 1px solid var(--line-strong);
+  gap: 0 80px;
+  margin-bottom: 88px;
+  position: relative;
 }
-.expl-col { display: flex; flex-direction: column; gap: 16px; }
+.expl-cols::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: var(--line);
+}
 
-.expl-col-icon {
-  width: 48px; height: 48px;
-  margin-bottom: 4px;
+.expl-col { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+
+.expl-col-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
+  margin-bottom: 6px;
+}
+.expl-col-no {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-text);
 }
 .expl-col-h3 {
   font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(20px, 1.8vw, 26px);
-  letter-spacing: -0.025em;
+  font-weight: 600;
+  font-size: clamp(19px, 1.7vw, 24px);
+  letter-spacing: -0.022em;
   line-height: 1.2;
   color: var(--ink);
 }
 .expl-col p {
   font-family: var(--body);
-  font-size: 15.5px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.75;
   color: var(--ink-soft);
 }
-.expl-col p strong { color: var(--ink); }
+.expl-col p strong { color: var(--ink); font-weight: 600; }
 
 .expl-list {
   list-style: none;
-  padding: 0; margin: 4px 0 0;
-  display: flex; flex-direction: column; gap: 10px;
+  padding: 0; margin: 6px 0 0;
+  display: flex; flex-direction: column;
 }
 .expl-list li {
   position: relative;
-  padding-left: 20px;
+  padding: 9px 0 9px 22px;
+  border-top: 1px solid var(--line);
   font-family: var(--body);
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--ink-soft);
 }
 .expl-list li::before {
   content: "";
-  position: absolute; left: 0; top: 8px;
-  width: 5px; height: 5px;
-  border-radius: 50%;
+  position: absolute; left: 2px; top: 17px;
+  width: 8px; height: 1.5px;
   background: var(--accent);
 }
 
+/* Facts — financial-report style stat pair */
 .expl-fact-row {
   display: flex;
-  gap: 32px;
-  margin-top: 8px;
+  gap: 0;
+  margin-top: 14px;
 }
 .expl-fact {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
+  padding: 18px 32px 0 0;
+  border-top: 1px solid var(--line-strong);
+  flex: 1;
 }
+.expl-fact + .expl-fact { padding-left: 32px; border-left: 1px solid var(--line); }
 .expl-fact-val {
   font-family: var(--display);
-  font-size: clamp(26px, 2.4vw, 36px);
-  font-weight: 500;
+  font-size: clamp(30px, 2.6vw, 42px);
+  font-weight: 600;
   letter-spacing: -0.03em;
-  color: var(--accent);
+  color: var(--ink);
   line-height: 1;
 }
 .expl-fact-lbl {
   font-family: var(--mono);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-mute);
-  max-width: 20ch;
-  line-height: 1.4;
+  max-width: 22ch;
+  line-height: 1.5;
 }
 
 /* Reference table */
@@ -245,17 +249,17 @@
   border-collapse: collapse;
   font-family: var(--body);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 .expl-table thead th {
   text-align: left;
   font-family: var(--mono);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-light);
-  padding: 0 24px 12px 0;
+  color: var(--ink-mute);
+  padding: 0 24px 14px 0;
   border-bottom: 1px solid var(--line-strong);
 }
 .expl-table thead th:last-child { padding-right: 0; }
@@ -263,25 +267,31 @@
   text-align: left;
   font-weight: 600;
   color: var(--ink);
-  padding: 11px 24px 11px 0;
+  padding: 14px 24px 14px 0;
   border-bottom: 1px solid var(--line);
   white-space: nowrap;
-  width: 260px;
+  width: 280px;
   vertical-align: top;
+  font-size: 14.5px;
 }
 .expl-table td {
   color: var(--ink-soft);
-  padding: 11px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
 }
 
 @media (max-width: 900px) {
-  .expl-cols { grid-template-columns: 1fr; gap: 40px; }
-  .expl-fact-row { gap: 24px; }
+  .expl-def { margin-bottom: 64px; }
+  .expl-cols { grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+  .expl-cols::before { display: none; }
+  .expl-fact-row { gap: 0; }
 }
 @media (max-width: 720px) {
-  .expl-intro { margin-bottom: 40px; }
-  .expl-table th[scope="row"] { width: 160px; font-size: 13.5px; }
+  .expl-def { padding-left: 20px; }
+  .expl-table th[scope="row"] { width: 150px; font-size: 13.5px; white-space: normal; }
   .expl-table td { font-size: 13.5px; }
+  .expl-fact + .expl-fact { padding-left: 20px; }
+  .expl-fact { padding-right: 20px; }
 }
 </style>

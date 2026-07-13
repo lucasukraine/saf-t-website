@@ -5,12 +5,16 @@
 <section class="s-validation" id="validation" aria-labelledby="validation-h2">
   <div class="container">
 
+    <div class="sect-rule">
+      <span class="sect-no">05</span>
+      <span class="sect-label">Валідація</span>
+    </div>
+
     <div class="val-layout">
 
       <!-- Left: text -->
       <div class="val-text">
-        <div class="eyebrow on-dark">Валідація</div>
-        <h2 id="validation-h2" class="val-h2">
+        <h2 id="validation-h2" class="sect-h2">
           Три рівні перевірки SAF-T файлу
         </h2>
         <p class="val-lead">
@@ -21,46 +25,21 @@
 
         <div class="val-points">
           <div class="val-point">
-            <div class="val-point-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none">
-                <path d="M4 2h9l4 4v13H4V2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M13 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-                <path d="M7 11L5.5 12.5 7 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13 11l1.5 1.5L13 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10.5 10.5l-1 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              </svg>
-            </div>
+            <span class="val-point-no" aria-hidden="true">1</span>
             <div>
               <h3 class="val-point-h3">XSD-валідація</h3>
               <p>Перевірка XML-файлу на відповідність офіційній схемі ДПС: структура, типи даних, обов'язкові поля.</p>
             </div>
           </div>
           <div class="val-point">
-            <div class="val-point-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none">
-                <rect x="3" y="2.5" width="14" height="15" rx="2" stroke="currentColor" stroke-width="1.3"/>
-                <rect x="4.5" y="4" width="11" height="3.5" rx=".8" stroke="currentColor" stroke-width="1"/>
-                <circle cx="7" cy="12" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="13" cy="12" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="7" cy="15.5" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="10" cy="15.5" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="13" cy="15.5" r="1" fill="currentColor" stroke="none"/>
-              </svg>
-            </div>
+            <span class="val-point-no" aria-hidden="true">2</span>
             <div>
               <h3 class="val-point-h3">Математичні та бухгалтерські контролі</h3>
               <p>Перевірка балансів, оборотів, узгодженості проводок між регістрами.</p>
             </div>
           </div>
           <div class="val-point">
-            <div class="val-point-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none">
-                <path d="M3 5h8M3 9h6M3 13h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                <circle cx="14" cy="12.5" r="3.5" stroke="currentColor" stroke-width="1.3"/>
-                <path d="M16.5 15l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              </svg>
-            </div>
+            <span class="val-point-no" aria-hidden="true">3</span>
             <div>
               <h3 class="val-point-h3">Міжсекційні контролі</h3>
               <p>Звіряння даних, що одночасно відображаються у різних блоках SAF-T. Результати доступні в інтерфейсі та у форматі Excel для зручного перегляду командою клієнта.</p>
@@ -81,7 +60,7 @@
             </div>
             <div class="vm-result pass">
               <span class="vm-res-dot"></span>
-              ПРОЙДЕНО
+              Пройдено
             </div>
           </div>
 
@@ -157,7 +136,7 @@
 
         </div>
 
-        <!-- Error example card (dimmed — no errors in this case) -->
+        <!-- Error example card -->
         <div class="vm-err-example">
           <div class="vee-head">
             <span class="vee-icon warn">⚠</span>
@@ -174,76 +153,61 @@
 </section>
 
 <style>
-.s-validation {
-  background: var(--dark-section);
-  color: var(--on-dark);
-  padding: var(--section-py) 0;
-  position: relative;
-  overflow: hidden;
-}
-.s-validation::before {
-  content: "";
-  position: absolute;
-  top: -80px; left: 50%; transform: translateX(-50%);
-  width: 800px; height: 300px;
-  background: radial-gradient(ellipse, rgba(3,169,244,.14), transparent 65%);
-  filter: blur(60px);
-  pointer-events: none;
-}
-
 .val-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.02fr .98fr;
+  gap: 88px;
   align-items: start;
 }
 
 /* Text */
-.val-text { display: flex; flex-direction: column; gap: 32px; }
-.val-text .eyebrow { margin-bottom: 0; }
-.val-h2 {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(26px, 2.6vw, 40px);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: #fff;
-}
+.val-text { display: flex; flex-direction: column; gap: 28px; }
 .val-lead {
-  font-size: 16px;
+  font-size: clamp(15.5px, 1.15vw, 17px);
   line-height: 1.7;
-  color: var(--on-dark-soft);
-  max-width: 54ch;
+  color: var(--ink-soft);
+  max-width: 52ch;
 }
 
-.val-points { display: flex; flex-direction: column; gap: 24px; }
+.val-points { display: flex; flex-direction: column; margin-top: 10px; }
 .val-point {
   display: flex;
-  gap: 14px;
+  gap: 22px;
   align-items: flex-start;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
 }
-.val-point-icon {
-  width: 28px; height: 28px;
-  color: var(--accent-light);
+.val-point-no {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-text);
+  width: 30px; height: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
   margin-top: 2px;
 }
 .val-point-h3 {
   font-family: var(--display);
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: -0.018em;
-  color: #fff;
-  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 7px;
 }
 .val-point p {
   font-family: var(--body);
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: var(--on-dark-soft);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 50ch;
 }
 
-/* === Validation Mockup === */
+/* === Validation mockup — chrome family === */
 .val-mockup {
   display: flex;
   flex-direction: column;
@@ -251,13 +215,13 @@
 }
 
 .vm-card {
-  background: rgba(13,20,45,.70);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,.09);
-  border-radius: 14px;
+  background: var(--chrome);
+  border: 1px solid var(--chrome-line);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 4px 40px rgba(0,0,0,.45);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.05) inset,
+    0 24px 64px -16px rgba(2,4,10,.5);
 }
 
 .vm-header {
@@ -266,77 +230,77 @@
   justify-content: space-between;
   gap: 12px;
   padding: 14px 18px;
-  background: rgba(0,0,0,.20);
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.025);
+  border-bottom: 1px solid var(--chrome-line);
 }
-.vm-header-left { display: flex; flex-direction: column; gap: 1px; }
+.vm-header-left { display: flex; flex-direction: column; gap: 2px; }
 .vm-title {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(238,242,255,.55);
+  color: rgba(226,235,250,.48);
 }
 .vm-file {
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 500;
-  color: rgba(238,242,255,.75);
+  color: rgba(226,235,250,.80);
 }
 .vm-result {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 6px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
   flex: none;
 }
 .vm-result.pass {
-  background: rgba(22,163,74,.12);
-  border: 1px solid rgba(22,163,74,.25);
-  color: #4ade80;
+  background: rgba(52,209,120,.08);
+  border: 1px solid rgba(52,209,120,.26);
+  color: var(--ok);
 }
 .vm-res-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: #4ade80;
+  background: var(--ok);
 }
 
 .vm-summary {
   display: flex;
-  gap: 0;
   padding: 14px 18px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid var(--chrome-line);
 }
 .vm-sum-item {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   padding-right: 16px;
-  border-right: 1px solid rgba(255,255,255,.06);
+  border-right: 1px solid var(--chrome-line);
   margin-right: 16px;
 }
-.vm-sum-item:last-child { border-right: none; margin-right: 0; }
+.vm-sum-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
 .vm-sum-val {
   font-family: var(--display);
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 19px;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: #fff;
   line-height: 1;
 }
-.vm-sum-item.ok .vm-sum-val { color: #4ade80; }
+.vm-sum-item.ok .vm-sum-val { color: var(--ok); }
 .vm-sum-lbl {
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: rgba(238,242,255,.35);
+  font-size: 8.5px;
+  letter-spacing: 0.09em;
+  color: rgba(226,235,250,.38);
   text-transform: uppercase;
 }
 
@@ -344,69 +308,61 @@
   padding: 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .vm-group {
-  border: 1px solid rgba(255,255,255,.06);
+  border: 1px solid rgba(160,185,225,.10);
   border-radius: 8px;
   overflow: hidden;
 }
 .vm-group-head {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(0,0,0,.15);
+  gap: 9px;
+  padding: 8px 13px;
+  background: rgba(255,255,255,.025);
 }
 .vm-group-icon {
   font-size: 11px;
   font-weight: 700;
-  width: 16px;
+  width: 14px;
   text-align: center;
 }
-.vm-group-icon.ok { color: #4ade80; }
+.vm-group-icon.ok { color: var(--ok); }
 .vm-group-name {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 600;
-  color: rgba(238,242,255,.70);
+  color: rgba(226,235,250,.72);
   flex: 1;
 }
-.vm-group-count {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: rgba(238,242,255,.35);
-}
 .vm-group-items {
-  padding: 8px 12px;
+  padding: 9px 13px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 .vm-check {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11.5px;
+  gap: 9px;
 }
-.vm-check.dim { opacity: .45; }
-.vc-icon { font-size: 10px; font-weight: 700; width: 14px; text-align: center; flex: none; }
-.vm-check.ok .vc-icon { color: #4ade80; }
-.vc-name { font-family: var(--mono); font-size: 11.5px; color: rgba(238,242,255,.60); }
+.vc-icon { font-size: 10px; font-weight: 700; width: 13px; text-align: center; flex: none; }
+.vm-check.ok .vc-icon { color: var(--ok); }
+.vc-name { font-family: var(--mono); font-size: 11px; color: rgba(226,235,250,.55); }
 
 .vm-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 18px;
-  border-top: 1px solid rgba(255,255,255,.06);
-  background: rgba(0,0,0,.12);
+  border-top: 1px solid var(--chrome-line);
 }
-.vm-schema-ref { display: flex; gap: 6px; align-items: center; }
+.vm-schema-ref { display: flex; gap: 7px; align-items: center; }
 .vm-schema-lbl {
   font-family: var(--mono);
-  font-size: 9.5px;
-  color: rgba(238,242,255,.30);
+  font-size: 9px;
+  color: rgba(226,235,250,.32);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -414,7 +370,7 @@
   font-family: var(--mono);
   font-size: 10.5px;
   font-weight: 600;
-  color: rgba(238,242,255,.55);
+  color: rgba(226,235,250,.58);
 }
 .vm-export-btn {
   display: inline-flex;
@@ -423,16 +379,16 @@
   font-family: var(--mono);
   font-size: 10.5px;
   font-weight: 600;
-  color: var(--accent-light);
+  color: var(--accent-hi);
   cursor: default;
 }
 
 /* Error example */
 .vm-err-example {
-  background: rgba(13,20,45,.50);
-  border: 1px solid rgba(255,152,0,.15);
-  border-radius: 10px;
-  padding: 12px 14px;
+  background: var(--chrome);
+  border: 1px solid rgba(255,150,60,.16);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -443,27 +399,27 @@
   gap: 8px;
 }
 .vee-icon { font-size: 12px; }
-.vee-icon.warn { color: rgba(255,152,0,.65); }
+.vee-icon.warn { color: rgba(255,160,70,.75); }
 .vee-label {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(238,242,255,.30);
+  color: rgba(226,235,250,.34);
 }
 .vee-body { display: flex; flex-direction: column; gap: 4px; }
 .vee-path {
   font-family: var(--mono);
   font-size: 10.5px;
-  color: rgba(255,152,0,.65);
+  color: rgba(255,160,70,.72);
   word-break: break-all;
 }
 .vee-msg {
   font-family: var(--mono);
   font-size: 10.5px;
-  color: rgba(238,242,255,.40);
-  line-height: 1.5;
+  color: rgba(226,235,250,.45);
+  line-height: 1.55;
 }
 
 @media (max-width: 1080px) {
@@ -471,7 +427,8 @@
 }
 @media (max-width: 720px) {
   .val-layout { gap: 36px; }
-  .vm-summary { flex-wrap: wrap; }
+  .vm-summary { flex-wrap: wrap; gap: 12px 0; }
   .vm-sum-item { min-width: 40%; }
+  .val-point { gap: 16px; }
 }
 </style>

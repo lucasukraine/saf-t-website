@@ -122,9 +122,11 @@ const combinedSchema = JSON.stringify({
     <!-- Favicon — base-aware so it works under any subpath -->
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 
-    <!-- Font preload — Cyrillic subsets are LCP-critical -->
+    <!-- Font preload — Cyrillic + Latin subsets are LCP-critical -->
     <link rel="preload" href={`${base}fonts/onest/onest-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href={`${base}fonts/onest/onest-latin.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
     <link rel="preload" href={`${base}fonts/manrope/manrope-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href={`${base}fonts/manrope/manrope-latin.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
 
     <!-- Structured data -->
     <script type="application/ld+json" is:inline set:html={combinedSchema} />

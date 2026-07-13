@@ -1,85 +1,73 @@
 ---
-// SaftErpGrid.astro — ERP compatibility visual section
+// SaftErpGrid.astro — ERP compatibility: precise schematic diagram
 ---
 
 <section class="s-erp" id="erp" aria-labelledby="erp-h2">
   <div class="container">
 
-    <div class="erp-intro">
-      <div class="eyebrow on-dark">Інтеграції</div>
-      <h2 id="erp-h2" class="erp-h2">
-        Інтеграція з обліковими системами
-      </h2>
-      <p class="erp-lead">
-        SAF-T Connector не прив'язаний до конкретної ERP-системи. Він може бути налаштований
-        для роботи з різними обліковими системами, базами даних та структурованими вивантаженнями.
-        Конкретний підхід до інтеграції залежить від архітектури системи клієнта, вимог безпеки
-        та доступних методів отримання даних.
+    <div class="sect-rule">
+      <span class="sect-no">03</span>
+      <span class="sect-label">Інтеграції</span>
+    </div>
+
+    <div class="sect-cols">
+      <h2 id="erp-h2" class="sect-h2">Інтеграція з обліковими системами</h2>
+      <p class="sect-lead">
+        SAF-T Connector не прив'язаний до конкретної ERP-системи. Він налаштовується
+        для роботи з різними обліковими системами, базами даних та структурованими
+        вивантаженнями. Підхід до інтеграції залежить від архітектури системи клієнта,
+        вимог безпеки та доступних методів отримання даних.
       </p>
     </div>
 
-    <!-- Visual flow diagram -->
-    <div class="erp-diagram" aria-label="Схема інтеграції: ERP-системи → SAF-T Connector → ДПС">
+    <!-- Schematic flow diagram -->
+    <div class="erp-diagram" aria-label="Схема інтеграції: облікові системи → SAF-T Connector → XML для ДПС">
+
+      <!-- Sources -->
       <div class="erp-sources" aria-label="Джерела даних">
-        <div class="erp-source">
-          <div class="erp-src-card">
-            <div class="erp-src-mark sap" aria-hidden="true">
-              <span>SAP</span>
-            </div>
-            <div class="erp-src-info">
-              <span class="erp-src-name">SAP ERP / S/4HANA</span>
-              <span class="erp-src-sub">Погоджений метод інтеграції</span>
-            </div>
-          </div>
+        <div class="erp-src-card">
+          <span class="erp-src-tag">SAP</span>
+          <span class="erp-src-name">SAP ERP / S/4HANA</span>
         </div>
-        <div class="erp-source">
-          <div class="erp-src-card">
-            <div class="erp-src-mark bas" aria-hidden="true">
-              <span>BAS</span>
-            </div>
-            <div class="erp-src-info">
-              <span class="erp-src-name">BAS / 1C Бухгалтерія</span>
-              <span class="erp-src-sub">Погоджений метод інтеграції</span>
-            </div>
-          </div>
+        <div class="erp-src-card">
+          <span class="erp-src-tag">BAS</span>
+          <span class="erp-src-name">BAS / 1C Бухгалтерія</span>
         </div>
-        <div class="erp-source">
-          <div class="erp-src-card">
-            <div class="erp-src-mark dynamics" aria-hidden="true">
-              <span>DYN</span>
-            </div>
-            <div class="erp-src-info">
-              <span class="erp-src-name">Microsoft Dynamics</span>
-              <span class="erp-src-sub">Погоджений метод інтеграції</span>
-            </div>
-          </div>
+        <div class="erp-src-card">
+          <span class="erp-src-tag">DYN</span>
+          <span class="erp-src-name">Microsoft Dynamics</span>
         </div>
-        <div class="erp-source">
-          <div class="erp-src-card">
-            <div class="erp-src-mark other" aria-hidden="true">
-              <span>+</span>
-            </div>
-            <div class="erp-src-info">
-              <span class="erp-src-name">Інші ERP, БД, експорти</span>
-              <span class="erp-src-sub">Oracle · Odoo · Excel / CSV</span>
-            </div>
-          </div>
+        <div class="erp-src-card">
+          <span class="erp-src-tag">+</span>
+          <span class="erp-src-name">Oracle · Odoo · Excel / CSV</span>
         </div>
       </div>
 
-      <!-- Arrow / connector center -->
-      <div class="erp-connector" aria-hidden="true">
-        <div class="erp-conn-line"></div>
-        <div class="erp-conn-node">
-          <div class="erp-conn-favicon">
-            <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="38" height="18" rx="9" fill="rgba(255,255,255,.22)" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
-              <circle cx="30" cy="10" r="7" fill="rgba(255,255,255,.92)" stroke="none"/>
-            </svg>
-          </div>
-          <span class="erp-conn-label">SAF-T<br>Connector</span>
+      <!-- Convergence web -->
+      <div class="erp-web" aria-hidden="true">
+        <svg viewBox="0 0 120 296" preserveAspectRatio="none">
+          <path d="M0 34 C 62 34, 58 148, 120 148" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M0 110 C 62 110, 58 148, 120 148" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M0 186 C 62 186, 58 148, 120 148" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M0 262 C 62 262, 58 148, 120 148" fill="none" vector-effect="non-scaling-stroke"/>
+        </svg>
+      </div>
+
+      <!-- Connector node -->
+      <div class="erp-node" aria-hidden="true">
+        <div class="erp-node-mark">
+          <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="38" height="18" rx="9" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+            <circle cx="30" cy="10" r="7" fill="rgba(255,255,255,.94)"/>
+          </svg>
         </div>
-        <div class="erp-conn-arrow" aria-hidden="true"></div>
+        <span class="erp-node-label">SAF-T<br>Connector</span>
+      </div>
+
+      <!-- Straight run to output -->
+      <div class="erp-run" aria-hidden="true">
+        <span class="erp-run-line"></span>
+        <span class="erp-run-head"></span>
       </div>
 
       <!-- Output -->
@@ -112,23 +100,17 @@
       </div>
     </div>
 
-    <!-- ERP detail cards -->
+    <!-- ERP details — hairline-divided editorial columns -->
     <div class="erp-details">
       <div class="erp-detail">
-        <div class="erp-detail-head">
-          <span class="erp-detail-badge sap">SAP</span>
-          <h3 class="erp-detail-h3">SAP ERP та S/4HANA</h3>
-        </div>
+        <h3 class="erp-detail-h3">SAP ERP та S/4HANA</h3>
         <p>
           Метод інтеграції з SAP погоджується з IT-командою клієнта і залежить від
           версії SAP, конфігурації, рівня авторизацій та архітектури даних.
         </p>
       </div>
       <div class="erp-detail">
-        <div class="erp-detail-head">
-          <span class="erp-detail-badge bas">BAS</span>
-          <h3 class="erp-detail-h3">BAS та 1C (українські конфігурації)</h3>
-        </div>
+        <h3 class="erp-detail-h3">BAS та 1C (українські конфігурації)</h3>
         <p>
           SAF-T UA за структурою ближчий до вимог українського бухгалтерського обліку,
           тому для BAS/1C-систем зазвичай потрібно менше трансформаційних функцій,
@@ -136,24 +118,18 @@
         </p>
       </div>
       <div class="erp-detail">
-        <div class="erp-detail-head">
-          <span class="erp-detail-badge dynamics">Dynamics</span>
-          <h3 class="erp-detail-h3">Microsoft Dynamics</h3>
-        </div>
+        <h3 class="erp-detail-h3">Microsoft Dynamics</h3>
         <p>
           Інтеграція з Microsoft Dynamics налаштовується залежно від конфігурації та версії
           системи клієнта. Метод доступу до даних погоджується на етапі аналізу.
         </p>
       </div>
       <div class="erp-detail">
-        <div class="erp-detail-head">
-          <span class="erp-detail-badge other">Excel</span>
-          <h3 class="erp-detail-h3">Excel та структуровані вивантаження</h3>
-        </div>
+        <h3 class="erp-detail-h3">Excel та структуровані вивантаження</h3>
         <p>
           Excel-файли з фіксованою структурою можуть використовуватися як додаткові
-          джерела даних — наприклад, таблиці МСФЗ-трансформації. Підходить для випадків,
-          коли частина даних ведеться поза основною ERP-системою.
+          джерела даних — наприклад, таблиці МСФЗ-трансформації, коли частина даних
+          ведеться поза основною ERP-системою.
         </p>
       </div>
     </div>
@@ -162,291 +138,230 @@
 </section>
 
 <style>
-.s-erp {
-  background: var(--dark-section);
-  padding: var(--section-py) 0;
-  border-top: rgba(255,255,255,.08);
-  overflow: hidden;
-}
-
-.erp-intro {
-  max-width: 680px;
-  margin-bottom: 64px;
-}
-.erp-intro .eyebrow { margin-bottom: var(--eyebrow-mb); }
-.erp-h2 {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(28px, 2.8vw, 44px);
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  color: var(--on-dark);
-  margin-bottom: 18px;
-}
-.erp-lead {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--on-dark-soft);
-  max-width: 60ch;
-}
-
-/* === Flow diagram === */
+/* === Schematic diagram === */
 .erp-diagram {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) minmax(60px, 1fr) auto minmax(60px, 1fr) minmax(230px, 280px);
   align-items: center;
-  gap: 0;
-  margin-bottom: 64px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 20px;
-  padding: 36px 40px;
-  overflow-x: auto;
+  margin-bottom: 96px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 44px 48px;
 }
 
+/* Sources */
 .erp-sources {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: none;
-  min-width: 240px;
 }
-
 .erp-src-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 10px;
+  gap: 14px;
+  height: 66px;
+  padding: 0 18px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   transition: border-color .2s var(--ease);
 }
-.erp-src-card:hover { border-color: rgba(3,169,244,.25); }
+.erp-src-card:hover { border-color: var(--line-strong); }
 
-.erp-src-mark {
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+.erp-src-tag {
   font-family: var(--mono);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: .06em;
+  color: var(--accent-text);
+  width: 42px;
   flex: none;
+  text-align: center;
+  padding: 5px 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
 }
-.erp-src-mark.sap   { background: rgba(255,152,0,.15);    color: #ffb74d;    border: 1px solid rgba(255,152,0,.30); }
-.erp-src-mark.bas   { background: rgba(3,169,244,.15);    color: var(--accent); border: 1px solid rgba(3,169,244,.30); }
-.erp-src-mark.dynamics { background: rgba(133,77,14,.20); color: #fbbf24;    border: 1px solid rgba(217,119,6,.30); }
-.erp-src-mark.other { background: rgba(100,116,139,.15);  color: #94a3b8;    border: 1px solid rgba(100,116,139,.30); font-size: 14px; }
+.erp-src-name {
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
 
-.erp-src-info { display: flex; flex-direction: column; gap: 1px; }
-.erp-src-name { font-family: var(--body); font-size: 13px; font-weight: 600; color: var(--on-dark); line-height: 1.3; }
-.erp-src-sub  { font-family: var(--mono); font-size: 10px; color: var(--on-dark-soft); letter-spacing: 0.04em; }
+/* Convergence web */
+.erp-web { align-self: stretch; display: flex; align-items: center; }
+.erp-web svg { width: 100%; height: 296px; }
+.erp-web path {
+  stroke: var(--line-strong);
+  stroke-width: 1px;
+}
 
-/* Connector node */
-.erp-connector {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0 24px;
-  min-width: 140px;
-  position: relative;
-}
-.erp-conn-line {
-  flex: 1;
-  height: 1px;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(3,169,244,.30) 0px,
-    rgba(3,169,244,.30) 6px,
-    transparent 6px,
-    transparent 12px
-  );
-}
-.erp-conn-node {
+/* Node */
+.erp-node {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px 22px;
-  background: linear-gradient(145deg, #29b6f6 0%, #039be5 55%, #0288d1 100%);
-  border-radius: 16px;
-  box-shadow:
-    0 8px 32px rgba(3,169,244,.50),
-    0 0 0 1px rgba(255,255,255,.20) inset,
-    0 0 0 8px rgba(3,169,244,.12);
-  flex: none;
+  gap: 9px;
+  padding: 20px 24px;
+  background: var(--chrome);
+  border: 1px solid var(--chrome-line);
+  border-radius: 12px;
+  box-shadow: 0 14px 40px -12px rgba(2,4,10,.45);
 }
-.erp-conn-favicon { width: 44px; height: 22px; }
-.erp-conn-label {
+.erp-node-mark { width: 44px; height: 22px; }
+.erp-node-label {
   font-family: var(--mono);
   font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
+  color: rgba(226,235,250,.75);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.45;
 }
-.erp-conn-arrow {
+
+/* Straight run + arrowhead */
+.erp-run {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  min-width: 0;
+}
+.erp-run-line {
   flex: 1;
   height: 1px;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(3,169,244,.30) 0px,
-    rgba(3,169,244,.30) 6px,
-    transparent 6px,
-    transparent 12px
-  );
-  position: relative;
+  background: var(--line-strong);
 }
-.erp-conn-arrow::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  top: 50%;
-  transform: translateY(-50%);
+.erp-run-head {
   width: 0; height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 8px solid rgba(3,169,244,.45);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 7px solid var(--ink-mute);
+  flex: none;
 }
 
 /* Output */
-.erp-output { flex: none; min-width: 220px; }
 .erp-out-card {
-  background: rgba(3,169,244,.10);
-  border: 1.5px solid rgba(3,169,244,.25);
-  border-radius: 12px;
-  padding: 16px 18px;
-  box-shadow: 0 4px 20px rgba(3,169,244,.08);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
 }
 .erp-out-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .erp-out-badge {
   font-family: var(--mono);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  background: rgba(3,169,244,.10);
-  color: var(--accent);
-  border: 1px solid rgba(3,169,244,.20);
-  border-radius: 4px;
-  padding: 2px 6px;
+  color: var(--accent-text);
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  padding: 3px 7px;
 }
 .erp-out-valid {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-family: var(--mono);
   font-size: 9.5px;
   font-weight: 600;
-  color: #4ade80;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  color: var(--ok-ink);
 }
 .erp-out-dot {
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: #4ade80;
+  background: var(--ok);
   flex: none;
 }
 .erp-out-name {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--on-dark);
-  margin-bottom: 3px;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
 .erp-out-meta {
   font-family: var(--body);
-  font-size: 11.5px;
-  color: var(--on-dark-soft);
-  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
 }
 .erp-out-stats {
   display: flex;
-  gap: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,.08);
+  gap: 18px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
 }
-.erp-stat { display: flex; flex-direction: column; gap: 1px; }
+.erp-stat { display: flex; flex-direction: column; gap: 2px; }
 .erp-stat-val {
   font-family: var(--display);
   font-size: 15px;
   font-weight: 600;
-  color: var(--on-dark);
+  color: var(--ink);
   letter-spacing: -0.02em;
   line-height: 1;
 }
 .erp-stat-lbl {
   font-family: var(--mono);
-  font-size: 9px;
-  color: var(--on-dark-soft);
-  letter-spacing: 0.06em;
+  font-size: 8.5px;
+  color: var(--ink-mute);
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-/* Detail cards */
+/* Details — hairline editorial columns */
 .erp-details {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 0 44px;
 }
 .erp-detail {
-  padding: 24px 20px;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 12px;
-  background: rgba(255,255,255,.04);
+  padding-top: 20px;
+  border-top: 1px solid var(--line-strong);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color .2s var(--ease);
 }
-.erp-detail:hover { border-color: rgba(3,169,244,.25); }
-.erp-detail-head { display: flex; align-items: center; gap: 10px; }
-.erp-detail-badge {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 3px 7px;
-  border-radius: 5px;
-  flex: none;
-}
-.erp-detail-badge.sap   { background: rgba(255,152,0,.15);    color: #ffb74d;    border: 1px solid rgba(255,152,0,.30); }
-.erp-detail-badge.bas   { background: rgba(3,169,244,.15);    color: var(--accent); border: 1px solid rgba(3,169,244,.30); }
-.erp-detail-badge.dynamics { background: rgba(133,77,14,.20); color: #fbbf24;    border: 1px solid rgba(217,119,6,.30); }
-.erp-detail-badge.other { background: rgba(100,116,139,.15);  color: #94a3b8;    border: 1px solid rgba(100,116,139,.30); }
 .erp-detail-h3 {
   font-family: var(--display);
-  font-weight: 500;
-  font-size: 15px;
-  letter-spacing: -0.018em;
-  line-height: 1.2;
-  color: var(--on-dark);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--ink);
 }
 .erp-detail p {
   font-family: var(--body);
   font-size: 13.5px;
-  line-height: 1.65;
-  color: var(--on-dark-soft);
+  line-height: 1.7;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 1200px) {
-  .erp-details { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 900px) {
-  .erp-diagram { flex-direction: column; gap: 24px; padding: 28px 24px; }
-  .erp-connector { flex-direction: row; padding: 0; min-width: auto; width: 100%; justify-content: center; }
-  .erp-sources { min-width: auto; width: 100%; flex-direction: row; flex-wrap: wrap; }
-  .erp-output { min-width: auto; width: 100%; }
+  .erp-diagram {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 32px 28px;
+    justify-items: center;
+  }
+  .erp-sources { width: 100%; }
+  .erp-src-card { height: 56px; }
+  .erp-web { display: none; }
+  .erp-run { transform: rotate(90deg); width: 40px; }
+  .erp-output { width: 100%; max-width: 340px; }
+  .erp-details { grid-template-columns: repeat(2, 1fr); gap: 36px 36px; }
 }
 @media (max-width: 720px) {
-  .erp-details { grid-template-columns: 1fr; }
-  .erp-sources { flex-direction: column; }
+  .erp-diagram { margin-bottom: 64px; }
+  .erp-details { grid-template-columns: 1fr; gap: 28px; }
 }
 </style>

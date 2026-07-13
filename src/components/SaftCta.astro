@@ -3,6 +3,7 @@
 ---
 
 <section class="s-cta" id="contact" aria-labelledby="cta-h2">
+  <div class="cta-glow" aria-hidden="true"></div>
   <div class="container">
     <div class="cta-inner">
 
@@ -22,7 +23,7 @@
         <a href="mailto:info@lucasua.com" class="btn btn-orange">
           Запитати вартість <span class="btn-arrow" aria-hidden="true">→</span>
         </a>
-        <a href="#faq" class="btn btn-ghost-light">
+        <a href="#faq" class="btn btn-ghost">
           Переглянути FAQ
         </a>
       </div>
@@ -32,17 +33,18 @@
           <span class="cta-contact-lbl">Написати нам</span>
           <button type="button" class="cta-contact-val email-reveal" data-user="info" data-domain="lucasua.com">Показати email</button>
         </div>
-        <span class="cta-sep" aria-hidden="true">·</span>
         <div class="cta-contact-item">
           <span class="cta-contact-lbl">Зателефонувати</span>
           <a href="tel:+380443447915" class="cta-contact-val">+38 (044) 344-79-15</a>
         </div>
-      </div>
-
-      <div class="cta-meta">
-        <span>Київ, БЦ Гулівер</span>
-        <span class="cta-sep" aria-hidden="true">·</span>
-        <a href="https://www.lucasua.com" target="_blank" rel="noopener" aria-label="LUCAS — зовнішній сайт">LUCAS</a>
+        <div class="cta-contact-item">
+          <span class="cta-contact-lbl">Офіс</span>
+          <span class="cta-contact-val is-static">Київ, БЦ Гулівер</span>
+        </div>
+        <div class="cta-contact-item">
+          <span class="cta-contact-lbl">Компанія</span>
+          <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="cta-contact-val" aria-label="LUCAS — зовнішній сайт">lucasua.com</a>
+        </div>
       </div>
 
     </div>
@@ -51,59 +53,52 @@
 
 <style>
 .s-cta {
-  background: var(--dark);
-  color: var(--on-dark);
-  padding: var(--section-py) 0;
   position: relative;
-  border-top: 1px solid rgba(255,255,255,.06);
   overflow: hidden;
 }
-.s-cta::before {
-  content: "";
+.cta-glow {
   position: absolute;
-  top: -100px; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 400px;
-  background: radial-gradient(ellipse, rgba(3,169,244,.18), transparent 65%);
+  top: -120px; left: 50%; transform: translateX(-50%);
+  width: 980px; height: 460px;
+  background: radial-gradient(ellipse, rgba(255,122,26,.10), transparent 65%);
   filter: blur(80px);
   pointer-events: none;
 }
 
 .cta-inner {
-  max-width: 700px;
+  max-width: 760px;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
   position: relative;
   z-index: 1;
 }
 
 .cta-inner .eyebrow {
-  margin-bottom: 28px;
-  justify-content: center;
-  color: rgba(238,242,255,.60);
+  margin-bottom: 30px;
+  color: var(--ink-mute);
 }
-.cta-inner .eyebrow::before { background: var(--orange); }
 
 .cta-h2 {
   font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(34px, 3.6vw, 58px);
+  font-weight: 600;
+  font-size: clamp(36px, 4vw, 62px);
   letter-spacing: -0.04em;
-  line-height: 1.06;
-  color: #fff;
-  margin-bottom: 24px;
+  line-height: 1.04;
+  color: var(--ink);
+  margin-bottom: 26px;
+  text-wrap: balance;
 }
-.cta-h2-accent { color: var(--orange); }
+.cta-h2-accent { color: var(--cta); }
 
 .cta-lead {
-  font-size: clamp(16px, 1.2vw, 18px);
-  line-height: 1.65;
-  color: var(--on-dark-soft);
+  font-size: clamp(15.5px, 1.2vw, 17.5px);
+  line-height: 1.7;
+  color: var(--ink-soft);
   max-width: 52ch;
-  margin-bottom: 40px;
+  margin-bottom: 44px;
 }
 
 .cta-actions {
@@ -111,72 +106,70 @@
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 72px;
 }
 
-.btn-ghost-light {
-  background: rgba(255,255,255,.08);
-  color: rgba(238,242,255,.80);
-  border-color: rgba(255,255,255,.18);
-}
-.btn-ghost-light:hover {
-  background: rgba(255,255,255,.14);
-  color: #fff;
-}
-.btn-ghost-light:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
+/* Contacts — hairline editorial row */
 .cta-contacts {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  align-items: stretch;
   justify-content: center;
-  margin-bottom: 16px;
+  gap: 0;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  width: 100%;
 }
 .cta-contact-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 3px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 6px;
+  padding: 0 36px;
+  border-left: 1px solid var(--line);
 }
+.cta-contact-item:first-child { border-left: none; }
 .cta-contact-lbl {
   font-family: var(--mono);
   font-size: 9.5px;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(238,242,255,.55);
+  color: var(--ink-mute);
 }
 .cta-contact-val {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(238,242,255,.70);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
   text-decoration: none;
   transition: color .2s var(--ease);
 }
-.cta-contact-val:hover { color: #fff; }
+a.cta-contact-val:hover,
+button.cta-contact-val:hover { color: var(--accent-text); }
 .cta-contact-val:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.cta-contact-val.is-static { color: var(--ink-soft); }
 
-.cta-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: rgba(238,242,255,.50);
+/* email-reveal inherits .cta-contact-val look; hover handled above */
+.cta-contact-item button.email-reveal:hover { color: var(--accent-text); }
+
+@media (max-width: 900px) {
+  .cta-contacts {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .cta-contact-item {
+    border-left: none;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
 }
-.cta-meta a { color: rgba(238,242,255,.60); text-decoration: none; transition: color .2s var(--ease); }
-.cta-meta a:hover { color: #fff; }
-.cta-meta a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-.cta-sep { color: rgba(238,242,255,.20); }
-
 @media (max-width: 720px) {
   .cta-actions { flex-direction: column; width: 100%; max-width: 340px; }
   .cta-actions .btn { justify-content: center; }
-  .cta-contacts { gap: 12px; }
-  .cta-meta { font-size: 10px; }
+  .cta-inner .eyebrow { margin-bottom: 22px; }
 }
 </style>
