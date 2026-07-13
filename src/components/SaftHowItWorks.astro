@@ -148,24 +148,56 @@
 
     </ol>
 
-    <!-- Timeline -->
+    <!-- Timeline — mini-Gantt on a month scale -->
     <div class="hiw-timeline">
       <div class="hiw-tl-head">
         <span class="hiw-tl-label">Типовий термін проєкту</span>
         <span class="hiw-tl-total">~3–4 місяці</span>
       </div>
-      <div class="hiw-tl-bar">
-        <div class="hiw-tl-seg" style="width:30%">
-          <span class="hiw-tl-seg-label">Аналіз і мапінг</span>
-          <span class="hiw-tl-seg-time">~1 міс.</span>
+
+      <div
+        class="hg"
+        role="img"
+        aria-label="Часова шкала проєкту на 4 місяці: аналіз і мапінг — приблизно 1 місяць; налаштування — приблизно 1,5 місяця; тестування і запуск — приблизно 1 місяць. Загалом 3–4 місяці залежно від складності."
+      >
+        <div class="hg-lines" aria-hidden="true">
+          <i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i>
         </div>
-        <div class="hiw-tl-seg accent" style="width:40%">
-          <span class="hiw-tl-seg-label">Налаштування</span>
-          <span class="hiw-tl-seg-time">~1,5 міс.</span>
+
+        <div class="hg-ruler" aria-hidden="true">
+          <span></span>
+          <div class="hg-ticks">
+            <span class="hg-tick">міс. 1</span>
+            <span class="hg-tick">міс. 2</span>
+            <span class="hg-tick">міс. 3</span>
+            <span class="hg-tick">міс. 4</span>
+          </div>
+          <span></span>
         </div>
-        <div class="hiw-tl-seg" style="width:30%">
-          <span class="hiw-tl-seg-label">Тестування і запуск</span>
-          <span class="hiw-tl-seg-time">~1 міс.</span>
+
+        <div class="hg-row" aria-hidden="true">
+          <span class="hg-name"><b>01</b>Аналіз і мапінг</span>
+          <div class="hg-track">
+            <div class="hg-bar" style="left:0; width:25%"></div>
+          </div>
+          <span class="hg-dur">~1 міс.</span>
+        </div>
+
+        <div class="hg-row" aria-hidden="true">
+          <span class="hg-name"><b>02</b>Налаштування</span>
+          <div class="hg-track">
+            <div class="hg-bar accent" style="left:25%; width:37.5%"></div>
+          </div>
+          <span class="hg-dur">~1,5 міс.</span>
+        </div>
+
+        <div class="hg-row" aria-hidden="true">
+          <span class="hg-name"><b>03</b>Тестування і запуск</span>
+          <div class="hg-track">
+            <div class="hg-bar" style="left:62.5%; width:25%"></div>
+            <div class="hg-tail" style="left:87.5%; width:12.5%"></div>
+          </div>
+          <span class="hg-dur">~1 міс.</span>
         </div>
       </div>
     </div>
@@ -314,8 +346,10 @@
 .hsv-export-icon { color: var(--accent-hi); font-size: 13px; font-weight: 700; }
 .hsv-export-size { color: rgba(226,235,250,.35); margin-left: auto; }
 
-/* Timeline — flat segmented bar */
+/* Timeline — mini-Gantt on a 4-month scale */
 .hiw-timeline {
+  --hg-name: 250px;
+  --hg-dur: 88px;
   border-top: 1px solid var(--line-strong);
   padding-top: 22px;
 }
@@ -323,7 +357,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 18px;
+  margin-bottom: 28px;
 }
 .hiw-tl-label {
   font-family: var(--mono); font-size: 10px; font-weight: 600;
@@ -335,47 +369,135 @@
   letter-spacing: -0.02em;
   color: var(--ink);
 }
-.hiw-tl-bar {
-  display: flex; gap: 3px;
+
+.hg { position: relative; }
+
+/* Month verticals — over the track area only */
+.hg-lines {
+  position: absolute;
+  left: var(--hg-name);
+  right: var(--hg-dur);
+  top: 26px;
+  bottom: 4px;
+  pointer-events: none;
 }
-.hiw-tl-seg {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 8px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 13px 16px;
-  min-width: 0;
+.hg-lines i {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
 }
-.hiw-tl-seg.accent {
-  background: var(--accent);
-  border-color: var(--accent);
+
+/* Ruler */
+.hg-ruler {
+  display: grid;
+  grid-template-columns: var(--hg-name) 1fr var(--hg-dur);
+  margin-bottom: 10px;
 }
-.hiw-tl-seg.accent .hiw-tl-seg-label,
-.hiw-tl-seg.accent .hiw-tl-seg-time { color: #052033; }
-.hiw-tl-seg-label {
-  font-family: var(--mono); font-size: 10px; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--ink);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+.hg-ticks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
-.hiw-tl-seg-time  {
-  font-family: var(--mono); font-size: 10.5px;
+.hg-tick {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
   color: var(--ink-mute);
-  flex: none;
+  padding-left: 9px;
+}
+
+/* Rows */
+.hg-row {
+  display: grid;
+  grid-template-columns: var(--hg-name) 1fr var(--hg-dur);
+  align-items: center;
+  min-height: 46px;
+}
+.hg-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  padding-right: 24px;
+}
+.hg-name b {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.hg-dur {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  text-align: right;
+}
+
+.hg-track {
+  position: relative;
+  height: 46px;
+}
+.hg-bar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  border-radius: 7px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+.hg-bar.accent {
+  background: linear-gradient(90deg, #33b4f5, #0295d8);
+  border-color: transparent;
+  box-shadow: 0 2px 14px rgba(3,169,244,.32);
+}
+/* Flex-range tail: hatched continuation into month 4 */
+.hg-tail {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  border-radius: 0 7px 7px 0;
+  background: repeating-linear-gradient(
+    -55deg,
+    var(--line-strong) 0px,
+    var(--line-strong) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  opacity: .8;
 }
 
 @media (max-width: 1080px) {
   .hiw-step { grid-template-columns: 64px 1fr; gap: 28px; padding: 44px 0; }
   .hiw-step-visual { display: none; }
   .hiw-step-num { font-size: 34px; }
+  .hiw-timeline { --hg-name: 200px; --hg-dur: 72px; }
 }
 @media (max-width: 720px) {
   .hiw-step { grid-template-columns: 1fr; gap: 14px; padding: 36px 0; }
   .hiw-step-num { font-size: 30px; padding-top: 0; }
   .hiw-steps { margin-bottom: 56px; }
-  .hiw-tl-bar { flex-direction: column; }
-  .hiw-tl-seg { width: 100% !important; }
+
+  /* Gantt: name+duration above the track, full-width scale */
+  .hiw-timeline { --hg-name: 0px; --hg-dur: 0px; }
+  .hg-lines { top: 24px; }
+  .hg-ruler { grid-template-columns: 1fr; }
+  .hg-ruler > span { display: none; }
+  .hg-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name dur" "track track";
+    row-gap: 0;
+    padding: 8px 0 2px;
+  }
+  .hg-name  { grid-area: name; padding-right: 0; }
+  .hg-dur   { grid-area: dur; }
+  .hg-track { grid-area: track; height: 30px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
