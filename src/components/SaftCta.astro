@@ -305,7 +305,7 @@
   width: 100%;
   max-width: 640px;
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
   padding: 36px;
@@ -340,27 +340,28 @@
   font-weight: 600;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--ink-mute);
+  color: var(--ink-soft);
 }
 
 .cf-input {
   appearance: none;
   width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--line-strong);
+  background: var(--field-bg);
+  border: 1px solid var(--field-line);
   border-radius: var(--radius-sm);
   padding: 13px 15px;
   font-family: var(--body);
   font-size: 14.5px;
   line-height: 1.5;
   color: var(--ink);
-  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
 }
 .cf-input::placeholder { color: var(--ink-mute); }
+.cf-input:hover { border-color: var(--ink-mute); }
 .cf-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(3,169,244,.18);
+  box-shadow: 0 0 0 3px rgba(3,169,244,.20);
 }
 .cf-input[aria-invalid="true"] { border-color: var(--err); }
 .cf-input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(220,80,70,.15); }
