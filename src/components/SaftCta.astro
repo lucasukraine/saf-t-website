@@ -240,6 +240,8 @@
         });
         showDone();
       } catch (err) {
+        // EmailJS errors carry {status, text} — surface them for diagnostics
+        console.error('[contact-form] send failed:', err && err.status, err && err.text ? err.text : err);
         setStatus('Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = btnHtml;
