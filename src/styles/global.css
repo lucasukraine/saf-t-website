@@ -132,6 +132,7 @@ body.theme-dark {
   --line-strong: rgba(215, 228, 248, .16);
   --accent-text: var(--accent-hi);
   --card-shadow: none;
+  --err:         #ff8078;
 }
 
 body.theme-light {
@@ -145,6 +146,7 @@ body.theme-light {
   --line-strong: rgba(23, 26, 33, .18);
   --accent-text: var(--accent-ink);
   --card-shadow: 0 1px 2px rgba(23, 26, 33, .04), 0 8px 32px -12px rgba(23, 26, 33, .07);
+  --err:         #c23d36;
 }
 
 /* ── Skip link (keyboard navigation) ────────────────────── */

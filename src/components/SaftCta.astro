@@ -1,5 +1,5 @@
 ---
-// SaftCta.astro — Final CTA section / contact
+// SaftCta.astro — Final CTA section: contact form + contact details
 ---
 
 <section class="s-cta" id="contact" aria-labelledby="cta-h2">
@@ -19,13 +19,55 @@
         наявних даних для SAF-T UA, та запропонуємо оптимальний підхід до впровадження.
       </p>
 
-      <div class="cta-actions">
-        <a href="mailto:info@lucasua.com" class="btn btn-orange">
-          Запитати вартість <span class="btn-arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="#faq" class="btn btn-ghost">
-          Переглянути FAQ
-        </a>
+      <!-- Contact form (EmailJS) -->
+      <div class="cform-card">
+        <form class="cform" id="contact-form" novalidate>
+          <input type="hidden" name="site_name" value="SAF-T Connector" />
+
+          <!-- Honeypot — visually hidden bot trap -->
+          <p class="cf-hp" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off" />
+          </p>
+
+          <div class="cf-grid">
+            <div class="cf-field">
+              <label class="cf-label" for="cf-name">Ім'я</label>
+              <input class="cf-input" type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Як до вас звертатися" />
+              <p class="cf-err" id="cf-name-err" hidden></p>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label" for="cf-email">Email</label>
+              <input class="cf-input" type="email" id="cf-email" name="email" required autocomplete="email" placeholder="name@company.com" />
+              <p class="cf-err" id="cf-email-err" hidden></p>
+            </div>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="cf-phone">Телефон</label>
+            <input class="cf-input" type="tel" id="cf-phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+38 (0__) ___-__-__" />
+            <p class="cf-err" id="cf-phone-err" hidden></p>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="cf-message">Повідомлення</label>
+            <textarea class="cf-input cf-textarea" id="cf-message" name="message" rows="5" required placeholder="Опишіть вашу облікову систему (ERP, кількість юросіб) та задачу"></textarea>
+            <p class="cf-err" id="cf-message-err" hidden></p>
+          </div>
+
+          <p class="cf-status" id="cf-status" role="status" aria-live="polite" hidden></p>
+
+          <button type="submit" class="btn btn-orange cf-submit" id="cf-submit">
+            Надіслати запит <span class="btn-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div class="cf-done" id="cf-done" hidden>
+          <span class="cf-done-mark" aria-hidden="true">✓</span>
+          <p class="cf-done-h">Запит надіслано</p>
+          <p class="cf-done-p">Дякуємо! Ми зв'яжемося з вами за вказаними контактами.</p>
+        </div>
       </div>
 
       <div class="cta-contacts">
@@ -50,6 +92,161 @@
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const PUBLIC_KEY  = 'iY16Y2CF5ffzdZCbh';
+    const SERVICE_ID  = 'service_ocdfpq8';
+    const TEMPLATE_ID = 'template_wz7w36q';
+    const SDK_SRC     = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    const MIN_FILL_MS = 5000;
+
+    const statusEl = document.getElementById('cf-status');
+    const submitBtn = document.getElementById('cf-submit');
+    const doneEl = document.getElementById('cf-done');
+
+    // Anti-spam: form must be visible ≥5s before submit.
+    let shownAt = Date.now();
+    let sdkPromise = null;
+
+    const loadSdk = () => {
+      if (window.emailjs) return Promise.resolve();
+      if (!sdkPromise) {
+        sdkPromise = new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = SDK_SRC;
+          s.async = true;
+          s.onload = () => {
+            try {
+              window.emailjs.init({ publicKey: PUBLIC_KEY });
+              resolve();
+            } catch (err) { reject(err); }
+          };
+          s.onerror = () => reject(new Error('EmailJS SDK failed to load'));
+          document.head.appendChild(s);
+        });
+      }
+      return sdkPromise;
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            shownAt = Date.now();
+            loadSdk().catch(() => {});
+            io.disconnect();
+          }
+        });
+      });
+      io.observe(form);
+    }
+    form.addEventListener('focusin', () => loadSdk().catch(() => {}), { once: true });
+
+    const validators = {
+      name: (v) =>
+        v.trim().length >= 2 ? '' : "Вкажіть ім'я — щонайменше 2 символи.",
+      email: (v) =>
+        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Вкажіть коректний email.',
+      phone: (v) => {
+        const digits = v.replace(/\D/g, '');
+        const okChars = /^[+\d\s()\-]+$/.test(v.trim());
+        return okChars && digits.length >= 9 && digits.length <= 15
+          ? '' : 'Вкажіть коректний номер телефону.';
+      },
+      message: (v) => {
+        if (v.trim().length < 5) return 'Опишіть ваш запит — щонайменше 5 символів.';
+        if (/(https?:\/\/|www\.)/i.test(v)) return 'Приберіть посилання з повідомлення — такі запити блокуються як спам.';
+        return '';
+      },
+    };
+
+    const setFieldError = (nameKey, msg) => {
+      const input = form.elements[nameKey];
+      const errEl = document.getElementById('cf-' + nameKey + '-err');
+      if (!input || !errEl) return;
+      if (msg) {
+        errEl.textContent = msg;
+        errEl.hidden = false;
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', errEl.id);
+      } else {
+        errEl.hidden = true;
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+      }
+    };
+
+    const setStatus = (msg) => {
+      statusEl.textContent = msg || '';
+      statusEl.hidden = !msg;
+    };
+
+    // Clear a field's error as the user edits it
+    ['name', 'email', 'phone', 'message'].forEach((key) => {
+      const input = form.elements[key];
+      if (input) input.addEventListener('input', () => setFieldError(key, ''));
+    });
+
+    const showDone = () => {
+      form.hidden = true;
+      doneEl.hidden = false;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('');
+
+      // Honeypot: silently swallow bot submissions
+      if (form.elements.website && form.elements.website.value) {
+        showDone();
+        return;
+      }
+
+      // Too-fast submission
+      if (Date.now() - shownAt < MIN_FILL_MS) {
+        setStatus('Форму надіслано занадто швидко. Зачекайте кілька секунд і спробуйте ще раз.');
+        return;
+      }
+
+      // Field validation
+      let firstInvalid = null;
+      ['name', 'email', 'phone', 'message'].forEach((key) => {
+        const msg = validators[key](form.elements[key].value);
+        setFieldError(key, msg);
+        if (msg && !firstInvalid) firstInvalid = form.elements[key];
+      });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const btnHtml = submitBtn.innerHTML;
+      submitBtn.textContent = 'Надсилаємо…';
+
+      try {
+        await loadSdk();
+        await window.emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+          from_name: form.elements.name.value.trim(),
+          reply_to:  form.elements.email.value.trim(),
+          phone:     form.elements.phone.value.trim(),
+          message:   form.elements.message.value.trim(),
+          site_name: form.elements.site_name.value,
+          site:      window.location.hostname,
+        });
+        showDone();
+      } catch (err) {
+        setStatus('Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnHtml;
+      }
+    });
+  })();
+</script>
 
 <style>
 .s-cta {
@@ -98,15 +295,136 @@
   line-height: 1.7;
   color: var(--ink-soft);
   max-width: 52ch;
-  margin-bottom: 44px;
+  margin-bottom: 48px;
 }
 
-.cta-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+/* === Contact form === */
+.cform-card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 36px;
   margin-bottom: 72px;
+  text-align: left;
+}
+
+.cform { display: flex; flex-direction: column; gap: 20px; }
+
+/* Honeypot — visually hidden, still in the a11y-invisible flow for bots */
+.cf-hp {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.cf-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+
+.cf-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.cf-input {
+  appearance: none;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.cf-input::placeholder { color: var(--ink-mute); }
+.cf-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(3,169,244,.18);
+}
+.cf-input[aria-invalid="true"] { border-color: var(--err); }
+.cf-input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(220,80,70,.15); }
+
+.cf-textarea { resize: vertical; min-height: 120px; }
+
+.cf-err {
+  font-family: var(--body);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--err);
+}
+
+.cf-status {
+  font-family: var(--body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--err);
+  border: 1px solid var(--line-strong);
+  border-left: 2px solid var(--err);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.cf-submit { width: 100%; }
+.cf-submit:disabled {
+  opacity: .6;
+  cursor: default;
+  transform: none;
+}
+
+/* Success state */
+.cf-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 28px 0;
+}
+.cf-done[hidden] { display: none; }
+.cf-done-mark {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(52,209,120,.45);
+  color: var(--ok);
+  font-size: 18px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+.cf-done-h {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.cf-done-p {
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 40ch;
 }
 
 /* Contacts — hairline editorial row */
@@ -168,8 +486,8 @@ button.cta-contact-val:hover { color: var(--accent-text); }
   }
 }
 @media (max-width: 720px) {
-  .cta-actions { flex-direction: column; width: 100%; max-width: 340px; }
-  .cta-actions .btn { justify-content: center; }
+  .cform-card { padding: 24px 20px; margin-bottom: 56px; }
+  .cf-grid { grid-template-columns: 1fr; }
   .cta-inner .eyebrow { margin-bottom: 22px; }
 }
 </style>
