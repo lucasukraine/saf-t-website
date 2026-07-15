@@ -1,5 +1,9 @@
 ---
 // SaftExplainer.astro — AEO/GEO block: clear definitional content for answer engines
+
+// Build date = last content review signal (site is rebuilt on every change)
+const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'numeric' })
+  .format(new Date());
 ---
 
 <section class="s-explainer" id="explainer" aria-labelledby="explainer-h2">
@@ -117,6 +121,15 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Official sources + freshness signal -->
+    <div class="expl-sources">
+      <span class="expl-src-lbl">Офіційні джерела</span>
+      <a href="https://mof.gov.ua" target="_blank" rel="noopener" class="expl-src-link">Міністерство фінансів України</a>
+      <span class="expl-src-sep" aria-hidden="true">·</span>
+      <a href="https://tax.gov.ua" target="_blank" rel="noopener" class="expl-src-link">Державна податкова служба України</a>
+      <span class="expl-updated">Оновлено: {updatedLabel}</span>
     </div>
 
   </div>
@@ -279,6 +292,45 @@
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
   font-size: 14.5px;
+}
+
+/* Sources + freshness row */
+.expl-sources {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.expl-src-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.expl-src-link {
+  font-family: var(--body);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  transition: color .2s var(--ease);
+}
+.expl-src-link:hover { color: var(--accent-text); }
+.expl-src-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.expl-src-sep { color: var(--ink-mute); }
+.expl-updated {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: var(--ink-mute);
 }
 
 @media (max-width: 900px) {

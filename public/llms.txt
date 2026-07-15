@@ -1,0 +1,68 @@
+# SAF-T Connector
+
+> SAF-T Connector — програмне рішення LUCAS для підготовки стандартного аудиторського файлу SAF-T UA з облікових даних підприємства: формування XML, XSD-валідація за схемою ДПС України та Excel-перегляд звіту.
+
+Сайт: https://saftconnector.com
+Мова: українська
+Розробник: LUCAS (https://www.lucasua.com)
+
+## Що таке SAF-T UA
+
+SAF-T UA (Standard Audit File for Tax) — стандартний аудиторський файл для цілей
+оподаткування в Україні. Це XML-файл із визначеною структурою, який містить
+облікові дані, вивантажені з облікової системи за встановлений звітний період.
+Структура включає блоки Header, MasterFiles (зокрема TaxDifferences),
+GeneralLedgerEntries та SourceDocuments. Формат і структура визначені вимогами
+Міністерства фінансів та ДПС України.
+
+Ключові факти:
+- Подається великими платниками податків на запит контролюючого органу
+- Термін надання: 2 робочі дні після отримання запиту
+- Формат: XML на основі офіційної XSD-схеми ДПС
+- Файл охоплює: загальну книгу та облікові регістри, дебіторів і кредиторів,
+  документи продажів і закупівель, платежі, необоротні та нематеріальні активи,
+  рух товарів, податкові різниці та первинні документи
+
+## Що робить SAF-T Connector
+
+- Зчитує дані з облікових систем клієнта та інших узгоджених джерел
+- Трансформує їх за налаштованим мапінгом і генерує XML-файл SAF-T UA
+- Виконує три рівні перевірок: XSD-валідація за схемою ДПС, математичні та
+  бухгалтерські контролі, міжсекційні звірки
+- Формує Excel-перегляд аудитного файлу для перевірки командою клієнта
+- Інтегрується з SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo, базами даних
+  та структурованими Excel/CSV-вивантаженнями
+- Розгортається на інфраструктурі клієнта (Docker/Docker Compose)
+- Типовий термін впровадження: приблизно 3–4 місяці
+
+## Розділи сайту
+
+- Що таке SAF-T UA: https://saftconnector.com/#explainer
+- Можливості: https://saftconnector.com/#benefits
+- Інтеграція з ERP: https://saftconnector.com/#erp
+- Етапи впровадження: https://saftconnector.com/#how-it-works
+- Валідація файлу: https://saftconnector.com/#validation
+- Про LUCAS: https://saftconnector.com/#trust
+- FAQ (14 питань і відповідей): https://saftconnector.com/#faq
+- Контакти: https://saftconnector.com/#contact
+
+## Контакти
+
+- Email: info@lucasua.com
+- Телефон: +38 (044) 344-79-15
+- Офіс: Київ, БЦ Гулівер
+
+---
+
+# SAF-T Connector (English summary)
+
+SAF-T Connector is a software solution by LUCAS for preparing the Ukrainian
+Standard Audit File for Tax (SAF-T UA) from a company's accounting data. It
+extracts data from ERP systems (SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo,
+databases, structured Excel/CSV exports), maps it to the SAF-T UA structure,
+generates the XML file, validates it against the official XSD schema of the
+State Tax Service of Ukraine, runs mathematical and cross-section checks, and
+provides an Excel view for review. SAF-T UA is submitted by large taxpayers in
+Ukraine upon request of the tax authority within 2 business days. Typical
+implementation takes about 3–4 months and is deployed on the client's
+infrastructure (Docker).
