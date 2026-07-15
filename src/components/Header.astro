@@ -12,14 +12,15 @@
       <img src={`${import.meta.env.BASE_URL}logo.svg`} class="logo-img logo-img-color" alt="" width="133" height="36" />
     </a>
 
-    <!-- Desktop nav — fragment-only hrefs work under any base path -->
+    <!-- Desktop nav — root-relative so links work from /blog/ pages too -->
     <nav class="nav" aria-label="Основна навігація">
-      <a href="#explainer">Що таке SAF-T</a>
-      <a href="#erp">ERP-системи</a>
-      <a href="#how-it-works">Реалізація</a>
-      <a href="#validation">Валідація XML</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Контакти</a>
+      <a href="/#explainer">Що таке SAF-T</a>
+      <a href="/#erp">ERP-системи</a>
+      <a href="/#how-it-works">Реалізація</a>
+      <a href="/#validation">Валідація XML</a>
+      <a href="/blog/">Блог</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Контакти</a>
     </nav>
 
     <!-- Actions -->
@@ -40,14 +41,15 @@
 <!-- Mobile slide-in panel -->
 <div inert class="mob-menu" id="mob-menu" role="dialog" aria-label="Навігаційне меню">
   <span class="mob-section-label">Навігація</span>
-  <a href="#explainer">Що таке SAF-T</a>
-  <a href="#erp">ERP-системи</a>
-  <a href="#how-it-works">Реалізація</a>
-  <a href="#validation">Валідація XML</a>
-  <a href="#faq">FAQ</a>
-  <a href="#contact">Контакти</a>
+  <a href="/#explainer">Що таке SAF-T</a>
+  <a href="/#erp">ERP-системи</a>
+  <a href="/#how-it-works">Реалізація</a>
+  <a href="/#validation">Валідація XML</a>
+  <a href="/blog/">Блог</a>
+  <a href="/#faq">FAQ</a>
+  <a href="/#contact">Контакти</a>
   <span class="mob-section-label">Дія</span>
-  <a href="#contact" class="mob-cta-link">Замовити демо →</a>
+  <a href="/#contact" class="mob-cta-link">Замовити демо →</a>
 </div>
 
 <div class="mob-overlay" id="mob-overlay"></div>

@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://saftconnector.com';
+const fmt = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const listSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${siteUrl}/blog/#page`,
+      url: `${siteUrl}/blog/`,
+      name: 'Блог про SAF-T UA — SAF-T Connector',
+      description: 'Гайди та практичні матеріали про SAF-T UA: вимоги, структура файлу, валідація, підготовка даних та інтеграція з ERP.',
+      inLanguage: 'uk',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      hasPart: posts.map((p) => ({
+        '@type': 'Article',
+        headline: p.data.title,
+        url: `${siteUrl}/blog/${p.id}/`,
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'SAF-T Connector', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Блог', item: `${siteUrl}/blog/` },
+      ],
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title="Блог про SAF-T UA: вимоги, структура, валідація | SAF-T Connector"
+  description="Практичні матеріали про SAF-T UA: хто подає файл, структура та XSD-валідація, підготовка облікових даних, інтеграція з SAP, BAS/1C та Odoo."
+  theme="light"
+  schemaExtra={listSchema}
+>
+  <section class="blog-index">
+    <div class="container">
+
+      <div class="sect-rule">
+        <span class="sect-no">Блог</span>
+        <span class="sect-label">SAF-T UA на практиці</span>
+      </div>
+
+      <div class="sect-cols">
+        <h1 class="sect-h2">Гайди та матеріали про SAF-T UA</h1>
+        <p class="sect-lead">
+          Вимоги і терміни, структура файлу, валідація, підготовка облікових даних
+          та інтеграція з ERP — практичні матеріали від команди LUCAS,
+          розробника SAF-T Connector.
+        </p>
+      </div>
+
+      <ul class="blog-list">
+        {posts.map((post, i) => (
+          <li>
+            <a href={`/blog/${post.id}/`} class="blog-row">
+              <span class="blog-no">{String(i + 1).padStart(2, '0')}</span>
+              <span class="blog-main">
+                <span class="blog-label">{post.data.label}</span>
+                <span class="blog-title">{post.data.title}</span>
+                <span class="blog-desc">{post.data.description}</span>
+              </span>
+              <span class="blog-side">
+                <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
+                <span class="blog-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.blog-index { padding: 136px 0 112px; }
+
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+}
+.blog-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 180px;
+  gap: 28px;
+  align-items: start;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.blog-no {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--accent-text);
+  padding-top: 4px;
+}
+.blog-main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.blog-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.blog-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(19px, 1.8vw, 24px);
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  color: var(--ink);
+  transition: color .2s var(--ease);
+}
+.blog-desc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 68ch;
+}
+.blog-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+.blog-side time {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.blog-arrow {
+  color: var(--ink-mute);
+  font-size: 18px;
+  transition: transform .2s var(--ease), color .2s var(--ease);
+}
+.blog-row:hover .blog-title { color: var(--accent-text); }
+.blog-row:hover .blog-arrow { color: var(--accent-text); transform: translateX(4px); }
+
+@media (max-width: 900px) {
+  .blog-row { grid-template-columns: 40px 1fr; }
+  .blog-side { grid-column: 2; flex-direction: row; align-items: baseline; gap: 14px; padding-top: 2px; }
+}
+@media (max-width: 720px) {
+  .blog-index { padding: 104px 0 72px; }
+  .blog-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .blog-no { display: none; }
+}
+</style>

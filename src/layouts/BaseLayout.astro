@@ -10,6 +10,12 @@ interface Props {
   ogImage?: string;
   noIndex?: boolean;
   schemaExtra?: string;
+  /** 'auto' — scroll-driven dark/light zones (landing). 'light' — fixed light theme (blog). */
+  theme?: 'auto' | 'light';
+  /** OpenGraph type; articles pass 'article' + timestamps. */
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -18,6 +24,10 @@ const {
   canonical,
   noIndex = false,
   schemaExtra,
+  theme = 'auto',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // Dynamic site URL — driven by astro.config.mjs `site` value.
@@ -127,7 +137,9 @@ const combinedSchema = JSON.stringify({
     {effectiveNoIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     <meta property="og:site_name" content="SAF-T Connector" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -160,14 +172,14 @@ const combinedSchema = JSON.stringify({
 
     <slot name="head" />
   </head>
-  <body class="theme-dark">
+  <body class={theme === 'light' ? 'theme-light' : 'theme-dark'}>
     <a class="skip-link" href="#main-content">Перейти до основного вмісту</a>
     <Header />
     <main id="main-content">
       <slot />
     </main>
     <Footer />
-    <script is:inline>
+    {theme === 'auto' && <script is:inline>
       (function () {
         // Theme alternates every 2 sections: dark(hero, explainer) → light(benefits, erp)
         // → dark(how-it-works, validation) → light(trust, faq) → dark(contact)
@@ -211,7 +223,7 @@ const combinedSchema = JSON.stringify({
           init();
         }
       })();
-    </script>
+    </script>}
     <script is:inline>
       // Anti-spam email reveal: address is split into data-user/data-domain
       // in the markup and only assembled into a real mailto link on click,

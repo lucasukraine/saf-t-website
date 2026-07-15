@@ -43,8 +43,23 @@ GeneralLedgerEntries та SourceDocuments. Формат і структура в
 - Етапи впровадження: https://saftconnector.com/#how-it-works
 - Валідація файлу: https://saftconnector.com/#validation
 - Про LUCAS: https://saftconnector.com/#trust
-- FAQ (14 питань і відповідей): https://saftconnector.com/#faq
+- FAQ (16 питань і відповідей): https://saftconnector.com/#faq
 - Контакти: https://saftconnector.com/#contact
+
+## Блог — гайди про SAF-T UA
+
+- Що таке SAF-T UA: структура, вимоги та підготовка файлу:
+  https://saftconnector.com/blog/shcho-take-saf-t-ua/
+- Хто подає SAF-T UA (великі платники, механізм «на запит ДПС»):
+  https://saftconnector.com/blog/hto-podaye-saf-t-ua/
+- SAF-T UA з 2027 року для платників ПДВ — що відомо:
+  https://saftconnector.com/blog/saf-t-ua-2027-pdv/
+- Валідація SAF-T UA: XSD-схема, бізнес-правила, типові помилки:
+  https://saftconnector.com/blog/validatsiia-saf-t-ua/
+- SAF-T UA для SAP, BAS та Odoo:
+  https://saftconnector.com/blog/saf-t-ua-sap-bas-odoo/
+- Оцінка готовності до SAF-T UA і план впровадження:
+  https://saftconnector.com/blog/otsinka-hotovnosti-saf-t-ua/
 
 ## Контакти
 
