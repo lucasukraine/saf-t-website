@@ -5,19 +5,17 @@ import { copyFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// DEPLOYMENT CONFIGURATION — switch between GitHub Pages and production:
+// DEPLOYMENT CONFIGURATION
 //
-//   Development — GitHub Pages subpath:
-//     site: 'https://YOUR-GITHUB-USERNAME.github.io',
-//     base: '/saf-t-website/',
+// Production — custom domain on GitHub Pages:
+//   site: 'https://saftconnector.com', base: '/'
+//   The custom domain is declared in public/CNAME (shipped with the Pages
+//   artifact). DNS: apex A-records → GitHub Pages IPs, www CNAME →
+//   lucasukraine.github.io. noindex is OFF on this hostname.
 //
-//   Production — Custom domain:
-//     site: 'https://saf-t.com.ua',
-//     base: '/',
-//
-// noindex is added automatically on github.io builds (see BaseLayout.astro).
-// When switching to production, remove noindex by switching to the production
-// site/base values below — no other changes needed.
+// Dev fallback — GitHub Pages subpath (noindex added automatically for
+// *.github.io hostnames, see BaseLayout.astro):
+//   site: 'https://lucasukraine.github.io', base: '/saf-t-website/'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const sitemapAlias = {
@@ -35,14 +33,8 @@ const sitemapAlias = {
 };
 
 export default defineConfig({
-  // Temporary — GitHub Pages (https://lucasukraine.github.io/saf-t-website/)
-  // noindex is added automatically for *.github.io deployments (see BaseLayout.astro).
-  site: 'https://lucasukraine.github.io',
-  base: '/saf-t-website/',
-
-  // Production — switch to this when moving to the custom domain:
-  // site: 'https://saf-t.com.ua',
-  // base: '/',
+  site: 'https://saftconnector.com',
+  base: '/',
 
   integrations: [sitemap(), sitemapAlias],
 });

@@ -1,11 +1,4 @@
 User-agent: *
 Allow: /
 
-# NOTE: During GitHub Pages development, indexing is blocked via
-# <meta name="robots" content="noindex, nofollow"> (automatic in BaseLayout.astro).
-# When switching to production (https://saf-t.com.ua):
-#   1. Set site: 'https://saf-t.com.ua' and base: '/' in astro.config.mjs
-#   2. noindex is removed automatically (no longer on github.io hostname)
-#   3. Update the Sitemap line below if the domain changes
-
-Sitemap: https://saf-t.com.ua/sitemap.xml
+Sitemap: https://saftconnector.com/sitemap.xml

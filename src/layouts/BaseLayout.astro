@@ -21,16 +21,15 @@ const {
 } = Astro.props;
 
 // Dynamic site URL — driven by astro.config.mjs `site` value.
-// GitHub Pages: 'https://YOUR-USERNAME.github.io'  → siteUrl = 'https://YOUR-USERNAME.github.io'
-// Production:   'https://saf-t.com.ua'             → siteUrl = 'https://saf-t.com.ua'
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://saf-t.com.ua';
+// Production: 'https://saftconnector.com' (custom domain on GitHub Pages)
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://saftconnector.com';
 const base = import.meta.env.BASE_URL; // e.g. '/saf-t-website/' or '/'
 
 const canonicalUrl = canonical ?? (siteUrl + Astro.url.pathname.replace(/\/$/, '') + '/').replace(/\/\/$/, '/');
 const ogImage = Astro.props.ogImage ?? `${siteUrl}/og-image.jpg`;
 
-// Automatically add noindex when deployed to GitHub Pages.
-// On production (saf-t.com.ua) noindex is never added unless explicitly set.
+// Automatically add noindex when deployed to a *.github.io preview URL.
+// On production (saftconnector.com) noindex is never added unless explicitly set.
 const isGithubPages = Astro.site?.hostname.endsWith('.github.io') ?? false;
 const effectiveNoIndex = noIndex || isGithubPages;
 
