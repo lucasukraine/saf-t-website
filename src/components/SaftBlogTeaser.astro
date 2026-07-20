@@ -1,0 +1,121 @@
+---
+// SaftBlogTeaser.astro — "Матеріали по темі": links homepage to every blog
+// guide with descriptive anchor text. Dates render straight from the blog
+// content collection (src/content/blog/*.md) — change pubDate there and it
+// updates here, on /blog/, on the article page and in its schema at once.
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+const fmt = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<section class="s-blogteaser" id="materials" aria-labelledby="materials-h2">
+  <div class="container">
+
+    <div class="sect-rule">
+      <span class="sect-no">08</span>
+      <span class="sect-label">Блог</span>
+    </div>
+
+    <div class="sect-cols">
+      <h2 id="materials-h2" class="sect-h2">Матеріали по темі</h2>
+      <p class="sect-lead">
+        Практичні гайди про SAF-T UA для CFO, бухгалтерів та IT-команд: вимоги,
+        структура файлу, валідація та інтеграція з ERP.
+        <a href="/blog/" class="mt-all-link">Усі статті →</a>
+      </p>
+    </div>
+
+    <ul class="mt-list" role="list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}/`} class="mt-row">
+            <span class="mt-label">{post.data.label}</span>
+            <span class="mt-title">{post.data.title}</span>
+            <time class="mt-date" datetime={post.data.pubDate.toISOString()}>
+              {fmt.format(post.data.pubDate)}
+            </time>
+            <span class="mt-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+
+<style>
+.mt-all-link {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.mt-all-link:hover { text-decoration-style: dotted; }
+
+.mt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+}
+.mt-row {
+  display: grid;
+  grid-template-columns: 150px 1fr auto 24px;
+  gap: 24px;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  transition: color .2s var(--ease);
+}
+.mt-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.mt-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: var(--ink);
+  transition: color .2s var(--ease);
+}
+.mt-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.mt-arrow {
+  color: var(--ink-mute);
+  justify-self: end;
+  transition: transform .2s var(--ease), color .2s var(--ease);
+}
+.mt-row:hover .mt-title { color: var(--accent-text); }
+.mt-row:hover .mt-arrow { color: var(--accent-text); transform: translateX(3px); }
+
+@media (max-width: 900px) {
+  .mt-row { grid-template-columns: 1fr auto 20px; }
+  .mt-label { display: none; }
+}
+@media (max-width: 720px) {
+  .mt-row {
+    grid-template-columns: 1fr 20px;
+    grid-template-areas: "title arrow" "date date";
+    row-gap: 6px;
+    padding: 16px 0;
+  }
+  .mt-title { grid-area: title; }
+  .mt-arrow { grid-area: arrow; }
+  .mt-date  { grid-area: date; }
+}
+</style>

@@ -114,8 +114,11 @@ const webPageSchema = {
   isPartOf: { '@id': `${siteUrl}/#website` },
   about: { '@id': `${siteUrl}/#software` },
   primaryImageOfPage: { '@type': 'ImageObject', url: ogImage },
-  datePublished: '2026-07-15',
-  dateModified: buildDate,
+  // Falls back to the homepage's own launch date when a page (e.g. a blog
+  // article) doesn't pass its real publishedTime/modifiedTime — otherwise
+  // every page would incorrectly claim the homepage's date.
+  datePublished: publishedTime ?? '2026-07-15',
+  dateModified: modifiedTime ?? buildDate,
   inLanguage: 'uk',
 };
 
@@ -183,9 +186,9 @@ const combinedSchema = JSON.stringify({
     {theme === 'auto' && <script is:inline>
       (function () {
         // Theme alternates every 2 sections: dark(hero, explainer) → light(benefits, erp)
-        // → dark(how-it-works, validation) → light(trust, faq) → dark(contact)
+        // → dark(how-it-works, validation) → light(trust, faq) → dark(materials, contact)
         var LIGHT_IDS = ['benefits', 'erp', 'trust', 'faq'];
-        var ZONE_IDS  = ['hero', 'explainer', 'benefits', 'erp', 'how-it-works', 'validation', 'trust', 'faq', 'contact'];
+        var ZONE_IDS  = ['hero', 'explainer', 'benefits', 'erp', 'how-it-works', 'validation', 'trust', 'faq', 'materials', 'contact'];
         var zones = [];
 
         var updateTheme = function () {
