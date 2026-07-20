@@ -16,6 +16,8 @@ interface Props {
   ogType?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
+  /** CSS selectors of the page's own quotable lead content, for WebPage.speakable. */
+  speakableSelectors?: string[];
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   ogType = 'website',
   publishedTime,
   modifiedTime,
+  speakableSelectors,
 } = Astro.props;
 
 // Dynamic site URL — driven by astro.config.mjs `site` value.
@@ -60,6 +63,19 @@ const orgSchema = {
   },
   description: 'Програмне рішення для автоматичного формування, валідації та експорту файлів SAF-T UA відповідно до вимог ДПС України.',
   areaServed: 'UA',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'БЦ Гулівер, вежа А, 17-й поверх',
+    addressLocality: 'Київ',
+    addressCountry: 'UA',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+380443447915',
+    contactType: 'sales',
+    areaServed: 'UA',
+    availableLanguage: ['Ukrainian'],
+  },
   parentOrganization: {
     '@type': 'Organization',
     name: 'LUCAS',
@@ -114,6 +130,9 @@ const webPageSchema = {
   isPartOf: { '@id': `${siteUrl}/#website` },
   about: { '@id': `${siteUrl}/#software` },
   primaryImageOfPage: { '@type': 'ImageObject', url: ogImage },
+  ...(speakableSelectors && {
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: speakableSelectors },
+  }),
   // Falls back to the homepage's own launch date when a page (e.g. a blog
   // article) doesn't pass its real publishedTime/modifiedTime — otherwise
   // every page would incorrectly claim the homepage's date.
@@ -137,6 +156,7 @@ const combinedSchema = JSON.stringify({
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="application/rss+xml" title="SAF-T Connector — Блог" href={`${base}rss.xml`} />
     {effectiveNoIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->

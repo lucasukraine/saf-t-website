@@ -41,6 +41,7 @@ const articleSchema = JSON.stringify({
       dateModified: isoMod,
       mainEntityOfPage: pageUrl,
       image: `${siteUrl}/og-image.jpg`,
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.post-lead'] },
       author: {
         '@type': 'Organization',
         name: 'LUCAS',
