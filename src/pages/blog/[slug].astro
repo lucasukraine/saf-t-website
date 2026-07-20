@@ -44,8 +44,10 @@ const articleSchema = JSON.stringify({
       speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.post-lead'] },
       author: {
         '@type': 'Organization',
-        name: 'LUCAS',
+        name: 'LUCAS Audit Team',
         url: 'https://www.lucasua.com',
+        description: 'Аудиторсько-методологічна команда LUCAS — аудиторської та технологічної компанії з понад 15-річним досвідом у фінансовому аудиті, МСФЗ-звітності та цифровій трансформації обліку.',
+        sameAs: ['https://www.linkedin.com/company/lucasukraine/'],
       },
       publisher: { '@id': `${siteUrl}/#organization` },
       about: { '@id': `${siteUrl}/#software` },
@@ -101,11 +103,19 @@ const articleSchema = JSON.stringify({
       </div>
 
       <footer class="post-foot">
-        <div class="post-note">
-          Матеріал підготовлено командою LUCAS — аудиторської та технологічної компанії,
-          розробника <a href="/">SAF-T Connector</a>. Інформація актуальна станом на дату
-          публікації; нормативна база SAF-T UA розвивається — звіряйте деталі з офіційними
-          джерелами ДПС та чинною редакцією ПКУ.
+        <div class="post-author">
+          <span class="post-author-mark" aria-hidden="true">LA</span>
+          <div class="post-author-body">
+            <p class="post-author-name">LUCAS Audit Team</p>
+            <p class="post-author-role">Аудиторсько-методологічна команда LUCAS</p>
+            <p class="post-author-bio">
+              Аудиторська та технологічна компанія з понад 15-річним досвідом у фінансовому
+              аудиті, МСФЗ-звітності та цифровій трансформації обліку — розробник
+              <a href="/">SAF-T Connector</a>. Інформація в статті актуальна станом на дату
+              публікації; нормативна база SAF-T UA розвивається — звіряйте деталі з
+              офіційними джерелами ДПС та чинною редакцією ПКУ.
+            </p>
+          </div>
         </div>
 
         <div class="post-cta">
@@ -302,16 +312,57 @@ const articleSchema = JSON.stringify({
 
 /* ── Footer blocks ── */
 .post-foot { max-width: 72ch; }
-.post-note {
+
+.post-author {
+  display: flex;
+  gap: 18px;
   margin-top: 48px;
-  padding-top: 20px;
+  padding-top: 24px;
   border-top: 1px solid var(--line-strong);
+}
+.post-author-mark {
+  flex: none;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--accent-text);
+}
+.post-author-body { display: flex; flex-direction: column; gap: 3px; }
+.post-author-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.post-author-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+}
+.post-author-bio {
   font-family: var(--body);
   font-size: 13px;
   line-height: 1.7;
   color: var(--ink-mute);
+  max-width: 62ch;
 }
-.post-note a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.post-author-bio a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 480px) {
+  .post-author { gap: 14px; }
+}
 
 .post-cta {
   margin-top: 36px;
