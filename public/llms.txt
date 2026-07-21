@@ -2,9 +2,9 @@
 
 > SAF-T Connector — програмне рішення LUCAS для підготовки стандартного аудиторського файлу SAF-T UA з облікових даних підприємства: формування XML, XSD-валідація за схемою ДПС України та Excel-перегляд звіту.
 
-Сайт: https://saftconnector.com
+Сайт: [saftconnector.com](https://saftconnector.com)
 Мова: українська
-Розробник: LUCAS (https://www.lucasua.com)
+Розробник: [LUCAS](https://www.lucasua.com)
 
 ## Що таке SAF-T UA
 
@@ -37,41 +37,33 @@ GeneralLedgerEntries та SourceDocuments. Формат і структура в
 
 ## Розділи сайту
 
-- Що таке SAF-T UA: https://saftconnector.com/#explainer
-- Можливості: https://saftconnector.com/#benefits
-- Інтеграція з ERP: https://saftconnector.com/#erp
-- Етапи впровадження: https://saftconnector.com/#how-it-works
-- Валідація файлу: https://saftconnector.com/#validation
-- Про LUCAS: https://saftconnector.com/#trust
-- FAQ (16 питань і відповідей): https://saftconnector.com/#faq
-- Контакти: https://saftconnector.com/#contact
+- [Що таке SAF-T UA](https://saftconnector.com/#explainer)
+- [Можливості](https://saftconnector.com/#benefits)
+- [Інтеграція з ERP](https://saftconnector.com/#erp)
+- [Етапи впровадження](https://saftconnector.com/#how-it-works)
+- [Валідація файлу](https://saftconnector.com/#validation)
+- [Про LUCAS](https://saftconnector.com/#trust)
+- [FAQ (16 питань і відповідей)](https://saftconnector.com/#faq)
+- [Контакти](https://saftconnector.com/#contact)
 
 ## Блог — гайди про SAF-T UA
 
-- Що таке SAF-T UA: структура, вимоги та підготовка файлу:
-  https://saftconnector.com/blog/shcho-take-saf-t-ua/
-- Хто подає SAF-T UA (великі платники, механізм «на запит ДПС»):
-  https://saftconnector.com/blog/hto-podaye-saf-t-ua/
-- SAF-T UA з 2027 року для платників ПДВ — що відомо:
-  https://saftconnector.com/blog/saf-t-ua-2027-pdv/
-- Валідація SAF-T UA: XSD-схема, бізнес-правила, типові помилки:
-  https://saftconnector.com/blog/validatsiia-saf-t-ua/
-- SAF-T UA для SAP, BAS та Odoo:
-  https://saftconnector.com/blog/saf-t-ua-sap-bas-odoo/
-- Оцінка готовності до SAF-T UA і план впровадження:
-  https://saftconnector.com/blog/otsinka-hotovnosti-saf-t-ua/
+- [Що таке SAF-T UA: структура, вимоги та підготовка файлу](https://saftconnector.com/blog/shcho-take-saf-t-ua/)
+- [Хто подає SAF-T UA (великі платники, механізм «на запит ДПС»)](https://saftconnector.com/blog/hto-podaye-saf-t-ua/)
+- [SAF-T UA з 2027 року для платників ПДВ — що відомо](https://saftconnector.com/blog/saf-t-ua-2027-pdv/)
+- [Валідація SAF-T UA: XSD-схема, бізнес-правила, типові помилки](https://saftconnector.com/blog/validatsiia-saf-t-ua/)
+- [SAF-T UA для SAP, BAS та Odoo](https://saftconnector.com/blog/saf-t-ua-sap-bas-odoo/)
+- [Оцінка готовності до SAF-T UA і план впровадження](https://saftconnector.com/blog/otsinka-hotovnosti-saf-t-ua/)
 
 ## Контакти
 
-- Email: info@lucasua.com
-- Телефон: +38 (044) 344-79-15
+- Email: [info@lucasua.com](mailto:info@lucasua.com)
+- Телефон: [+38 (044) 344-79-15](tel:+380443447915)
 - Офіс: Київ, БЦ Гулівер
 
----
+## English summary
 
-# SAF-T Connector (English summary)
-
-SAF-T Connector is a software solution by LUCAS for preparing the Ukrainian
+SAF-T Connector is a software solution by [LUCAS](https://www.lucasua.com) for preparing the Ukrainian
 Standard Audit File for Tax (SAF-T UA) from a company's accounting data. It
 extracts data from ERP systems (SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo,
 databases, structured Excel/CSV exports), maps it to the SAF-T UA structure,
@@ -80,4 +72,4 @@ State Tax Service of Ukraine, runs mathematical and cross-section checks, and
 provides an Excel view for review. SAF-T UA is submitted by large taxpayers in
 Ukraine upon request of the tax authority within 2 business days. Typical
 implementation takes about 3–4 months and is deployed on the client's
-infrastructure (Docker).
+infrastructure (Docker). Site: [saftconnector.com](https://saftconnector.com).

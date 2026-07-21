@@ -53,6 +53,13 @@ export default defineConfig({
   site: 'https://saftconnector.com',
   base: '/',
 
+  // Per-page CSS is small (a few KB) — inline it instead of shipping it as a
+  // separate <link rel="stylesheet">, which PageSpeed Insights flags as a
+  // render-blocking request on every page.
+  build: {
+    inlineStylesheets: 'always',
+  },
+
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith('/rss.xml'),
