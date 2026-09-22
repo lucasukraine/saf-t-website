@@ -54,6 +54,8 @@ GeneralLedgerEntries та SourceDocuments. Формат і структура в
 - [Валідація SAF-T UA: XSD-схема, бізнес-правила, типові помилки](https://saftconnector.com/blog/validatsiia-saf-t-ua/)
 - [SAF-T UA для SAP, BAS та Odoo](https://saftconnector.com/blog/saf-t-ua-sap-bas-odoo/)
 - [Оцінка готовності до SAF-T UA і план впровадження](https://saftconnector.com/blog/otsinka-hotovnosti-saf-t-ua/)
+- [SAF-T UA для 1С: Бухгалтерія, УТП, УВП, 7.7 і кастомізовані бази](https://saftconnector.com/blog/saf-t-ua-1c/)
+- [SAF-T UA для SAP: ECC, S/4HANA, Cloud і Business One](https://saftconnector.com/blog/saf-t-ua-sap/)
 
 ## Контакти
 
