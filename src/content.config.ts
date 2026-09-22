@@ -9,7 +9,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     label: z.string(), // editorial rubric shown above the title
-    order: z.number(), // manual ordering on the index page
+    order: z.number(), // tiebreaker for posts with the same pubDate (lists are newest-first)
   }),
 });
 
