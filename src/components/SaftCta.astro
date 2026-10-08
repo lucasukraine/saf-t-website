@@ -103,6 +103,9 @@
     const TEMPLATE_ID = 'template_wz7w36q';
     const SDK_SRC     = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
     const MIN_FILL_MS = 5000;
+    const THROTTLE_MS = 60000;
+    // Known abusive senders — EmailJS drops these before the request leaves the browser.
+    const BLOCKED_EMAILS = [];
 
     const statusEl = document.getElementById('cf-status');
     const submitBtn = document.getElementById('cf-submit');
@@ -110,6 +113,11 @@
 
     // Anti-spam: form must be visible ≥5s before submit.
     let shownAt = Date.now();
+    // Anti-spam: a real person presses a key or taps; scripted fills set .value directly.
+    let interacted = false;
+    ['keydown', 'pointerdown'].forEach((evt) => {
+      form.addEventListener(evt, () => { interacted = true; }, { once: true, passive: true });
+    });
     let sdkPromise = null;
 
     const loadSdk = () => {
@@ -121,7 +129,17 @@
           s.async = true;
           s.onload = () => {
             try {
-              window.emailjs.init({ publicKey: PUBLIC_KEY });
+              const opts = {
+                publicKey: PUBLIC_KEY,
+                // 451 for Puppeteer/Selenium-style automated browsers
+                blockHeadless: true,
+                // 429 — one send per minute from the same browser
+                limitRate: { id: 'saft-contact', throttle: THROTTLE_MS },
+              };
+              if (BLOCKED_EMAILS.length) {
+                opts.blockList = { watchVariable: 'reply_to', list: BLOCKED_EMAILS };
+              }
+              window.emailjs.init(opts);
               resolve();
             } catch (err) { reject(err); }
           };
@@ -158,7 +176,7 @@
           ? '' : 'Вкажіть коректний номер телефону.';
       },
       message: (v) => {
-        if (v.trim().length < 5) return 'Опишіть ваш запит — щонайменше 5 символів.';
+        if (v.trim().length < 15) return 'Опишіть ваш запит докладніше — щонайменше 15 символів.';
         if (/(https?:\/\/|www\.)/i.test(v)) return 'Приберіть посилання з повідомлення — такі запити блокуються як спам.';
         return '';
       },
@@ -206,6 +224,12 @@
         return;
       }
 
+      // No keyboard or pointer input in the form — scripted fill
+      if (!interacted) {
+        showDone();
+        return;
+      }
+
       // Too-fast submission
       if (Date.now() - shownAt < MIN_FILL_MS) {
         setStatus('Форму надіслано занадто швидко. Зачекайте кілька секунд і спробуйте ще раз.');
@@ -237,12 +261,23 @@
           message:   form.elements.message.value.trim(),
           site_name: form.elements.site_name.value,
           site:      window.location.hostname,
+          // Diagnostics — let us tell a real enquiry from an automated one
+          page:      window.location.pathname,
+          fill_s:    Math.round((Date.now() - shownAt) / 1000),
+          ua:        navigator.userAgent,
         });
         showDone();
       } catch (err) {
         // EmailJS errors carry {status, text} — surface them for diagnostics
         console.error('[contact-form] send failed:', err && err.status, err && err.text ? err.text : err);
-        setStatus('Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.');
+        const code = err && err.status;
+        if (code === 429) {
+          setStatus('Запит уже надіслано. Зачекайте хвилину перед наступною спробою.');
+        } else if (code === 451 || code === 403) {
+          setStatus('Не вдалося надіслати запит. Скористайтеся контактами нижче.');
+        } else {
+          setStatus('Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.');
+        }
         submitBtn.disabled = false;
         submitBtn.innerHTML = btnHtml;
       }
