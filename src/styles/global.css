@@ -173,6 +173,8 @@ body.theme-light {
 
 /* ── Base resets ─────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
+/* The hidden attribute must win over any author display rule (flex/grid cards) */
+[hidden] { display: none !important; }
 html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
   margin: 0;
