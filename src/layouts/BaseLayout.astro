@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { getLang, alternatesFor, htmlLang, ogLocale, type Lang } from '../i18n';
 
 interface Props {
   title?: string;
@@ -20,9 +21,22 @@ interface Props {
   speakableSelectors?: string[];
 }
 
+const lang: Lang = getLang(Astro.url);
+
+const defaults = {
+  uk: {
+    title: 'SAF-T Connector — формування та валідація SAF-T UA файлів',
+    description: 'SAF-T Connector формує XML-файли SAF-T UA з SAP, BAS/1C, Odoo та Excel. Вбудована XSD-валідація за схемою ДПС. Готовий стандартний аудиторський файл для ДПС України.',
+  },
+  en: {
+    title: 'SAF-T Connector — SAF-T UA file generation and validation',
+    description: 'SAF-T Connector builds SAF-T UA XML files from SAP, BAS/1C, Odoo and Excel, with built-in XSD validation against the schema of the State Tax Service of Ukraine.',
+  },
+}[lang];
+
 const {
-  title = 'SAF-T Connector — формування та валідація SAF-T UA файлів',
-  description = 'SAF-T Connector формує XML-файли SAF-T UA з SAP, BAS/1C, Odoo та Excel. Вбудована XSD-валідація за схемою ДПС. Готовий стандартний аудиторський файл для ДПС України.',
+  title = defaults.title,
+  description = defaults.description,
   canonical,
   noIndex = false,
   schemaExtra,
@@ -39,7 +53,11 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://saftconnec
 const base = import.meta.env.BASE_URL; // e.g. '/saf-t-website/' or '/'
 
 const canonicalUrl = canonical ?? (siteUrl + Astro.url.pathname.replace(/\/$/, '') + '/').replace(/\/\/$/, '/');
-const ogImage = Astro.props.ogImage ?? `${siteUrl}/og-image.jpg`;
+const ogImage = Astro.props.ogImage ?? `${siteUrl}/${lang === 'en' ? 'og-image-en.jpg' : 'og-image.jpg'}`;
+
+// hreflang pairs — only for pages that exist in both languages (home, blog
+// index). Ukrainian articles have no English counterpart, so they get none.
+const alternates = alternatesFor(Astro.url.pathname);
 
 // Automatically add noindex when deployed to a *.github.io preview URL.
 // On production (saftconnector.com) noindex is never added unless explicitly set.
@@ -49,6 +67,47 @@ const effectiveNoIndex = noIndex || isGithubPages;
 // Build date doubles as the page's dateModified — the static site is
 // rebuilt on every content change, so this is truthful.
 const buildDate = new Date().toISOString().split('T')[0];
+
+// Locale copy for schema and chrome strings
+const loc = {
+  uk: {
+    orgDescription: 'Програмне рішення для автоматичного формування, валідації та експорту файлів SAF-T UA відповідно до вимог ДПС України.',
+    street: 'БЦ Гулівер, вежа А, 17-й поверх',
+    city: 'Київ',
+    softwareDescription: 'SAF-T Connector — програмне рішення для автоматичного формування XML-файлів SAF-T UA, XSD-валідації та подачі до ДПС України. Підтримує SAP, BAS/1C, Oracle, Microsoft Dynamics, Odoo та інші ERP-системи.',
+    features: [
+      'Автоматичне формування XML-файлу SAF-T UA з облікових даних',
+      'XSD-валідація за офіційною схемою ДПС',
+      'Математичні, бухгалтерські та міжсекційні контролі',
+      'Excel-перегляд аудиторського файлу',
+      'Інтеграція з SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo, Excel/CSV',
+      'Розгортання на інфраструктурі клієнта (Docker)',
+    ],
+    audience: 'Бухгалтери, IT-директори, фінансові директори великих та середніх підприємств',
+    launch: '2026-07-15',
+    skip: 'Перейти до основного вмісту',
+    rss: 'SAF-T Connector — Блог',
+  },
+  en: {
+    orgDescription: 'Software for automated generation, validation and export of SAF-T UA files in line with the requirements of the State Tax Service of Ukraine.',
+    street: 'Gulliver Business Center, Tower A, 17th floor',
+    city: 'Kyiv',
+    softwareDescription: 'SAF-T Connector is a software solution for automated generation of SAF-T UA XML files, XSD validation and submission to the State Tax Service of Ukraine. It supports SAP, BAS/1C, Oracle, Microsoft Dynamics, Odoo and other ERP systems.',
+    features: [
+      'Automated generation of the SAF-T UA XML file from accounting data',
+      'XSD validation against the official STS schema',
+      'Mathematical, accounting and cross-section controls',
+      'Excel view of the audit file',
+      'Integration with SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo, Excel/CSV',
+      'Deployment on the client\'s infrastructure (Docker)',
+    ],
+    audience: 'Accountants, CIOs and CFOs of large and mid-sized companies',
+    // Date the English version went live
+    launch: '2026-11-23',
+    skip: 'Skip to main content',
+    rss: 'SAF-T Connector — Blog (in Ukrainian)',
+  },
+}[lang];
 
 const orgSchema = {
   '@type': 'Organization',
@@ -61,12 +120,12 @@ const orgSchema = {
     width: 600,
     height: 164,
   },
-  description: 'Програмне рішення для автоматичного формування, валідації та експорту файлів SAF-T UA відповідно до вимог ДПС України.',
+  description: loc.orgDescription,
   areaServed: 'UA',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'БЦ Гулівер, вежа А, 17-й поверх',
-    addressLocality: 'Київ',
+    streetAddress: loc.street,
+    addressLocality: loc.city,
     addressCountry: 'UA',
   },
   contactPoint: {
@@ -74,7 +133,7 @@ const orgSchema = {
     telephone: '+380443447915',
     contactType: 'sales',
     areaServed: 'UA',
-    availableLanguage: ['Ukrainian'],
+    availableLanguage: ['Ukrainian', 'English'],
   },
   sameAs: ['https://www.linkedin.com/company/lucasukraine/'],
   parentOrganization: {
@@ -95,21 +154,14 @@ const softwareSchema = {
     '@type': 'Offer',
     availability: 'https://schema.org/InStock',
   },
-  description: 'SAF-T Connector — програмне рішення для автоматичного формування XML-файлів SAF-T UA, XSD-валідації та подачі до ДПС України. Підтримує SAP, BAS/1C, Oracle, Microsoft Dynamics, Odoo та інші ERP-системи.',
-  featureList: [
-    'Автоматичне формування XML-файлу SAF-T UA з облікових даних',
-    'XSD-валідація за офіційною схемою ДПС',
-    'Математичні, бухгалтерські та міжсекційні контролі',
-    'Excel-перегляд аудиторського файлу',
-    'Інтеграція з SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo, Excel/CSV',
-    'Розгортання на інфраструктурі клієнта (Docker)',
-  ],
+  description: loc.softwareDescription,
+  featureList: loc.features,
   screenshot: ogImage,
   publisher: { '@id': `${siteUrl}/#organization` },
   inLanguage: 'uk',
   audience: {
     '@type': 'BusinessAudience',
-    audienceType: 'Бухгалтери, IT-директори, фінансові директори великих та середніх підприємств',
+    audienceType: loc.audience,
   },
 };
 
@@ -119,7 +171,7 @@ const websiteSchema = {
   url: siteUrl,
   name: 'SAF-T Connector',
   publisher: { '@id': `${siteUrl}/#organization` },
-  inLanguage: 'uk',
+  inLanguage: ['uk', 'en'],
 };
 
 const webPageSchema = {
@@ -137,9 +189,9 @@ const webPageSchema = {
   // Falls back to the homepage's own launch date when a page (e.g. a blog
   // article) doesn't pass its real publishedTime/modifiedTime — otherwise
   // every page would incorrectly claim the homepage's date.
-  datePublished: publishedTime ?? '2026-07-15',
+  datePublished: publishedTime ?? loc.launch,
   dateModified: modifiedTime ?? buildDate,
-  inLanguage: 'uk',
+  inLanguage: lang,
 };
 
 const combinedSchema = JSON.stringify({
@@ -149,7 +201,7 @@ const combinedSchema = JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="uk">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -157,7 +209,14 @@ const combinedSchema = JSON.stringify({
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" type="application/rss+xml" title="SAF-T Connector — Блог" href={`${base}rss.xml`} />
+    {alternates && (
+      <>
+        <link rel="alternate" hreflang="uk" href={siteUrl + alternates.uk} />
+        <link rel="alternate" hreflang="en" href={siteUrl + alternates.en} />
+        <link rel="alternate" hreflang="x-default" href={siteUrl + alternates.uk} />
+      </>
+    )}
+    <link rel="alternate" type="application/rss+xml" title={loc.rss} href={`${base}rss.xml`} />
     {effectiveNoIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
@@ -168,7 +227,8 @@ const combinedSchema = JSON.stringify({
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    {alternates && <meta property="og:locale:alternate" content={ogLocale[lang === 'en' ? 'uk' : 'en']} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -185,10 +245,12 @@ const combinedSchema = JSON.stringify({
     <link rel="icon" type="image/png" sizes="48x48" href={`${base}favicon-48.png`} />
     <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
 
-    <!-- Font preload — Cyrillic + Latin subsets are LCP-critical -->
-    <link rel="preload" href={`${base}fonts/onest/onest-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <!-- Font preload — LCP-critical subsets. English pages render Cyrillic only
+         below the fold (Ukrainian article titles), so they skip those preloads;
+         unicode-range still fetches them on demand. -->
+    {lang === 'uk' && <link rel="preload" href={`${base}fonts/onest/onest-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />}
     <link rel="preload" href={`${base}fonts/onest/onest-latin.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
-    <link rel="preload" href={`${base}fonts/manrope/manrope-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    {lang === 'uk' && <link rel="preload" href={`${base}fonts/manrope/manrope-cyrillic.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />}
     <link rel="preload" href={`${base}fonts/manrope/manrope-latin.woff2`} as="font" type="font/woff2" crossorigin fetchpriority="high" />
 
     <!-- Structured data -->
@@ -198,7 +260,7 @@ const combinedSchema = JSON.stringify({
     <slot name="head" />
   </head>
   <body class={theme === 'light' ? 'theme-light' : 'theme-dark'}>
-    <a class="skip-link" href="#main-content">Перейти до основного вмісту</a>
+    <a class="skip-link" href="#main-content">{loc.skip}</a>
     <Header />
     <main id="main-content">
       <slot />

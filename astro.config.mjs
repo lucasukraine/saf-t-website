@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { copyFileSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { alternatesFor } from './src/i18n/index.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DEPLOYMENT CONFIGURATION
@@ -64,15 +65,27 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.endsWith('/rss.xml'),
       serialize(item) {
-        const path = new URL(item.url).pathname;
+        const url = new URL(item.url);
+        const path = url.pathname;
+        // hreflang alternates — same pairs as the <link rel="alternate"> tags
+        // in BaseLayout (src/i18n), so sitemap and HTML never disagree.
+        const alt = alternatesFor(path);
+        const links = alt
+          ? [
+              { lang: 'uk', url: url.origin + alt.uk },
+              { lang: 'en', url: url.origin + alt.en },
+              { lang: 'x-default', url: url.origin + alt.uk },
+            ]
+          : undefined;
         const slug = path.match(/^\/blog\/([^/]+)\/$/)?.[1];
         if (slug && blogLastmods[slug]) {
           return { ...item, lastmod: blogLastmods[slug] };
         }
-        if (path === '/blog/') {
-          return { ...item, lastmod: latestBlogLastmod ?? buildIso };
+        // Both blog indexes list the same articles
+        if (path === '/blog/' || path === '/en/blog/') {
+          return { ...item, links, lastmod: latestBlogLastmod ?? buildIso };
         }
-        return { ...item, lastmod: buildIso };
+        return { ...item, links, lastmod: buildIso };
       },
     }),
     sitemapAlias,

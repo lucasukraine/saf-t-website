@@ -1,5 +1,82 @@
 ---
 // SaftBenefits.astro — Key benefits grid
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+
+const icons = [
+  `<path d="M5 3h14l8 8v19H5V3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M19 3v8h8" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M11 18l-3 4 3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 18l3 4-3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  `<path d="M16 2.5L28 7v9C28 24.5 22.5 29 16 31 9.5 29 4 24.5 4 16V7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M11 16.5l3.5 3.5 7.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  `<rect x="3" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M3 13h26M3 19h26" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M11 6v20M19 6v20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`,
+  `<path d="M6 16A10 10 0 0 1 23.5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M26 16A10 10 0 0 1 8.5 23.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M19.5 5.5l4 3-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.5 26.5l-4-3 3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+];
+
+const t = {
+  uk: {
+    label: 'Можливості',
+    // Non-breaking hyphen: keeps "SAF-T" together on narrow screens
+    h2: 'Що вміє SAF‑T Connector',
+    lead: 'Формування XML, Excel-перегляд звіту та багаторівнева валідація — весь необхідний функціонал для повторюваного процесу формування стандартного аудиторського файлу.',
+    cards: [
+      {
+        h3: 'Автоматичне формування XML',
+        body: 'Рішення зчитує дані з облікової системи, трансформує їх відповідно до налаштованого мапінгу та генерує XML-файл. Інтеграція налаштовується під конкретну архітектуру даних клієнта.',
+        list: ['Пряме підключення до джерела даних', 'Трансформація за налаштованим мапінгом', 'Обробка великих обсягів транзакцій'],
+      },
+      {
+        h3: 'Валідація перед поданням',
+        body: 'Вбудовані перевірки виявляють помилки до подання: XSD-валідація за офіційною схемою ДПС, математичні контролі та міжсекційні звірки.',
+        list: ["XSD-валідація (структура, типи даних, обов'язкові поля)", 'Математичні та бухгалтерські контролі', 'Міжсекційні перевірки'],
+      },
+      {
+        h3: 'Excel-перегляд',
+        body: 'SAF-T Connector генерує XML та дозволяє переглядати дані в Excel для швидкої перевірки, фільтрації помилок і підтвердження коректності перед поданням.',
+        list: ['Перегляд згенерованого звіту в табличному форматі', 'Фільтрація рядків із помилками', 'Перевірка перед поданням до ДПС'],
+      },
+      {
+        h3: 'Адаптація до змін вимог ДПС',
+        body: 'При оновленні вимог ДПС користувачі отримують нову версію продукту з оновленими валідаторами. LUCAS може оновити мапінг відповідно до нових вимог або надати клієнту можливість виконати це самостійно.',
+        list: ['Оновлення XSD-валідації при зміні схеми', 'Оновлення мапінгу в рамках підтримки', 'Можливість самостійного оновлення клієнтом'],
+      },
+    ],
+  },
+  en: {
+    label: 'Capabilities',
+    h2: 'What SAF‑T Connector does',
+    lead: 'XML generation, an Excel view of the report and multi-level validation: everything you need to make producing the standard audit file a repeatable process.',
+    cards: [
+      {
+        h3: 'Automated XML generation',
+        body: 'The solution reads data from your accounting system, transforms it according to the configured mapping and generates the XML file. The integration is set up around your specific data architecture.',
+        list: ['Direct connection to the data source', 'Transformation via configured mapping', 'Handles large transaction volumes'],
+      },
+      {
+        h3: 'Validation before submission',
+        body: 'Built-in checks catch errors before the file goes out: XSD validation against the official STS schema, mathematical controls and cross-section reconciliations.',
+        list: ['XSD validation (structure, data types, mandatory fields)', 'Mathematical and accounting controls', 'Cross-section checks'],
+      },
+      {
+        h3: 'Excel view',
+        body: 'SAF-T Connector generates the XML and lets you review the data in Excel to check it quickly, filter out errors and confirm it is correct before submission.',
+        list: ['Review the generated report as a table', 'Filter rows with errors', 'Final check before submission to the STS'],
+      },
+      {
+        h3: 'Keeps pace with STS changes',
+        body: 'When the STS updates its requirements, users receive a new product version with updated validators. LUCAS can update the mapping to the new requirements, or enable the client to do it in-house.',
+        list: ['XSD validation updated when the schema changes', 'Mapping updates as part of support', 'Option for the client to update in-house'],
+      },
+    ],
+  },
+}[lang];
 ---
 
 <section class="s-benefits" id="benefits" aria-labelledby="benefits-h2">
@@ -7,114 +84,34 @@
 
     <div class="sect-rule">
       <span class="sect-no">02</span>
-      <span class="sect-label">Можливості</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="sect-cols">
-      <h2 id="benefits-h2" class="sect-h2">Що вміє SAF‑T Connector</h2>
+      <h2 id="benefits-h2" class="sect-h2">{t.h2}</h2>
       <p class="sect-lead">
-        Формування XML, Excel-перегляд звіту та багаторівнева валідація — весь необхідний
-        функціонал для повторюваного процесу формування стандартного аудиторського файлу.
+        {t.lead}
       </p>
     </div>
 
     <div class="benefits-grid" role="list">
-
-      <div class="benefit-card" role="listitem">
-        <div class="bc-top">
-          <span class="bc-no">01</span>
-          <div class="bc-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M5 3h14l8 8v19H5V3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-              <path d="M19 3v8h8" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-              <path d="M11 18l-3 4 3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M21 18l3 4-3 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+      {t.cards.map((card, i) => (
+        <div class="benefit-card" role="listitem">
+          <div class="bc-top">
+            <span class="bc-no">{String(i + 1).padStart(2, '0')}</span>
+            <div class="bc-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" set:html={icons[i]} />
+            </div>
           </div>
+          <h3 class="bc-h3">{card.h3}</h3>
+          <p class="bc-body">
+            {card.body}
+          </p>
+          <ul class="bc-list">
+            {card.list.map((li) => <li>{li}</li>)}
+          </ul>
         </div>
-        <h3 class="bc-h3">Автоматичне формування XML</h3>
-        <p class="bc-body">
-          Рішення зчитує дані з облікової системи, трансформує їх відповідно
-          до налаштованого мапінгу та генерує XML-файл. Інтеграція налаштовується
-          під конкретну архітектуру даних клієнта.
-        </p>
-        <ul class="bc-list">
-          <li>Пряме підключення до джерела даних</li>
-          <li>Трансформація за налаштованим мапінгом</li>
-          <li>Обробка великих обсягів транзакцій</li>
-        </ul>
-      </div>
-
-      <div class="benefit-card" role="listitem">
-        <div class="bc-top">
-          <span class="bc-no">02</span>
-          <div class="bc-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M16 2.5L28 7v9C28 24.5 22.5 29 16 31 9.5 29 4 24.5 4 16V7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-              <path d="M11 16.5l3.5 3.5 7.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        <h3 class="bc-h3">Валідація перед поданням</h3>
-        <p class="bc-body">
-          Вбудовані перевірки виявляють помилки до подання: XSD-валідація за офіційною
-          схемою ДПС, математичні контролі та міжсекційні звірки.
-        </p>
-        <ul class="bc-list">
-          <li>XSD-валідація (структура, типи даних, обов'язкові поля)</li>
-          <li>Математичні та бухгалтерські контролі</li>
-          <li>Міжсекційні перевірки</li>
-        </ul>
-      </div>
-
-      <div class="benefit-card" role="listitem">
-        <div class="bc-top">
-          <span class="bc-no">03</span>
-          <div class="bc-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <rect x="3" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.4"/>
-              <path d="M3 13h26M3 19h26" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              <path d="M11 6v20M19 6v20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <h3 class="bc-h3">Excel-перегляд</h3>
-        <p class="bc-body">
-          SAF-T Connector генерує XML та дозволяє переглядати дані в Excel для швидкої
-          перевірки, фільтрації помилок і підтвердження коректності перед поданням.
-        </p>
-        <ul class="bc-list">
-          <li>Перегляд згенерованого звіту в табличному форматі</li>
-          <li>Фільтрація рядків із помилками</li>
-          <li>Перевірка перед поданням до ДПС</li>
-        </ul>
-      </div>
-
-      <div class="benefit-card" role="listitem">
-        <div class="bc-top">
-          <span class="bc-no">04</span>
-          <div class="bc-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M6 16A10 10 0 0 1 23.5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              <path d="M26 16A10 10 0 0 1 8.5 23.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              <path d="M19.5 5.5l4 3-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12.5 26.5l-4-3 3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        <h3 class="bc-h3">Адаптація до змін вимог ДПС</h3>
-        <p class="bc-body">
-          При оновленні вимог ДПС користувачі отримують нову версію продукту
-          з оновленими валідаторами. LUCAS може оновити мапінг відповідно до нових вимог
-          або надати клієнту можливість виконати це самостійно.
-        </p>
-        <ul class="bc-list">
-          <li>Оновлення XSD-валідації при зміні схеми</li>
-          <li>Оновлення мапінгу в рамках підтримки</li>
-          <li>Можливість самостійного оновлення клієнтом</li>
-        </ul>
-      </div>
-
+      ))}
     </div>
 
   </div>

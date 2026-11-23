@@ -1,5 +1,6 @@
 ---
 title: "Хто подає SAF-T UA: великі платники та механізм «на запит ДПС»"
+titleEn: "Who submits SAF-T UA: large taxpayers and the “upon STS request” mechanism"
 description: "Кому потрібно бути готовим надати SAF-T UA: великі платники податків, компанії під час перевірки, нюанс щодо ПСІ і що робити після отримання запиту від ДПС."
 pubDate: 2026-04-13
 label: "Вимоги"

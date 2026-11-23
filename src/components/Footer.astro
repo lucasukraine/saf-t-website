@@ -1,6 +1,74 @@
 ---
 // Footer.astro — SAF-T Connector
+import { getLang, homePath, blogPath } from '../i18n';
+
 const currentYear = new Date().getFullYear();
+const lang = getLang(Astro.url);
+const home = homePath(lang);
+
+const t = {
+  uk: {
+    homeAria: 'SAF-T Connector — на головну',
+    tagline: 'Формування XML-файлу та XSD-валідація відповідно до вимог е-аудиту ДПС України.',
+    legal: ['Розробка: ТОВ САФ-Т Коннектор', 'Впровадження: ТОВ Лукас Аудит'],
+    product: 'Продукт',
+    productLinks: [
+      ['#explainer', 'Що таке SAF-T'],
+      ['#benefits', 'Можливості'],
+      ['#erp', 'ERP-системи'],
+      ['#how-it-works', 'Реалізація'],
+      ['#validation', 'Валідація XML'],
+    ],
+    resources: 'Ресурси',
+    blog: 'Блог',
+    guides: [
+      ['/blog/shcho-take-saf-t-ua/', 'Гайд по SAF-T UA'],
+      ['/blog/hto-podaye-saf-t-ua/', 'Хто подає SAF-T'],
+      ['/blog/validatsiia-saf-t-ua/', 'Валідація XSD'],
+    ],
+    guidesLang: undefined,
+    contact: "Зв'язок",
+    demo: 'Запит на демо',
+    reveal: 'Показати email',
+    phone: 'Телефон',
+    phoneDisplay: '+38 (044) 344-79-15',
+    address: 'Адреса',
+    addressVal: 'Київ, БЦ Гулівер, вежа А, 17-й поверх',
+    copy: `© ${currentYear} ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит". Усі права захищені.`,
+    extAria: 'lucasua.com — зовнішній сайт',
+  },
+  en: {
+    homeAria: 'SAF-T Connector — home',
+    tagline: 'XML file generation and XSD validation in line with the e-audit requirements of the State Tax Service of Ukraine.',
+    legal: ['Product: SAF-T Connector LLC', 'Implementation: LUCAS Audit LLC'],
+    product: 'Product',
+    productLinks: [
+      ['#explainer', 'What is SAF-T'],
+      ['#benefits', 'Capabilities'],
+      ['#erp', 'ERP systems'],
+      ['#how-it-works', 'Implementation'],
+      ['#validation', 'XML validation'],
+    ],
+    resources: 'Resources',
+    blog: 'Blog',
+    // Ukrainian-only articles — the link text says so
+    guides: [
+      ['/blog/shcho-take-saf-t-ua/', 'SAF-T UA guide (UA)'],
+      ['/blog/hto-podaye-saf-t-ua/', 'Who submits SAF-T (UA)'],
+      ['/blog/validatsiia-saf-t-ua/', 'XSD validation (UA)'],
+    ],
+    guidesLang: 'uk',
+    contact: 'Contact',
+    demo: 'Demo requests',
+    reveal: 'Show email',
+    phone: 'Phone',
+    phoneDisplay: '+380 44 344 7915',
+    address: 'Address',
+    addressVal: 'Gulliver Business Center, Tower A, 17th floor, Kyiv, Ukraine',
+    copy: `© ${currentYear} SAF-T Connector LLC. LUCAS Audit LLC. All rights reserved.`,
+    extAria: 'lucasua.com — external website',
+  },
+}[lang];
 ---
 <footer class="footer">
   <div class="footer-inner">
@@ -8,63 +76,57 @@ const currentYear = new Date().getFullYear();
 
       <!-- Brand column -->
       <div class="footer-brand">
-        <a href={import.meta.env.BASE_URL} class="footer-logo" aria-label="SAF-T Connector — на головну">
+        <a href={home} class="footer-logo" aria-label={t.homeAria}>
           <img src={`${import.meta.env.BASE_URL}logo-white.svg`} class="footer-logo-img" alt="" width="111" height="30" />
         </a>
         <p class="footer-tagline">
-          Формування XML-файлу та XSD-валідація відповідно до вимог е-аудиту ДПС України.
+          {t.tagline}
         </p>
         <p class="footer-legal">
-          Розробка: ТОВ САФ-Т Коннектор<br>
-          Впровадження: ТОВ Лукас Аудит
+          {t.legal[0]}<br>
+          {t.legal[1]}
         </p>
       </div>
 
       <!-- Navigation -->
       <div>
-        <p class="footer-col-label">Продукт</p>
+        <p class="footer-col-label">{t.product}</p>
         <ul>
-          <li><a href="/#explainer">Що таке SAF-T</a></li>
-          <li><a href="/#benefits">Можливості</a></li>
-          <li><a href="/#erp">ERP-системи</a></li>
-          <li><a href="/#how-it-works">Реалізація</a></li>
-          <li><a href="/#validation">Валідація XML</a></li>
+          {t.productLinks.map(([hash, label]) => <li><a href={`${home}${hash}`}>{label}</a></li>)}
         </ul>
       </div>
 
       <!-- Resources -->
       <div>
-        <p class="footer-col-label">Ресурси</p>
+        <p class="footer-col-label">{t.resources}</p>
         <ul>
-          <li><a href="/blog/">Блог</a></li>
-          <li><a href="/blog/shcho-take-saf-t-ua/">Гайд по SAF-T UA</a></li>
-          <li><a href="/blog/hto-podaye-saf-t-ua/">Хто подає SAF-T</a></li>
-          <li><a href="/blog/validatsiia-saf-t-ua/">Валідація XSD</a></li>
-          <li><a href="/#faq">FAQ</a></li>
+          <li><a href={blogPath(lang)}>{t.blog}</a></li>
+          {t.guides.map(([href, label]) => <li><a href={href} hreflang={t.guidesLang}>{label}</a></li>)}
+          <li><a href={`${home}#faq`}>FAQ</a></li>
         </ul>
       </div>
 
       <!-- Contact -->
       <div class="footer-contact">
-        <p class="footer-col-label">Зв'язок</p>
+        <p class="footer-col-label">{t.contact}</p>
         <div class="footer-contact-row">
-          <span class="footer-contact-lbl">Запит на демо</span>
-          <button type="button" class="footer-contact-val email-reveal" data-user="info" data-domain="lucasua.com">Показати email</button>
+          <span class="footer-contact-lbl">{t.demo}</span>
+          <button type="button" class="footer-contact-val email-reveal" data-user="info" data-domain="lucasua.com">{t.reveal}</button>
         </div>
         <div class="footer-contact-row">
-          <span class="footer-contact-lbl">Телефон</span>
-          <a href="tel:+380443447915" class="footer-contact-val">+38 (044) 344-79-15</a>
+          <span class="footer-contact-lbl">{t.phone}</span>
+          <a href="tel:+380443447915" class="footer-contact-val">{t.phoneDisplay}</a>
         </div>
         <div class="footer-contact-row">
-          <span class="footer-contact-lbl">Адреса</span>
-          <span class="footer-contact-val">Київ, БЦ Гулівер, вежа А, 17-й поверх</span>
+          <span class="footer-contact-lbl">{t.address}</span>
+          <span class="footer-contact-val">{t.addressVal}</span>
         </div>
       </div>
     </div>
 
     <div class="footer-bot">
-      <span class="footer-bot-copy">© {currentYear} ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит". Усі права захищені.</span>
-      <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent" aria-label="lucasua.com — зовнішній сайт">lucasua.com →</a>
+      <span class="footer-bot-copy">{t.copy}</span>
+      <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent" aria-label={t.extAria}>lucasua.com →</a>
     </div>
   </div>
 </footer>

@@ -1,5 +1,70 @@
 ---
 // SaftHowItWorks.astro — Implementation process (3 steps)
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    label: 'Реалізація',
+    h2: 'Етапи впровадження',
+    lead: 'Типовий термін впровадження — приблизно 3–4 місяці залежно від кількості юридичних осіб, складності облікової системи, якості даних та доступності IT-команди клієнта.',
+    stepsAria: 'Кроки впровадження',
+    s1h: 'Аналіз та мапінг',
+    s1p: 'Аналізуємо якість і достатність облікових даних клієнта: чи вистачає наявних даних, де є прогалини. Розробляємо мапінг — відповідність між обліковою структурою клієнта та елементами SAF-T UA. Узгоджуємо джерела даних.',
+    s1tags: ['Аналіз даних', 'Розробка мапінгу', 'Узгодження джерел'],
+    s1card: 'Аналіз даних',
+    s1chip: '✓ Готово',
+    s1items: ['Аналіз якості даних', 'Визначення джерел даних', 'Розробка мапінгу', 'Узгодження прогалин'],
+    s2h: 'Налаштування та інтеграція',
+    s2p: 'Налаштовуємо програмне забезпечення: логіку трансформації, підключення до джерел даних. Розгортаємо систему на інфраструктурі клієнта, налаштовуємо доступи та авторизації. Погоджуємо з IT-командою підхід до вивантаження даних.',
+    s2tags: ['Налаштування трансформації', 'Інтеграція з ERP', 'Розгортання'],
+    s2card: 'Генерація XML',
+    s3h: 'Тестування та запуск',
+    s3p: 'Генеруємо тестові файли на реальних даних. Виконуємо XSD-валідацію, математичні та міжсекційні перевірки. Усуваємо виявлені проблеми з даними та мапінгом. Навчаємо користувачів і передаємо процес команді клієнта.',
+    s3tags: ['XSD-валідація', 'Тестування на реальних даних', 'Навчання та запуск'],
+    s3card: 'XSD-валідація',
+    s3chip: 'Пройдено',
+    s3items: ['Структура XSD — відповідає', 'Математичні контролі — пройдено', 'Міжсекційні перевірки — пройдено', 'Типи даних — без порушень'],
+    s3file: 'SAF-T_UA_звітний_період.xml',
+    tlLabel: 'Типовий термін проєкту',
+    tlTotal: '~3–4 місяці',
+    tlAria: 'Часова шкала проєкту на 4 місяці: аналіз і мапінг — приблизно 1 місяць; налаштування — приблизно 1,5 місяця; тестування і запуск — приблизно 1 місяць. Загалом 3–4 місяці залежно від складності.',
+    month: 'міс.',
+    rows: ['Аналіз і мапінг', 'Налаштування', 'Тестування і запуск'],
+    durs: ['~1 міс.', '~1,5 міс.', '~1 міс.'],
+  },
+  en: {
+    label: 'Implementation',
+    h2: 'Implementation stages',
+    lead: 'A typical implementation takes about 3–4 months, depending on the number of legal entities, the complexity of the accounting system, data quality and the availability of the client\'s IT team.',
+    stepsAria: 'Implementation steps',
+    s1h: 'Analysis and mapping',
+    s1p: 'We assess the quality and completeness of the client\'s accounting data: whether the existing data is sufficient and where the gaps are. We build the mapping, which links the client\'s accounting structure to the elements of SAF-T UA, and agree on the data sources.',
+    s1tags: ['Data analysis', 'Mapping design', 'Source alignment'],
+    s1card: 'Data analysis',
+    s1chip: '✓ Done',
+    s1items: ['Data quality assessment', 'Data sources identified', 'Mapping designed', 'Resolving gaps'],
+    s2h: 'Configuration and integration',
+    s2p: 'We configure the software: transformation logic and connections to the data sources. We deploy the system on the client\'s infrastructure and set up access rights and authorizations. The data export approach is agreed with the client\'s IT team.',
+    s2tags: ['Transformation setup', 'ERP integration', 'Deployment'],
+    s2card: 'XML generation',
+    s3h: 'Testing and go-live',
+    s3p: 'We generate test files on real data and run XSD validation along with mathematical and cross-section checks. We fix the data and mapping issues that surface, train the users and hand the process over to the client\'s team.',
+    s3tags: ['XSD validation', 'Testing on real data', 'Training and go-live'],
+    s3card: 'XSD validation',
+    s3chip: 'Passed',
+    s3items: ['XSD structure — compliant', 'Mathematical controls — passed', 'Cross-section checks — passed', 'Data types — no violations'],
+    s3file: 'SAF-T_UA_reporting_period.xml',
+    tlLabel: 'Typical project timeline',
+    tlTotal: '~3–4 months',
+    tlAria: 'Four-month project timeline: analysis and mapping, about 1 month; configuration, about 1.5 months; testing and go-live, about 1 month. 3–4 months in total, depending on complexity.',
+    month: 'Month',
+    rows: ['Analysis and mapping', 'Configuration', 'Testing and go-live'],
+    durs: ['~1 mo.', '~1.5 mo.', '~1 mo.'],
+  },
+}[lang];
+
+const ticks = [1, 2, 3, 4].map((n) => `${t.month} ${n}`);
 ---
 
 <section class="s-hiw" id="how-it-works" aria-labelledby="hiw-h2">
@@ -7,59 +72,52 @@
 
     <div class="sect-rule">
       <span class="sect-no">04</span>
-      <span class="sect-label">Реалізація</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="sect-cols">
-      <h2 id="hiw-h2" class="sect-h2">Етапи впровадження</h2>
+      <h2 id="hiw-h2" class="sect-h2">{t.h2}</h2>
       <p class="sect-lead">
-        Типовий термін впровадження — приблизно 3–4 місяці залежно від кількості
-        юридичних осіб, складності облікової системи, якості даних та доступності
-        IT-команди клієнта.
+        {t.lead}
       </p>
     </div>
 
     <!-- Steps -->
-    <ol class="hiw-steps" aria-label="Кроки впровадження">
+    <ol class="hiw-steps" aria-label={t.stepsAria}>
 
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">01</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">Аналіз та мапінг</h3>
+          <h3 class="hiw-step-h3">{t.s1h}</h3>
           <p>
-            Аналізуємо якість і достатність облікових даних клієнта: чи вистачає
-            наявних даних, де є прогалини. Розробляємо мапінг —
-            відповідність між обліковою структурою клієнта та елементами SAF-T UA.
-            Узгоджуємо джерела даних.
+            {t.s1p}
           </p>
           <div class="hiw-tags">
-            <span class="hiw-tag">Аналіз даних</span>
-            <span class="hiw-tag">Розробка мапінгу</span>
-            <span class="hiw-tag">Узгодження джерел</span>
+            {t.s1tags.map((tag) => <span class="hiw-tag">{tag}</span>)}
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
           <div class="hsv-card">
             <div class="hsv-head">
-              <span class="hsv-lbl">Аналіз даних</span>
-              <span class="hsv-chip done">✓ Готово</span>
+              <span class="hsv-lbl">{t.s1card}</span>
+              <span class="hsv-chip done">{t.s1chip}</span>
             </div>
             <div class="hsv-items">
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Аналіз якості даних</span>
+                <span>{t.s1items[0]}</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Визначення джерел даних</span>
+                <span>{t.s1items[1]}</span>
               </div>
               <div class="hsv-item">
                 <span class="hsv-icon check">✓</span>
-                <span>Розробка мапінгу</span>
+                <span>{t.s1items[2]}</span>
               </div>
               <div class="hsv-item active">
                 <span class="hsv-icon spin-icon">⟳</span>
-                <span>Узгодження прогалин</span>
+                <span>{t.s1items[3]}</span>
               </div>
             </div>
           </div>
@@ -69,22 +127,18 @@
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">02</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">Налаштування та інтеграція</h3>
+          <h3 class="hiw-step-h3">{t.s2h}</h3>
           <p>
-            Налаштовуємо програмне забезпечення: логіку трансформації, підключення до джерел
-            даних. Розгортаємо систему на інфраструктурі клієнта, налаштовуємо доступи
-            та авторизації. Погоджуємо з IT-командою підхід до вивантаження даних.
+            {t.s2p}
           </p>
           <div class="hiw-tags">
-            <span class="hiw-tag">Налаштування трансформації</span>
-            <span class="hiw-tag">Інтеграція з ERP</span>
-            <span class="hiw-tag">Розгортання</span>
+            {t.s2tags.map((tag) => <span class="hiw-tag">{tag}</span>)}
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
           <div class="hsv-card">
             <div class="hsv-head">
-              <span class="hsv-lbl">Генерація XML</span>
+              <span class="hsv-lbl">{t.s2card}</span>
               <span class="hsv-chip prog">68%</span>
             </div>
             <div class="hsv-xml-blocks">
@@ -101,45 +155,31 @@
       <li class="hiw-step">
         <div class="hiw-step-num" aria-hidden="true">03</div>
         <div class="hiw-step-body">
-          <h3 class="hiw-step-h3">Тестування та запуск</h3>
+          <h3 class="hiw-step-h3">{t.s3h}</h3>
           <p>
-            Генеруємо тестові файли на реальних даних. Виконуємо XSD-валідацію,
-            математичні та міжсекційні перевірки. Усуваємо виявлені проблеми з даними
-            та мапінгом. Навчаємо користувачів і передаємо процес команді клієнта.
+            {t.s3p}
           </p>
           <div class="hiw-tags">
-            <span class="hiw-tag">XSD-валідація</span>
-            <span class="hiw-tag">Тестування на реальних даних</span>
-            <span class="hiw-tag">Навчання та запуск</span>
+            {t.s3tags.map((tag) => <span class="hiw-tag">{tag}</span>)}
           </div>
         </div>
         <div class="hiw-step-visual" aria-hidden="true">
           <div class="hsv-card">
             <div class="hsv-head">
-              <span class="hsv-lbl">XSD-валідація</span>
-              <span class="hsv-chip done">Пройдено</span>
+              <span class="hsv-lbl">{t.s3card}</span>
+              <span class="hsv-chip done">{t.s3chip}</span>
             </div>
             <div class="hsv-items">
-              <div class="hsv-item">
-                <span class="hsv-icon check">✓</span>
-                <span>Структура XSD — відповідає</span>
-              </div>
-              <div class="hsv-item">
-                <span class="hsv-icon check">✓</span>
-                <span>Математичні контролі — пройдено</span>
-              </div>
-              <div class="hsv-item">
-                <span class="hsv-icon check">✓</span>
-                <span>Міжсекційні перевірки — пройдено</span>
-              </div>
-              <div class="hsv-item">
-                <span class="hsv-icon check">✓</span>
-                <span>Типи даних — без порушень</span>
-              </div>
+              {t.s3items.map((item) => (
+                <div class="hsv-item">
+                  <span class="hsv-icon check">✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
             <div class="hsv-export">
               <span class="hsv-export-icon">↓</span>
-              <span>SAF-T_UA_звітний_період.xml</span>
+              <span>{t.s3file}</span>
               <span class="hsv-export-size">XML</span>
             </div>
           </div>
@@ -151,14 +191,14 @@
     <!-- Timeline — mini-Gantt on a month scale -->
     <div class="hiw-timeline">
       <div class="hiw-tl-head">
-        <span class="hiw-tl-label">Типовий термін проєкту</span>
-        <span class="hiw-tl-total">~3–4 місяці</span>
+        <span class="hiw-tl-label">{t.tlLabel}</span>
+        <span class="hiw-tl-total">{t.tlTotal}</span>
       </div>
 
       <div
         class="hg"
         role="img"
-        aria-label="Часова шкала проєкту на 4 місяці: аналіз і мапінг — приблизно 1 місяць; налаштування — приблизно 1,5 місяця; тестування і запуск — приблизно 1 місяць. Загалом 3–4 місяці залежно від складності."
+        aria-label={t.tlAria}
       >
         <div class="hg-lines" aria-hidden="true">
           <i style="left:0"></i><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i><i style="left:100%"></i>
@@ -167,37 +207,34 @@
         <div class="hg-ruler" aria-hidden="true">
           <span></span>
           <div class="hg-ticks">
-            <span class="hg-tick">міс. 1</span>
-            <span class="hg-tick">міс. 2</span>
-            <span class="hg-tick">міс. 3</span>
-            <span class="hg-tick">міс. 4</span>
+            {ticks.map((tk) => <span class="hg-tick">{tk}</span>)}
           </div>
           <span></span>
         </div>
 
         <div class="hg-row" aria-hidden="true">
-          <span class="hg-name"><b>01</b>Аналіз і мапінг</span>
+          <span class="hg-name"><b>01</b>{t.rows[0]}</span>
           <div class="hg-track">
             <div class="hg-bar" style="left:0; width:25%"></div>
           </div>
-          <span class="hg-dur">~1 міс.</span>
+          <span class="hg-dur">{t.durs[0]}</span>
         </div>
 
         <div class="hg-row" aria-hidden="true">
-          <span class="hg-name"><b>02</b>Налаштування</span>
+          <span class="hg-name"><b>02</b>{t.rows[1]}</span>
           <div class="hg-track">
             <div class="hg-bar accent" style="left:25%; width:37.5%"></div>
           </div>
-          <span class="hg-dur">~1,5 міс.</span>
+          <span class="hg-dur">{t.durs[1]}</span>
         </div>
 
         <div class="hg-row" aria-hidden="true">
-          <span class="hg-name"><b>03</b>Тестування і запуск</span>
+          <span class="hg-name"><b>03</b>{t.rows[2]}</span>
           <div class="hg-track">
             <div class="hg-bar" style="left:62.5%; width:25%"></div>
             <div class="hg-tail" style="left:87.5%; width:12.5%"></div>
           </div>
-          <span class="hg-dur">~1 міс.</span>
+          <span class="hg-dur">{t.durs[2]}</span>
         </div>
       </div>
     </div>

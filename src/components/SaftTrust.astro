@@ -1,5 +1,57 @@
 ---
 // SaftTrust.astro — Trust / expertise / background section
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    label: 'Досвід та відповідальність',
+    h2: 'Чому обрати нас',
+    lead: 'LUCAS розробляє SAF-T Connector і впроваджує його власними командами — фінансових консультантів і розробників. Немає розподілу відповідальності між постачальником програмного забезпечення та консультантами. Ми — єдиний центр відповідальності за продукт і його впровадження.',
+    // Non-breaking hyphen in "SAF‑T UA": avoids an orphaned "T" at line end
+    body: 'LUCAS має практичний досвід участі у пілотному проєкті з впровадження SAF‑T UA для великого міжнародного клієнта разом із представниками ДПС України. Цей досвід важливий, оскільки стандарт є великим і технічно складним стандартом, де успіх залежить від якості даних, логіки мапінгу, обліково-правових підходів, специфіки ERP та валідації. Продукт розроблений аудиторами та фінансовими консультантами для бухгалтерських і фінансових команд.',
+    linkAria: 'Про компанію LUCAS — зовнішній сайт',
+    link: 'Про компанію LUCAS',
+    creds: [
+      ['Власна розробка', 'LUCAS відповідає і за продукт, і за його впровадження'],
+      ['Пілот ДПС', 'Команда з досвідом участі в пілотному проєкті'],
+      ['Єдина команда', 'Фінансові консультанти та розробники LUCAS'],
+      ['~3–4 міс.', 'Типовий термін впровадження'],
+    ],
+    badgesAria: 'Характеристики продукту',
+    badges: [
+      'Відповідність вимогам Мінфіну та ДПС',
+      'Оновлення при зміні офіційної схеми',
+      'Excel-перегляд',
+      'Технічна підтримка та супровід',
+      'Аудиторський та фінансовий досвід LUCAS',
+      'Розгортання на інфраструктурі клієнта',
+    ],
+  },
+  en: {
+    label: 'Experience and accountability',
+    h2: 'Why choose us',
+    lead: 'LUCAS builds SAF-T Connector and implements it with its own teams of finance consultants and developers. Responsibility is never split between a software vendor and a consultancy: we are the single point of accountability for both the product and its implementation.',
+    body: 'LUCAS has hands-on experience from a SAF‑T UA pilot implementation for a large international client, carried out together with representatives of the State Tax Service of Ukraine. That experience matters because SAF‑T UA is an extensive, technically complex standard, where success depends on data quality, mapping logic, accounting and legal judgment, ERP specifics and validation. The product was built by auditors and finance consultants for accounting and finance teams.',
+    linkAria: 'About LUCAS — external website',
+    link: 'About LUCAS',
+    creds: [
+      ['In-house product', 'LUCAS is responsible for both the product and its implementation'],
+      ['STS pilot', 'A team with hands-on experience from the pilot project'],
+      ['One team', 'LUCAS finance consultants and developers'],
+      ['~3–4 months', 'Typical implementation time'],
+    ],
+    badgesAria: 'Product highlights',
+    badges: [
+      'Compliant with Ministry of Finance and STS requirements',
+      'Updated when the official schema changes',
+      'Excel view',
+      'Technical support and maintenance',
+      'LUCAS audit and finance expertise',
+      'Deployed on the client\'s infrastructure',
+    ],
+  },
+}[lang];
 ---
 
 <section class="s-trust" id="trust" aria-labelledby="trust-h2">
@@ -7,7 +59,7 @@
 
     <div class="sect-rule">
       <span class="sect-no">06</span>
-      <span class="sect-label">Досвід та відповідальність</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="trust-layout">
@@ -15,57 +67,33 @@
       <!-- Left: statement -->
       <div class="trust-statement">
         <h2 id="trust-h2" class="sect-h2">
-          Чому обрати нас
+          {t.h2}
         </h2>
         <p class="trust-lead">
-          LUCAS розробляє SAF-T Connector і впроваджує його власними командами —
-          фінансових консультантів і розробників. Немає розподілу відповідальності
-          між постачальником програмного забезпечення та консультантами. Ми — єдиний
-          центр відповідальності за продукт і його впровадження.
+          {t.lead}
         </p>
         <p class="trust-body">
-          LUCAS має практичний досвід участі у пілотному проєкті з впровадження
-          SAF‑T UA для великого міжнародного клієнта разом із представниками
-          ДПС України. Цей досвід важливий, оскільки стандарт є великим і технічно
-          складним стандартом, де успіх залежить від якості даних, логіки мапінгу,
-          обліково-правових підходів, специфіки ERP та валідації.
-          Продукт розроблений аудиторами та фінансовими консультантами для
-          бухгалтерських і фінансових команд.
+          {t.body}
         </p>
-        <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="trust-link" aria-label="Про компанію LUCAS — зовнішній сайт">
-          Про компанію LUCAS <span aria-hidden="true">→</span>
+        <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="trust-link" aria-label={t.linkAria}>
+          {t.link} <span aria-hidden="true">→</span>
         </a>
       </div>
 
       <!-- Right: credentials — hairline stat table -->
       <div class="trust-creds">
-        <div class="cred-card">
-          <div class="cred-val">Власна розробка</div>
-          <div class="cred-lbl">LUCAS відповідає і за продукт, і за його впровадження</div>
-        </div>
-        <div class="cred-card">
-          <div class="cred-val">Пілот ДПС</div>
-          <div class="cred-lbl">Команда з досвідом участі в пілотному проєкті</div>
-        </div>
-        <div class="cred-card">
-          <div class="cred-val">Єдина команда</div>
-          <div class="cred-lbl">Фінансові консультанти та розробники LUCAS</div>
-        </div>
-        <div class="cred-card">
-          <div class="cred-val">~3–4 міс.</div>
-          <div class="cred-lbl">Типовий термін впровадження</div>
-        </div>
+        {t.creds.map(([val, lbl]) => (
+          <div class="cred-card">
+            <div class="cred-val">{val}</div>
+            <div class="cred-lbl">{lbl}</div>
+          </div>
+        ))}
       </div>
     </div>
 
     <!-- Trust signals — single editorial row -->
-    <div class="trust-badges" role="list" aria-label="Характеристики продукту">
-      <span class="trust-badge" role="listitem">Відповідність вимогам Мінфіну та ДПС</span>
-      <span class="trust-badge" role="listitem">Оновлення при зміні офіційної схеми</span>
-      <span class="trust-badge" role="listitem">Excel-перегляд</span>
-      <span class="trust-badge" role="listitem">Технічна підтримка та супровід</span>
-      <span class="trust-badge" role="listitem">Аудиторський та фінансовий досвід LUCAS</span>
-      <span class="trust-badge" role="listitem">Розгортання на інфраструктурі клієнта</span>
+    <div class="trust-badges" role="list" aria-label={t.badgesAria}>
+      {t.badges.map((b) => <span class="trust-badge" role="listitem">{b}</span>)}
     </div>
 
   </div>

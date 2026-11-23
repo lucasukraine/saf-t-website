@@ -1,5 +1,52 @@
 ---
 // SaftValidation.astro — XML generation and validation UI mockup section
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    label: 'Валідація',
+    h2: 'Три рівні перевірок',
+    lead: 'Попередня перевірка допомагає виявити технічні помилки до передачі файлу та зменшити ризик повторної підготовки або відхилення. Помилки доступні для перегляду в інтерфейсі та у форматі Excel.',
+    points: [
+      { h3: 'XSD-валідація', p: "Перевірка XML-файлу на відповідність офіційній схемі ДПС: структура, типи даних, обов'язкові поля." },
+      { h3: 'Математичні та бухгалтерські контролі', p: 'Перевірка балансів, оборотів, узгодженості проводок між регістрами.' },
+      { h3: 'Міжсекційні контролі', p: 'Перехресне звіряння даних, що відображаються у різних блоках стандартного аудиторського файлу.' },
+    ],
+    title: 'Звіт валідації XSD',
+    pass: 'Пройдено',
+    sum: ['критичних', 'попереджень', 'структура', 'типи даних'],
+    c1: ['AuditFileVersion — формат', 'TaxRegistrationNumber формат', 'FiscalYear діапазон дат'],
+    c2: ['AccountID унікальність', 'AccountType допустимі значення'],
+    c3: ['TransactionDate ISO 8601', 'Debit/Credit balance'],
+    schemaLbl: 'Схема:',
+    schemaVal: 'XSD-схема ДПС',
+    download: 'Завантажити XML',
+    errLabel: 'Приклад повідомлення про помилку',
+    errMsg: "cvc-datatype-valid: значення '14.03.2024' не відповідає типу xs:date",
+  },
+  en: {
+    label: 'Validation',
+    h2: 'Three levels of checks',
+    lead: 'Checking the file before it goes out catches technical errors early and reduces the risk of having to rebuild it or having it rejected. Errors can be reviewed in the interface and in Excel.',
+    points: [
+      { h3: 'XSD validation', p: 'The XML file is checked against the official STS schema: structure, data types and mandatory fields.' },
+      { h3: 'Mathematical and accounting controls', p: 'Balances, turnovers and the consistency of entries across registers are verified.' },
+      { h3: 'Cross-section controls', p: 'Data that appears in several blocks of the standard audit file is reconciled across them.' },
+    ],
+    title: 'XSD validation report',
+    pass: 'Passed',
+    sum: ['critical', 'warnings', 'structure', 'data types'],
+    c1: ['AuditFileVersion — format', 'TaxRegistrationNumber format', 'FiscalYear date range'],
+    c2: ['AccountID uniqueness', 'AccountType allowed values'],
+    c3: ['TransactionDate ISO 8601', 'Debit/Credit balance'],
+    schemaLbl: 'Schema:',
+    schemaVal: 'STS XSD schema',
+    download: 'Download XML',
+    errLabel: 'Sample error message',
+    errMsg: "cvc-datatype-valid.1.2.1: '14.03.2024' is not a valid value for 'date'.",
+  },
+}[lang];
 ---
 
 <section class="s-validation" id="validation" aria-labelledby="validation-h2">
@@ -7,7 +54,7 @@
 
     <div class="sect-rule">
       <span class="sect-no">05</span>
-      <span class="sect-label">Валідація</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="val-layout">
@@ -15,36 +62,22 @@
       <!-- Left: text -->
       <div class="val-text">
         <h2 id="validation-h2" class="sect-h2">
-          Три рівні перевірок
+          {t.h2}
         </h2>
         <p class="val-lead">
-          Попередня перевірка допомагає виявити технічні помилки до передачі файлу
-          та зменшити ризик повторної підготовки або відхилення. Помилки доступні
-          для перегляду в інтерфейсі та у форматі Excel.
+          {t.lead}
         </p>
 
         <div class="val-points">
-          <div class="val-point">
-            <span class="val-point-no" aria-hidden="true">1</span>
-            <div>
-              <h3 class="val-point-h3">XSD-валідація</h3>
-              <p>Перевірка XML-файлу на відповідність офіційній схемі ДПС: структура, типи даних, обов'язкові поля.</p>
+          {t.points.map((pt, i) => (
+            <div class="val-point">
+              <span class="val-point-no" aria-hidden="true">{i + 1}</span>
+              <div>
+                <h3 class="val-point-h3">{pt.h3}</h3>
+                <p>{pt.p}</p>
+              </div>
             </div>
-          </div>
-          <div class="val-point">
-            <span class="val-point-no" aria-hidden="true">2</span>
-            <div>
-              <h3 class="val-point-h3">Математичні та бухгалтерські контролі</h3>
-              <p>Перевірка балансів, оборотів, узгодженості проводок між регістрами.</p>
-            </div>
-          </div>
-          <div class="val-point">
-            <span class="val-point-no" aria-hidden="true">3</span>
-            <div>
-              <h3 class="val-point-h3">Міжсекційні контролі</h3>
-              <p>Перехресне звіряння даних, що відображаються у різних блоках стандартного аудиторського файлу.</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -55,12 +88,12 @@
           <!-- Header -->
           <div class="vm-header">
             <div class="vm-header-left">
-              <span class="vm-title">Звіт валідації XSD</span>
+              <span class="vm-title">{t.title}</span>
               <span class="vm-file">SAF-T_UA_2024_Q4.xml</span>
             </div>
             <div class="vm-result pass">
               <span class="vm-res-dot"></span>
-              Пройдено
+              {t.pass}
             </div>
           </div>
 
@@ -68,19 +101,19 @@
           <div class="vm-summary">
             <div class="vm-sum-item ok">
               <span class="vm-sum-val">0</span>
-              <span class="vm-sum-lbl">критичних</span>
+              <span class="vm-sum-lbl">{t.sum[0]}</span>
             </div>
             <div class="vm-sum-item ok">
               <span class="vm-sum-val">0</span>
-              <span class="vm-sum-lbl">попереджень</span>
+              <span class="vm-sum-lbl">{t.sum[1]}</span>
             </div>
             <div class="vm-sum-item ok">
               <span class="vm-sum-val">✓</span>
-              <span class="vm-sum-lbl">структура</span>
+              <span class="vm-sum-lbl">{t.sum[2]}</span>
             </div>
             <div class="vm-sum-item ok">
               <span class="vm-sum-val">✓</span>
-              <span class="vm-sum-lbl">типи даних</span>
+              <span class="vm-sum-lbl">{t.sum[3]}</span>
             </div>
           </div>
 
@@ -93,9 +126,7 @@
                 <span class="vm-group-name">Header</span>
               </div>
               <div class="vm-group-items">
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AuditFileVersion — формат</span></div>
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TaxRegistrationNumber формат</span></div>
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">FiscalYear діапазон дат</span></div>
+                {t.c1.map((c) => <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">{c}</span></div>)}
               </div>
             </div>
 
@@ -105,8 +136,7 @@
                 <span class="vm-group-name">MasterFiles — Accounts</span>
               </div>
               <div class="vm-group-items">
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountID унікальність</span></div>
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">AccountType допустимі значення</span></div>
+                {t.c2.map((c) => <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">{c}</span></div>)}
               </div>
             </div>
 
@@ -116,8 +146,7 @@
                 <span class="vm-group-name">GeneralLedger Entries</span>
               </div>
               <div class="vm-group-items">
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">TransactionDate ISO 8601</span></div>
-                <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">Debit/Credit balance</span></div>
+                {t.c3.map((c) => <div class="vm-check ok"><span class="vc-icon">✓</span><span class="vc-name">{c}</span></div>)}
               </div>
             </div>
 
@@ -126,11 +155,11 @@
           <!-- Footer action -->
           <div class="vm-footer">
             <div class="vm-schema-ref">
-              <span class="vm-schema-lbl">Схема:</span>
-              <span class="vm-schema-val">XSD-схема ДПС</span>
+              <span class="vm-schema-lbl">{t.schemaLbl}</span>
+              <span class="vm-schema-val">{t.schemaVal}</span>
             </div>
             <div class="vm-export-btn">
-              <span>↓</span> Завантажити XML
+              <span>↓</span> {t.download}
             </div>
           </div>
 
@@ -140,11 +169,11 @@
         <div class="vm-err-example">
           <div class="vee-head">
             <span class="vee-icon warn">⚠</span>
-            <span class="vee-label">Приклад повідомлення про помилку</span>
+            <span class="vee-label">{t.errLabel}</span>
           </div>
           <div class="vee-body">
             <span class="vee-path">/SAFTFile/GeneralLedger/Entry[1042]/TransactionDate</span>
-            <span class="vee-msg">cvc-datatype-valid: значення '14.03.2024' не відповідає типу xs:date</span>
+            <span class="vee-msg">{t.errMsg}</span>
           </div>
         </div>
       </div>

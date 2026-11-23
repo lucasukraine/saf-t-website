@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SaftHero from '../../components/SaftHero.astro';
+import SaftExplainer from '../../components/SaftExplainer.astro';
+import SaftBenefits from '../../components/SaftBenefits.astro';
+import SaftErpGrid from '../../components/SaftErpGrid.astro';
+import SaftHowItWorks from '../../components/SaftHowItWorks.astro';
+import SaftValidation from '../../components/SaftValidation.astro';
+import SaftTrust from '../../components/SaftTrust.astro';
+import SaftFaq from '../../components/SaftFaq.astro';
+import SaftBlogTeaser from '../../components/SaftBlogTeaser.astro';
+import SaftCta from '../../components/SaftCta.astro';
+import { faqPageSchema } from '../../data/faq';
+
+// English counterpart of / — same sections; copy comes from each component's
+// `en` dictionary (locale is derived from the /en/ URL).
+const title = 'SAF-T Connector — turnkey SAF-T UA in Ukraine | LUCAS';
+const description = 'Turnkey SAF-T UA implementation for companies in Ukraine in 3–4 months: data analysis, mapping, ERP integration, XSD validation against the STS schema, Excel view.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  schemaExtra={faqPageSchema('en')}
+  speakableSelectors={['.expl-def', '.hero-lead']}
+>
+  <SaftHero />
+  <SaftExplainer />
+  <SaftBenefits />
+  <SaftErpGrid />
+  <SaftHowItWorks />
+  <SaftValidation />
+  <SaftTrust />
+  <SaftFaq />
+  <SaftBlogTeaser />
+  <SaftCta />
+</BaseLayout>

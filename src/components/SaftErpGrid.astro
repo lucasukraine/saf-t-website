@@ -1,5 +1,74 @@
 ---
 // SaftErpGrid.astro — ERP compatibility: precise schematic diagram
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    label: 'Інтеграції',
+    h2: 'Інтеграція з обліковими системами',
+    lead: "Хороша новина: SAF-T Connector сумісний із вашою обліковою системою. Рішення не прив'язане до конкретної ERP та може бути налаштоване для роботи з будь-якими обліковими системами, базами даних і структурованими вивантаженнями.",
+    diagramAria: 'Схема інтеграції: облікові системи → SAF-T Connector → XML для ДПС',
+    sourcesAria: 'Джерела даних',
+    bas: 'BAS / 1C Бухгалтерія',
+    outputAria: 'Результат',
+    valid: 'XSD валідний',
+    outName: 'SAF-T_UA_звітний_період.xml',
+    outMeta: 'Готовий до подання до ДПС України',
+    statExcel: 'Excel-перегляд',
+    statErr: 'помилок XSD',
+    details: [
+      {
+        h3: 'SAP ERP та S/4HANA',
+        p: 'Метод інтеграції з SAP погоджується з IT-командою клієнта і залежить від версії SAP, конфігурації, рівня авторизацій та архітектури даних.',
+      },
+      {
+        h3: 'BAS та 1C (українські конфігурації)',
+        p: 'SAF-T UA за структурою ближчий до вимог українського бухгалтерського обліку, тому для BAS/1C-систем зазвичай потрібно менше трансформаційних функцій, ніж для систем із суттєво іншою обліковою логікою.',
+      },
+      {
+        h3: 'Microsoft Dynamics',
+        p: 'Інтеграція з Microsoft Dynamics налаштовується залежно від конфігурації та версії системи клієнта. Метод доступу до даних погоджується на етапі аналізу.',
+      },
+      {
+        h3: 'Будь-які інші ERP, у тому числі кастомні',
+        p: 'Oracle, Odoo, галузеві та самописні системи підключаються через доступні інтерфейси або напряму з бази даних. Excel- і CSV-файли з фіксованою структурою — як додаткові джерела.',
+      },
+    ],
+  },
+  en: {
+    label: 'Integrations',
+    h2: 'Integration with accounting systems',
+    lead: "The good news: SAF-T Connector works with your accounting system. It isn't tied to any particular ERP and can be configured to work with any accounting system, database or structured export.",
+    diagramAria: 'Integration diagram: accounting systems → SAF-T Connector → XML for the STS',
+    sourcesAria: 'Data sources',
+    bas: 'BAS / 1C Accounting',
+    outputAria: 'Output',
+    valid: 'XSD valid',
+    outName: 'SAF-T_UA_reporting_period.xml',
+    outMeta: 'Ready for submission to the STS of Ukraine',
+    statExcel: 'Excel view',
+    statErr: 'XSD errors',
+    details: [
+      {
+        h3: 'SAP ERP and S/4HANA',
+        p: 'The SAP integration method is agreed with the client\'s IT team and depends on the SAP version, configuration, authorization levels and data architecture.',
+      },
+      {
+        h3: 'BAS and 1C (Ukrainian configurations)',
+        p: 'Structurally, SAF-T UA is close to Ukrainian accounting rules, so BAS/1C systems, which are built around those rules, usually need fewer transformations than systems with substantially different accounting logic, such as group ERPs set up for IFRS or another country\'s GAAP.',
+      },
+      {
+        h3: 'Microsoft Dynamics',
+        p: 'The Microsoft Dynamics integration is configured for the version and setup of the client\'s system. The data access method is agreed during the analysis stage.',
+      },
+      {
+        h3: 'Any other ERP, including custom-built',
+        p: 'Oracle, Odoo, industry-specific and in-house systems connect through their available interfaces or directly at the database level. Excel and CSV files with a fixed structure can serve as additional sources.',
+      },
+    ],
+  },
+}[lang];
 ---
 
 <section class="s-erp" id="erp" aria-labelledby="erp-h2">
@@ -7,30 +76,28 @@
 
     <div class="sect-rule">
       <span class="sect-no">03</span>
-      <span class="sect-label">Інтеграції</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="sect-cols">
-      <h2 id="erp-h2" class="sect-h2">Інтеграція з обліковими системами</h2>
+      <h2 id="erp-h2" class="sect-h2">{t.h2}</h2>
       <p class="sect-lead">
-        Хороша новина: SAF-T Connector сумісний із вашою обліковою системою. Рішення
-        не прив'язане до конкретної ERP та може бути налаштоване для роботи з будь-якими
-        обліковими системами, базами даних і структурованими вивантаженнями.
+        {t.lead}
       </p>
     </div>
 
     <!-- Schematic flow diagram -->
-    <div class="erp-diagram" aria-label="Схема інтеграції: облікові системи → SAF-T Connector → XML для ДПС">
+    <div class="erp-diagram" aria-label={t.diagramAria}>
 
       <!-- Sources -->
-      <div class="erp-sources" aria-label="Джерела даних">
+      <div class="erp-sources" aria-label={t.sourcesAria}>
         <div class="erp-src-card">
           <span class="erp-src-tag">SAP</span>
           <span class="erp-src-name">SAP ERP / S/4HANA</span>
         </div>
         <div class="erp-src-card">
           <span class="erp-src-tag">BAS</span>
-          <span class="erp-src-name">BAS / 1C Бухгалтерія</span>
+          <span class="erp-src-name">{t.bas}</span>
         </div>
         <div class="erp-src-card">
           <span class="erp-src-tag">DYN</span>
@@ -70,17 +137,17 @@
       </div>
 
       <!-- Output -->
-      <div class="erp-output" aria-label="Результат">
+      <div class="erp-output" aria-label={t.outputAria}>
         <div class="erp-out-card">
           <div class="erp-out-top">
             <span class="erp-out-badge">XML</span>
             <span class="erp-out-valid">
               <span class="erp-out-dot"></span>
-              XSD валідний
+              {t.valid}
             </span>
           </div>
-          <div class="erp-out-name">SAF-T_UA_звітний_період.xml</div>
-          <div class="erp-out-meta">Готовий до подання до ДПС України</div>
+          <div class="erp-out-name">{t.outName}</div>
+          <div class="erp-out-meta">{t.outMeta}</div>
           <div class="erp-out-stats">
             <div class="erp-stat">
               <span class="erp-stat-val">✓</span>
@@ -88,11 +155,11 @@
             </div>
             <div class="erp-stat">
               <span class="erp-stat-val">✓</span>
-              <span class="erp-stat-lbl">Excel-перегляд</span>
+              <span class="erp-stat-lbl">{t.statExcel}</span>
             </div>
             <div class="erp-stat">
               <span class="erp-stat-val">0</span>
-              <span class="erp-stat-lbl">помилок XSD</span>
+              <span class="erp-stat-lbl">{t.statErr}</span>
             </div>
           </div>
         </div>
@@ -101,36 +168,14 @@
 
     <!-- ERP details — hairline-divided editorial columns -->
     <div class="erp-details">
-      <div class="erp-detail">
-        <h3 class="erp-detail-h3">SAP ERP та S/4HANA</h3>
-        <p>
-          Метод інтеграції з SAP погоджується з IT-командою клієнта і залежить від
-          версії SAP, конфігурації, рівня авторизацій та архітектури даних.
-        </p>
-      </div>
-      <div class="erp-detail">
-        <h3 class="erp-detail-h3">BAS та 1C (українські конфігурації)</h3>
-        <p>
-          SAF-T UA за структурою ближчий до вимог українського бухгалтерського обліку,
-          тому для BAS/1C-систем зазвичай потрібно менше трансформаційних функцій,
-          ніж для систем із суттєво іншою обліковою логікою.
-        </p>
-      </div>
-      <div class="erp-detail">
-        <h3 class="erp-detail-h3">Microsoft Dynamics</h3>
-        <p>
-          Інтеграція з Microsoft Dynamics налаштовується залежно від конфігурації та версії
-          системи клієнта. Метод доступу до даних погоджується на етапі аналізу.
-        </p>
-      </div>
-      <div class="erp-detail">
-        <h3 class="erp-detail-h3">Будь-які інші ERP, у тому числі кастомні</h3>
-        <p>
-          Oracle, Odoo, галузеві та самописні системи підключаються через доступні
-          інтерфейси або напряму з бази даних. Excel- і CSV-файли з фіксованою
-          структурою — як додаткові джерела.
-        </p>
-      </div>
+      {t.details.map((d) => (
+        <div class="erp-detail">
+          <h3 class="erp-detail-h3">{d.h3}</h3>
+          <p>
+            {d.p}
+          </p>
+        </div>
+      ))}
     </div>
 
   </div>

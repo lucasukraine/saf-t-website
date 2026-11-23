@@ -1,9 +1,88 @@
 ---
 // SaftExplainer.astro — AEO/GEO block: clear definitional content for answer engines
+import { getLang, dateLocale } from '../i18n';
+
+const lang = getLang(Astro.url);
 
 // Build date = last content review signal (site is rebuilt on every change)
-const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'numeric' })
+const updatedLabel = new Intl.DateTimeFormat(dateLocale[lang], { month: 'long', year: 'numeric' })
   .format(new Date());
+
+const t = {
+  uk: {
+    label: 'Регуляторний контекст',
+    h2: 'Що таке SAF-T UA?',
+    lead: 'Формат і структура файлу визначені вимогами Міністерства фінансів та ДПС України. Нижче — визначення, регуляторні факти та роль SAF-T Connector у цьому процесі.',
+    def: '<strong>SAF-T UA (Standard Audit File for Tax)</strong> — стандартний аудиторський файл для цілей оподаткування в Україні. Це XML-файл із визначеною структурою, який містить облікові дані, вивантажені з облікової системи за встановлений звітний період. Структура включає блоки <strong>Header</strong>, <strong>MasterFiles</strong> (зокрема TaxDifferences), <strong>GeneralLedgerEntries</strong> та <strong>SourceDocuments</strong>.',
+    colA: 'SAF-T в Україні',
+    colA1: 'Файл подається <strong>великими платниками податків</strong> на запит контролюючого органу. Конкретні вимоги залежать від поточного законодавства, статусу платника та запитів ДПС. Файл має бути надано протягом <strong>2 робочих днів</strong> після отримання запиту.',
+    colA2: 'Файл охоплює: загальну книгу та облікові регістри, дебіторів і кредиторів, документи продажів і закупівель, платежі, необоротні та нематеріальні активи, рух товарів, податкові різниці та первинні документи.',
+    fact1Val: '2 дні',
+    fact1Lbl: 'термін подання після запиту ДПС',
+    fact2Lbl: 'формат на основі XSD-схеми ДПС',
+    colB: 'Коротко про рішення',
+    colB1: '<strong>SAF-T Connector</strong> — програмне рішення LUCAS для формування аудиторського файлу SAF-T UA. Система зчитує дані з облікових систем та інших узгоджених джерел, трансформує їх відповідно до налаштованого мапінгу та генерує XML-файл.',
+    colB2: 'Поруч із XML формується Excel-представлення для зручної перевірки командою клієнта. Вбудована валідація перевіряє файл за офіційною схемою ДПС, виконує математичні та міжсекційні перевірки до подання.',
+    list: [
+      'Налаштована інтеграція з обліковою системою клієнта',
+      'Мапінг облікових даних на структуру звітного файлу',
+      'XSD-валідація, математичні та міжсекційні перевірки',
+      'Excel-перегляд аудиторського файлу поруч із XML',
+    ],
+    tableAria: 'Ключові характеристики SAF-T UA',
+    thKey: 'Характеристика',
+    thVal: 'Значення',
+    rows: [
+      ['Термін подання', '2 робочі дні після запиту контролюючого органу'],
+      ['Формат', 'XML (XSD-схема ДПС)'],
+      ['Платники', 'Великі платники податків (вимоги залежать від законодавства та запитів ДПС)'],
+      ['Орган-регулятор', 'ДПС України / Міністерство фінансів України'],
+      ['Структура файлу', 'Header, MasterFiles (TaxDifferences), GeneralLedgerEntries, SourceDocuments'],
+    ],
+    sources: 'Офіційні джерела',
+    mof: 'Міністерство фінансів України',
+    sts: 'Державна податкова служба України',
+    linkLang: undefined,
+    updated: 'Оновлено:',
+  },
+  en: {
+    label: 'Regulatory context',
+    h2: 'What is SAF-T UA?',
+    lead: 'The format and structure of the file are set by the Ministry of Finance and the State Tax Service of Ukraine (STS). Below: the definition, the regulatory facts, and where SAF-T Connector fits in.',
+    def: '<strong>SAF-T UA (Standard Audit File for Tax)</strong> is the standard audit file for tax purposes in Ukraine. It is an XML file with a prescribed structure that contains accounting data exported from the company\'s accounting system for a defined reporting period. The structure consists of the <strong>Header</strong>, <strong>MasterFiles</strong> (including TaxDifferences), <strong>GeneralLedgerEntries</strong> and <strong>SourceDocuments</strong> blocks.',
+    colA: 'SAF-T in Ukraine',
+    colA1: 'The file is submitted by <strong>large taxpayers</strong> upon request from the tax authority. The exact requirements depend on current legislation, the taxpayer\'s status and the STS request itself. The file must be provided within <strong>2 business days</strong> of receiving the request.',
+    colA2: 'The file covers the general ledger and accounting registers, customers and suppliers, sales and purchase documents, payments, fixed and intangible assets, inventory movements, tax differences and source documents.',
+    fact1Val: '2 days',
+    fact1Lbl: 'to respond to an STS request',
+    fact2Lbl: 'format based on the STS XSD schema',
+    colB: 'The solution in brief',
+    colB1: '<strong>SAF-T Connector</strong> is a software solution by LUCAS for producing the SAF-T UA audit file. It reads data from accounting systems and other agreed sources, transforms it according to a configured mapping and generates the XML file.',
+    colB2: 'Alongside the XML, it produces an Excel view so the client\'s team can review the data with ease. Built-in validation checks the file against the official STS schema and runs mathematical and cross-section checks before submission.',
+    list: [
+      'Integration configured for the client\'s accounting system',
+      'Mapping of accounting data to the reporting file structure',
+      'XSD validation, mathematical and cross-section checks',
+      'Excel view of the audit file alongside the XML',
+    ],
+    tableAria: 'Key facts about SAF-T UA',
+    thKey: 'Attribute',
+    thVal: 'Value',
+    rows: [
+      ['Deadline', '2 business days after a request from the tax authority'],
+      ['Format', 'XML (STS XSD schema)'],
+      ['Who submits', 'Large taxpayers (requirements depend on legislation and STS requests)'],
+      ['Regulator', 'State Tax Service of Ukraine / Ministry of Finance of Ukraine'],
+      ['File structure', 'Header, MasterFiles (TaxDifferences), GeneralLedgerEntries, SourceDocuments'],
+    ],
+    sources: 'Official sources',
+    mof: 'Ministry of Finance of Ukraine',
+    sts: 'State Tax Service of Ukraine',
+    // Both official sites are Ukrainian-language by default
+    linkLang: 'uk',
+    updated: 'Updated:',
+  },
+}[lang];
 ---
 
 <section class="s-explainer" id="explainer" aria-labelledby="explainer-h2">
@@ -11,28 +90,19 @@ const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'nu
 
     <div class="sect-rule">
       <span class="sect-no">01</span>
-      <span class="sect-label">Регуляторний контекст</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <!-- AEO: definitional intro — designed to be quoted by AI answer engines -->
     <div class="sect-cols">
-      <h2 id="explainer-h2" class="sect-h2">Що таке SAF-T UA?</h2>
+      <h2 id="explainer-h2" class="sect-h2">{t.h2}</h2>
       <p class="sect-lead">
-        Формат і структура файлу визначені вимогами Міністерства фінансів
-        та ДПС України. Нижче — визначення, регуляторні факти та роль
-        SAF-T Connector у цьому процесі.
+        {t.lead}
       </p>
     </div>
 
     <!-- Definition — editorial pull-quote treatment -->
-    <p class="expl-def">
-      <strong>SAF-T UA (Standard Audit File for Tax)</strong> — стандартний аудиторський
-      файл для цілей оподаткування в Україні. Це XML-файл із визначеною структурою,
-      який містить облікові дані, вивантажені з облікової системи за встановлений
-      звітний період. Структура включає блоки <strong>Header</strong>,
-      <strong>MasterFiles</strong> (зокрема TaxDifferences),
-      <strong>GeneralLedgerEntries</strong> та <strong>SourceDocuments</strong>.
-    </p>
+    <p class="expl-def" set:html={t.def} />
 
     <!-- Two columns: context + connector -->
     <div class="expl-cols">
@@ -40,27 +110,20 @@ const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'nu
       <div class="expl-col">
         <div class="expl-col-head">
           <span class="expl-col-no">A</span>
-          <h3 class="expl-col-h3">SAF-T в Україні</h3>
+          <h3 class="expl-col-h3">{t.colA}</h3>
         </div>
+        <p set:html={t.colA1} />
         <p>
-          Файл подається <strong>великими платниками податків</strong> на запит
-          контролюючого органу. Конкретні вимоги залежать від поточного законодавства,
-          статусу платника та запитів ДПС. Файл має бути надано протягом
-          <strong>2 робочих днів</strong> після отримання запиту.
-        </p>
-        <p>
-          Файл охоплює: загальну книгу та облікові регістри, дебіторів і кредиторів,
-          документи продажів і закупівель, платежі, необоротні та нематеріальні активи,
-          рух товарів, податкові різниці та первинні документи.
+          {t.colA2}
         </p>
         <div class="expl-fact-row">
           <div class="expl-fact">
-            <span class="expl-fact-val">2 дні</span>
-            <span class="expl-fact-lbl">термін подання після запиту ДПС</span>
+            <span class="expl-fact-val">{t.fact1Val}</span>
+            <span class="expl-fact-lbl">{t.fact1Lbl}</span>
           </div>
           <div class="expl-fact">
             <span class="expl-fact-val">XML</span>
-            <span class="expl-fact-lbl">формат на основі XSD-схеми ДПС</span>
+            <span class="expl-fact-lbl">{t.fact2Lbl}</span>
           </div>
         </div>
       </div>
@@ -68,68 +131,45 @@ const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'nu
       <div class="expl-col">
         <div class="expl-col-head">
           <span class="expl-col-no">B</span>
-          <h3 class="expl-col-h3">Коротко про рішення</h3>
+          <h3 class="expl-col-h3">{t.colB}</h3>
         </div>
+        <p set:html={t.colB1} />
         <p>
-          <strong>SAF-T Connector</strong> — програмне рішення LUCAS для формування аудиторського
-          файлу SAF-T UA. Система зчитує дані з облікових систем та інших узгоджених джерел,
-          трансформує їх відповідно до налаштованого мапінгу та генерує XML-файл.
-        </p>
-        <p>
-          Поруч із XML формується Excel-представлення для зручної перевірки командою клієнта.
-          Вбудована валідація перевіряє файл за офіційною схемою ДПС, виконує математичні та
-          міжсекційні перевірки до подання.
+          {t.colB2}
         </p>
         <ul class="expl-list">
-          <li>Налаштована інтеграція з обліковою системою клієнта</li>
-          <li>Мапінг облікових даних на структуру звітного файлу</li>
-          <li>XSD-валідація, математичні та міжсекційні перевірки</li>
-          <li>Excel-перегляд аудиторського файлу поруч із XML</li>
+          {t.list.map((item) => <li>{item}</li>)}
         </ul>
       </div>
     </div>
 
     <!-- AEO reference table -->
     <div class="expl-table-wrap">
-      <table class="expl-table" aria-label="Ключові характеристики SAF-T UA">
+      <table class="expl-table" aria-label={t.tableAria}>
         <thead>
           <tr>
-            <th scope="col">Характеристика</th>
-            <th scope="col">Значення</th>
+            <th scope="col">{t.thKey}</th>
+            <th scope="col">{t.thVal}</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Термін подання</th>
-            <td>2 робочі дні після запиту контролюючого органу</td>
-          </tr>
-          <tr>
-            <th scope="row">Формат</th>
-            <td>XML (XSD-схема ДПС)</td>
-          </tr>
-          <tr>
-            <th scope="row">Платники</th>
-            <td>Великі платники податків (вимоги залежать від законодавства та запитів ДПС)</td>
-          </tr>
-          <tr>
-            <th scope="row">Орган-регулятор</th>
-            <td>ДПС України / Міністерство фінансів України</td>
-          </tr>
-          <tr>
-            <th scope="row">Структура файлу</th>
-            <td>Header, MasterFiles (TaxDifferences), GeneralLedgerEntries, SourceDocuments</td>
-          </tr>
+          {t.rows.map(([k, v]) => (
+            <tr>
+              <th scope="row">{k}</th>
+              <td>{v}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
 
     <!-- Official sources + freshness signal -->
     <div class="expl-sources">
-      <span class="expl-src-lbl">Офіційні джерела</span>
-      <a href="https://mof.gov.ua" target="_blank" rel="noopener" class="expl-src-link">Міністерство фінансів України</a>
+      <span class="expl-src-lbl">{t.sources}</span>
+      <a href="https://mof.gov.ua" target="_blank" rel="noopener" class="expl-src-link" hreflang={t.linkLang}>{t.mof}</a>
       <span class="expl-src-sep" aria-hidden="true">·</span>
-      <a href="https://tax.gov.ua" target="_blank" rel="noopener" class="expl-src-link">Державна податкова служба України</a>
-      <span class="expl-updated">Оновлено: {updatedLabel}</span>
+      <a href="https://tax.gov.ua" target="_blank" rel="noopener" class="expl-src-link" hreflang={t.linkLang}>{t.sts}</a>
+      <span class="expl-updated">{t.updated} {updatedLabel}</span>
     </div>
 
   </div>
@@ -150,7 +190,8 @@ const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'nu
   color: var(--ink-soft);
   margin-bottom: 88px;
 }
-.expl-def strong { color: var(--ink); font-weight: 600; }
+/* :global — <strong> comes from set:html copy, which carries no scope attribute */
+.expl-def :global(strong) { color: var(--ink); font-weight: 600; }
 
 /* Two columns, hairline-divided */
 .expl-cols {
@@ -198,7 +239,7 @@ const updatedLabel = new Intl.DateTimeFormat('uk-UA', { month: 'long', year: 'nu
   line-height: 1.75;
   color: var(--ink-soft);
 }
-.expl-col p strong { color: var(--ink); font-weight: 600; }
+.expl-col p :global(strong) { color: var(--ink); font-weight: 600; }
 
 .expl-list {
   list-style: none;

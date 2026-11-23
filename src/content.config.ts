@@ -5,6 +5,9 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    // English gloss of the title. Articles stay Ukrainian-only; the English
+    // pages (/en/ and /en/blog/) use this to tell readers what each one covers.
+    titleEn: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),

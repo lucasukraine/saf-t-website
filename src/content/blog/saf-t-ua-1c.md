@@ -1,5 +1,6 @@
 ---
 title: "SAF-T UA для 1С: як сформувати файл з Бухгалтерії, УТП, УВП і 7.7"
+titleEn: "SAF-T UA from 1C: Accounting, Trade Management, Manufacturing Management and 1C 7.7"
 description: "Де в базі 1С шукати дані для SAF-T UA, чим відрізняються типові й кастомізовані конфігурації, як працювати з великими базами і чому механізм SAF-T краще не прив'язувати до самої 1С."
 pubDate: 2026-08-12
 label: "ERP: 1С"

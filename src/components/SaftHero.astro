@@ -1,5 +1,52 @@
 ---
 // SaftHero.astro — Hero section with HTML/CSS product mockup
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    h1Accent: 'SAF-T UA:',
+    h1: 'впровадження під&nbsp;ключ',
+    lead: 'Рішення витягує дані з ERP, перевіряє їх структуру та формує файл для подання до ДПС відповідно до українських вимог е-аудиту.',
+    ctaPrimary: 'Запитати вартість',
+    ctaSecondary: 'Як це працює',
+    signalsAria: 'Підтримувані системи',
+    signalsLabel: 'Інтеграція',
+    signals: 'SAP · BAS / 1C · Odoo · Oracle · MS Dynamics · Excel / CSV · Будь-які інші, у тому числі кастомні облікові системи',
+    processing: 'Обробка',
+    fileStage: 'формування',
+    source: 'Джерело · SAP ERP',
+    src: ['Рахунки (COA)', 'Субрахунки', 'Журнал проводок', 'Реєстр ПДВ', 'Необоротні активи'],
+    xsd: 'XSD-валідація',
+    chk: ['Структура файлу', 'Формати дат', 'Коди рахунків', 'ЄДРПОУ', 'Суми транзакцій'],
+    progress: '60% — генерація XML',
+    modules: '3 / 5 модулів',
+    preview: 'Попередній перегляд',
+    taxId: 'ЄДРПОУ',
+    badge: 'Згідно вимог ДПС',
+  },
+  en: {
+    h1Accent: 'SAF-T UA:',
+    h1: 'turnkey implementation',
+    lead: 'The solution extracts data from your ERP, validates its structure and produces a file ready for submission to the State Tax Service of Ukraine under local e-audit requirements.',
+    ctaPrimary: 'Request pricing',
+    ctaSecondary: 'How it works',
+    signalsAria: 'Supported systems',
+    signalsLabel: 'Integration',
+    signals: 'SAP · BAS / 1C · Odoo · Oracle · MS Dynamics · Excel / CSV · Any other system, including custom-built accounting software',
+    processing: 'Processing',
+    fileStage: 'generating',
+    source: 'Source · SAP ERP',
+    src: ['Chart of accounts', 'Sub-accounts', 'Journal entries', 'VAT register', 'Fixed assets'],
+    xsd: 'XSD validation',
+    chk: ['File structure', 'Date formats', 'Account codes', 'EDRPOU code', 'Transaction amounts'],
+    progress: '60% — generating XML',
+    modules: '3 / 5 modules',
+    preview: 'Preview',
+    taxId: 'EDRPOU',
+    badge: 'Built to STS requirements',
+  },
+}[lang];
 ---
 
 <section class="s-hero" aria-labelledby="hero-h1">
@@ -18,27 +65,26 @@
 
       <!-- H1 is the LCP element — rendered without entrance animation -->
       <h1 id="hero-h1" class="hero-h1">
-        <span class="hero-h1-accent">SAF-T UA:</span>
-        впровадження під&nbsp;ключ
+        <span class="hero-h1-accent">{t.h1Accent}</span>
+        <Fragment set:html={t.h1} />
       </h1>
 
       <p class="hero-lead ha d3">
-        Рішення витягує дані з ERP, перевіряє їх структуру та формує файл для подання
-        до ДПС відповідно до українських вимог е-аудиту.
+        {t.lead}
       </p>
 
       <div class="hero-actions ha d4">
         <a href="#contact" class="btn btn-orange">
-          Запитати вартість <span class="btn-arrow" aria-hidden="true">→</span>
+          {t.ctaPrimary} <span class="btn-arrow" aria-hidden="true">→</span>
         </a>
         <a href="#how-it-works" class="btn btn-ghost">
-          Як це працює
+          {t.ctaSecondary}
         </a>
       </div>
 
-      <div class="hero-signals ha d5" aria-label="Підтримувані системи">
-        <span class="signal-label">Інтеграція</span>
-        <span class="signal-line">SAP · BAS / 1C · Odoo · Oracle · MS Dynamics · Excel / CSV · Будь-які інші, у тому числі кастомні облікові системи</span>
+      <div class="hero-signals ha d5" aria-label={t.signalsAria}>
+        <span class="signal-label">{t.signalsLabel}</span>
+        <span class="signal-line">{t.signals}</span>
       </div>
     </div>
 
@@ -49,13 +95,13 @@
         <!-- Window chrome -->
         <div class="mc-bar">
           <span class="mc-title">SAF-T Connector</span>
-          <span class="mc-badge"><span class="mc-status-dot pulse"></span>Обробка</span>
+          <span class="mc-badge"><span class="mc-status-dot pulse"></span>{t.processing}</span>
         </div>
 
         <!-- File row -->
         <div class="mc-status-row">
           <span class="mc-status-text">SAF-T UA_2024_Q4.xml</span>
-          <span class="mc-status-meta">формування</span>
+          <span class="mc-status-meta">{t.fileStage}</span>
         </div>
 
         <!-- Two-column panel -->
@@ -63,31 +109,31 @@
 
           <!-- Sources panel -->
           <div class="mc-panel">
-            <div class="mc-panel-label">Джерело · SAP ERP</div>
+            <div class="mc-panel-label">{t.source}</div>
             <div class="mc-rows">
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Рахунки (COA)</span>
+                <span class="mc-row-name">{t.src[0]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Субрахунки</span>
+                <span class="mc-row-name">{t.src[1]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Журнал проводок</span>
+                <span class="mc-row-name">{t.src[2]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row active">
                 <span class="mc-icon spin">⟳</span>
-                <span class="mc-row-name">Реєстр ПДВ</span>
+                <span class="mc-row-name">{t.src[3]}</span>
                 <span class="mc-row-meta">···</span>
               </div>
               <div class="mc-row dim">
                 <span class="mc-icon pend">○</span>
-                <span class="mc-row-name">Необоротні активи</span>
+                <span class="mc-row-name">{t.src[4]}</span>
                 <span class="mc-row-meta">—</span>
               </div>
             </div>
@@ -95,31 +141,31 @@
 
           <!-- Validation panel -->
           <div class="mc-panel mc-panel-right">
-            <div class="mc-panel-label">XSD-валідація</div>
+            <div class="mc-panel-label">{t.xsd}</div>
             <div class="mc-rows">
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Структура файлу</span>
+                <span class="mc-row-name">{t.chk[0]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Формати дат</span>
+                <span class="mc-row-name">{t.chk[1]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">Коди рахунків</span>
+                <span class="mc-row-name">{t.chk[2]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row done">
                 <span class="mc-icon ok">✓</span>
-                <span class="mc-row-name">ЄДРПОУ</span>
+                <span class="mc-row-name">{t.chk[3]}</span>
                 <span class="mc-row-meta ok-text">OK</span>
               </div>
               <div class="mc-row active">
                 <span class="mc-icon spin">⟳</span>
-                <span class="mc-row-name">Суми транзакцій</span>
+                <span class="mc-row-name">{t.chk[4]}</span>
                 <span class="mc-row-meta">···</span>
               </div>
             </div>
@@ -132,19 +178,19 @@
             <div class="mc-progress-fill" style="width: 60%"></div>
           </div>
           <div class="mc-progress-meta">
-            <span>60% — генерація XML</span>
-            <span class="mc-progress-num">3 / 5 модулів</span>
+            <span>{t.progress}</span>
+            <span class="mc-progress-num">{t.modules}</span>
           </div>
         </div>
 
         <!-- XML snippet -->
         <div class="mc-xml">
-          <div class="mc-xml-label">Попередній перегляд</div>
+          <div class="mc-xml-label">{t.preview}</div>
           <div class="mc-xml-code">
             <span class="xl-ln"><span class="xl-t">&lt;</span><span class="xl-e">SAFTFile</span><span class="xl-t">&gt;</span></span>
             <span class="xl-ln xl-i1"><span class="xl-t">&lt;</span><span class="xl-e">Header</span><span class="xl-t">&gt;</span></span>
             <span class="xl-ln xl-i2"><span class="xl-t">&lt;</span><span class="xl-e">AuditFileVersion</span><span class="xl-t">&gt;</span><span class="xl-v">···</span><span class="xl-t">&lt;/</span><span class="xl-e">AuditFileVersion</span><span class="xl-t">&gt;</span></span>
-            <span class="xl-ln xl-i2"><span class="xl-t">&lt;</span><span class="xl-e">TaxRegistrationNumber</span><span class="xl-t">&gt;</span><span class="xl-v">ЄДРПОУ</span><span class="xl-t">&lt;/</span><span class="xl-e">TaxRegistrationNumber</span><span class="xl-t">&gt;</span></span>
+            <span class="xl-ln xl-i2"><span class="xl-t">&lt;</span><span class="xl-e">TaxRegistrationNumber</span><span class="xl-t">&gt;</span><span class="xl-v">{t.taxId}</span><span class="xl-t">&lt;/</span><span class="xl-e">TaxRegistrationNumber</span><span class="xl-t">&gt;</span></span>
             <span class="xl-ln xl-i2"><span class="xl-t">&lt;</span><span class="xl-e">FiscalYear</span><span class="xl-t">&gt;</span><span class="xl-v">2024</span><span class="xl-t">&lt;/</span><span class="xl-e">FiscalYear</span><span class="xl-t">&gt;</span></span>
             <span class="xl-ln xl-i1"><span class="xl-t">&lt;/</span><span class="xl-e">Header</span><span class="xl-t">&gt;</span></span>
             <span class="xl-ln xl-dim"><span class="xl-t">&lt;</span><span class="xl-e">MasterFiles</span><span class="xl-t">&gt;</span> <span class="xl-c">···</span></span>
@@ -155,7 +201,7 @@
       <!-- Floating badge -->
       <div class="mockup-badge">
         <span class="badge-dot"></span>
-        Згідно вимог ДПС
+        {t.badge}
       </div>
     </div>
   </div>

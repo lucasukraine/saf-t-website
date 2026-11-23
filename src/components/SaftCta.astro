@@ -1,5 +1,82 @@
 ---
 // SaftCta.astro — Final CTA section: contact form + contact details
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = {
+  uk: {
+    eyebrow: 'Наступний крок',
+    h2a: 'Готові розпочати впровадження',
+    lead: 'Розкажіть нам про вашу облікову систему. Ми проаналізуємо, чи достатньо наявних даних для SAF-T UA, та запропонуємо оптимальний підхід до впровадження.',
+    name: "Ім'я",
+    namePh: 'Як до вас звертатися',
+    phone: 'Телефон',
+    phonePh: '+38 (0__) ___-__-__',
+    message: 'Повідомлення',
+    messagePh: 'Опишіть вашу облікову систему (ERP, кількість юросіб) та задачу',
+    submit: 'Надіслати запит',
+    doneH: 'Запит надіслано',
+    doneP: "Дякуємо! Ми зв'яжемося з вами за вказаними контактами.",
+    cEmail: 'Написати нам',
+    reveal: 'Показати email',
+    cPhone: 'Зателефонувати',
+    phoneDisplay: '+38 (044) 344-79-15',
+    cOffice: 'Офіс',
+    office: 'Київ, БЦ Гулівер',
+    cCompany: 'Компанія',
+    companyAria: 'LUCAS — зовнішній сайт',
+  },
+  en: {
+    eyebrow: 'Next step',
+    h2a: 'Ready to implement',
+    lead: 'Tell us about your accounting system. We\'ll assess whether your existing data is sufficient for SAF-T UA and propose the best implementation approach.',
+    name: 'Name',
+    namePh: 'How should we address you?',
+    phone: 'Phone',
+    phonePh: '+380 __ ___ __ __',
+    message: 'Message',
+    messagePh: 'Describe your accounting system (ERP, number of legal entities) and what you need',
+    submit: 'Send request',
+    doneH: 'Request sent',
+    doneP: 'Thank you! We\'ll get back to you using the contact details you provided.',
+    cEmail: 'Email us',
+    reveal: 'Show email',
+    cPhone: 'Call us',
+    phoneDisplay: '+380 44 344 7915',
+    cOffice: 'Office',
+    office: 'Gulliver Business Center, Kyiv',
+    cCompany: 'Company',
+    companyAria: 'LUCAS — external website',
+  },
+}[lang];
+
+// Messages used by the inline form script (validation, status, errors)
+const msgs = {
+  uk: {
+    name: "Вкажіть ім'я — щонайменше 2 символи.",
+    email: 'Вкажіть коректний email.',
+    phone: 'Вкажіть коректний номер телефону.',
+    messageShort: 'Опишіть ваш запит докладніше — щонайменше 15 символів.',
+    messageLinks: 'Приберіть посилання з повідомлення — такі запити блокуються як спам.',
+    tooFast: 'Форму надіслано занадто швидко. Зачекайте кілька секунд і спробуйте ще раз.',
+    sending: 'Надсилаємо…',
+    throttled: 'Запит уже надіслано. Зачекайте хвилину перед наступною спробою.',
+    blocked: 'Не вдалося надіслати запит. Скористайтеся контактами нижче.',
+    failed: 'Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.',
+  },
+  en: {
+    name: 'Please enter your name (at least 2 characters).',
+    email: 'Please enter a valid email address.',
+    phone: 'Please enter a valid phone number.',
+    messageShort: 'Please describe your request in a bit more detail (at least 15 characters).',
+    messageLinks: 'Please remove links from your message. Messages with links are blocked as spam.',
+    tooFast: 'The form was submitted too quickly. Please wait a few seconds and try again.',
+    sending: 'Sending…',
+    throttled: 'Your request has already been sent. Please wait a minute before trying again.',
+    blocked: 'We couldn\'t send your request. Please use the contact details below.',
+    failed: 'We couldn\'t send your request. Please try again or use the contact details below.',
+  },
+}[lang];
 ---
 
 <section class="s-cta" id="contact" aria-labelledby="cta-h2">
@@ -7,16 +84,15 @@
   <div class="container">
     <div class="cta-inner">
 
-      <div class="eyebrow orange">Наступний крок</div>
+      <div class="eyebrow orange">{t.eyebrow}</div>
 
       <h2 id="cta-h2" class="cta-h2">
-        Готові розпочати впровадження<br>
+        {t.h2a}<br>
         <span class="cta-h2-accent">SAF-T Connector?</span>
       </h2>
 
       <p class="cta-lead">
-        Розкажіть нам про вашу облікову систему. Ми проаналізуємо, чи достатньо
-        наявних даних для SAF-T UA, та запропонуємо оптимальний підхід до впровадження.
+        {t.lead}
       </p>
 
       <!-- Contact form (EmailJS) -->
@@ -32,8 +108,8 @@
 
           <div class="cf-grid">
             <div class="cf-field">
-              <label class="cf-label" for="cf-name">Ім'я</label>
-              <input class="cf-input" type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Як до вас звертатися" />
+              <label class="cf-label" for="cf-name">{t.name}</label>
+              <input class="cf-input" type="text" id="cf-name" name="name" required autocomplete="name" placeholder={t.namePh} />
               <p class="cf-err" id="cf-name-err" hidden></p>
             </div>
             <div class="cf-field">
@@ -44,48 +120,48 @@
           </div>
 
           <div class="cf-field">
-            <label class="cf-label" for="cf-phone">Телефон</label>
-            <input class="cf-input" type="tel" id="cf-phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+38 (0__) ___-__-__" />
+            <label class="cf-label" for="cf-phone">{t.phone}</label>
+            <input class="cf-input" type="tel" id="cf-phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder={t.phonePh} />
             <p class="cf-err" id="cf-phone-err" hidden></p>
           </div>
 
           <div class="cf-field">
-            <label class="cf-label" for="cf-message">Повідомлення</label>
-            <textarea class="cf-input cf-textarea" id="cf-message" name="message" rows="5" required placeholder="Опишіть вашу облікову систему (ERP, кількість юросіб) та задачу"></textarea>
+            <label class="cf-label" for="cf-message">{t.message}</label>
+            <textarea class="cf-input cf-textarea" id="cf-message" name="message" rows="5" required placeholder={t.messagePh}></textarea>
             <p class="cf-err" id="cf-message-err" hidden></p>
           </div>
 
           <p class="cf-status" id="cf-status" role="status" aria-live="polite" hidden></p>
 
           <button type="submit" class="btn btn-orange cf-submit" id="cf-submit">
-            Надіслати запит <span class="btn-arrow" aria-hidden="true">→</span>
+            {t.submit} <span class="btn-arrow" aria-hidden="true">→</span>
           </button>
         </form>
 
         <!-- Success state -->
         <div class="cf-done" id="cf-done" hidden>
           <span class="cf-done-mark" aria-hidden="true">✓</span>
-          <p class="cf-done-h">Запит надіслано</p>
-          <p class="cf-done-p">Дякуємо! Ми зв'яжемося з вами за вказаними контактами.</p>
+          <p class="cf-done-h">{t.doneH}</p>
+          <p class="cf-done-p">{t.doneP}</p>
         </div>
       </div>
 
       <div class="cta-contacts">
         <div class="cta-contact-item">
-          <span class="cta-contact-lbl">Написати нам</span>
-          <button type="button" class="cta-contact-val email-reveal" data-user="info" data-domain="lucasua.com">Показати email</button>
+          <span class="cta-contact-lbl">{t.cEmail}</span>
+          <button type="button" class="cta-contact-val email-reveal" data-user="info" data-domain="lucasua.com">{t.reveal}</button>
         </div>
         <div class="cta-contact-item">
-          <span class="cta-contact-lbl">Зателефонувати</span>
-          <a href="tel:+380443447915" class="cta-contact-val">+38 (044) 344-79-15</a>
+          <span class="cta-contact-lbl">{t.cPhone}</span>
+          <a href="tel:+380443447915" class="cta-contact-val">{t.phoneDisplay}</a>
         </div>
         <div class="cta-contact-item">
-          <span class="cta-contact-lbl">Офіс</span>
-          <span class="cta-contact-val is-static">Київ, БЦ Гулівер</span>
+          <span class="cta-contact-lbl">{t.cOffice}</span>
+          <span class="cta-contact-val is-static">{t.office}</span>
         </div>
         <div class="cta-contact-item">
-          <span class="cta-contact-lbl">Компанія</span>
-          <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="cta-contact-val" aria-label="LUCAS — зовнішній сайт">lucasua.com</a>
+          <span class="cta-contact-lbl">{t.cCompany}</span>
+          <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="cta-contact-val" aria-label={t.companyAria}>lucasua.com</a>
         </div>
       </div>
 
@@ -93,7 +169,7 @@
   </div>
 </section>
 
-<script is:inline>
+<script is:inline define:vars={{ MSG: msgs }}>
   (() => {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -166,18 +242,18 @@
 
     const validators = {
       name: (v) =>
-        v.trim().length >= 2 ? '' : "Вкажіть ім'я — щонайменше 2 символи.",
+        v.trim().length >= 2 ? '' : MSG.name,
       email: (v) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Вкажіть коректний email.',
+        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : MSG.email,
       phone: (v) => {
         const digits = v.replace(/\D/g, '');
         const okChars = /^[+\d\s()\-]+$/.test(v.trim());
         return okChars && digits.length >= 9 && digits.length <= 15
-          ? '' : 'Вкажіть коректний номер телефону.';
+          ? '' : MSG.phone;
       },
       message: (v) => {
-        if (v.trim().length < 15) return 'Опишіть ваш запит докладніше — щонайменше 15 символів.';
-        if (/(https?:\/\/|www\.)/i.test(v)) return 'Приберіть посилання з повідомлення — такі запити блокуються як спам.';
+        if (v.trim().length < 15) return MSG.messageShort;
+        if (/(https?:\/\/|www\.)/i.test(v)) return MSG.messageLinks;
         return '';
       },
     };
@@ -232,7 +308,7 @@
 
       // Too-fast submission
       if (Date.now() - shownAt < MIN_FILL_MS) {
-        setStatus('Форму надіслано занадто швидко. Зачекайте кілька секунд і спробуйте ще раз.');
+        setStatus(MSG.tooFast);
         return;
       }
 
@@ -250,7 +326,7 @@
 
       submitBtn.disabled = true;
       const btnHtml = submitBtn.innerHTML;
-      submitBtn.textContent = 'Надсилаємо…';
+      submitBtn.textContent = MSG.sending;
 
       try {
         await loadSdk();
@@ -272,11 +348,11 @@
         console.error('[contact-form] send failed:', err && err.status, err && err.text ? err.text : err);
         const code = err && err.status;
         if (code === 429) {
-          setStatus('Запит уже надіслано. Зачекайте хвилину перед наступною спробою.');
+          setStatus(MSG.throttled);
         } else if (code === 451 || code === 403) {
-          setStatus('Не вдалося надіслати запит. Скористайтеся контактами нижче.');
+          setStatus(MSG.blocked);
         } else {
-          setStatus('Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся контактами нижче.');
+          setStatus(MSG.failed);
         }
         submitBtn.disabled = false;
         submitBtn.innerHTML = btnHtml;

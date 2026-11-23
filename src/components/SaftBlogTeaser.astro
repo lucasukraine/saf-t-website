@@ -3,12 +3,31 @@
 // guide with descriptive anchor text. Dates render straight from the blog
 // content collection (src/content/blog/*.md) — change pubDate there and it
 // updates here, on /blog/, on the article page and in its schema at once.
+// Articles are Ukrainian-only: on the English homepage each row shows the
+// article's English gloss (titleEn) and is marked as a Ukrainian page.
 import { getCollection } from 'astro:content';
+import { getLang, blogPath, dateLocale } from '../i18n';
 
+const lang = getLang(Astro.url);
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
-const fmt = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = new Intl.DateTimeFormat(dateLocale[lang], { day: 'numeric', month: 'long', year: 'numeric' });
+
+const t = {
+  uk: {
+    label: 'Блог',
+    h2: 'Матеріали по темі',
+    lead: 'Практичні гайди про SAF-T UA для CFO, бухгалтерів та IT-команд: вимоги, структура файлу, валідація та інтеграція з ERP.',
+    all: 'Усі статті →',
+  },
+  en: {
+    label: 'Blog',
+    h2: 'Further reading',
+    lead: 'Practical SAF-T UA guides for CFOs, accountants and IT teams: requirements, file structure, validation and ERP integration. The articles are published in Ukrainian.',
+    all: 'About our guides →',
+  },
+}[lang];
 ---
 
 <section class="s-blogteaser" id="materials" aria-labelledby="materials-h2">
@@ -16,29 +35,39 @@ const fmt = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', ye
 
     <div class="sect-rule">
       <span class="sect-no">08</span>
-      <span class="sect-label">Блог</span>
+      <span class="sect-label">{t.label}</span>
     </div>
 
     <div class="sect-cols">
-      <h2 id="materials-h2" class="sect-h2">Матеріали по темі</h2>
+      <h2 id="materials-h2" class="sect-h2">{t.h2}</h2>
       <p class="sect-lead">
-        Практичні гайди про SAF-T UA для CFO, бухгалтерів та IT-команд: вимоги,
-        структура файлу, валідація та інтеграція з ERP.
-        <a href="/blog/" class="mt-all-link">Усі статті →</a>
+        {t.lead}
+        <a href={blogPath(lang)} class="mt-all-link">{t.all}</a>
       </p>
     </div>
 
     <ul class="mt-list" role="list">
       {posts.map((post) => (
         <li>
-          <a href={`/blog/${post.id}/`} class="mt-row">
-            <span class="mt-label">{post.data.label}</span>
-            <span class="mt-title">{post.data.title}</span>
-            <time class="mt-date" datetime={post.data.pubDate.toISOString()}>
-              {fmt.format(post.data.pubDate)}
-            </time>
-            <span class="mt-arrow" aria-hidden="true">→</span>
-          </a>
+          {lang === 'en' ? (
+            <a href={`/blog/${post.id}/`} class="mt-row" hreflang="uk">
+              <span class="mt-label">In Ukrainian</span>
+              <span class="mt-title">{post.data.titleEn}</span>
+              <time class="mt-date" datetime={post.data.pubDate.toISOString()}>
+                {fmt.format(post.data.pubDate)}
+              </time>
+              <span class="mt-arrow" aria-hidden="true">→</span>
+            </a>
+          ) : (
+            <a href={`/blog/${post.id}/`} class="mt-row">
+              <span class="mt-label">{post.data.label}</span>
+              <span class="mt-title">{post.data.title}</span>
+              <time class="mt-date" datetime={post.data.pubDate.toISOString()}>
+                {fmt.format(post.data.pubDate)}
+              </time>
+              <span class="mt-arrow" aria-hidden="true">→</span>
+            </a>
+          )}
         </li>
       ))}
     </ul>
