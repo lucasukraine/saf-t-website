@@ -15,7 +15,7 @@ const t = {
     lead: 'Формат і структура файлу визначені вимогами Міністерства фінансів та ДПС України. Нижче — визначення, регуляторні факти та роль SAF-T Connector у цьому процесі.',
     def: '<strong>SAF-T UA (Standard Audit File for Tax)</strong> — стандартний аудиторський файл для цілей оподаткування в Україні. Це XML-файл із визначеною структурою, який містить облікові дані, вивантажені з облікової системи за встановлений звітний період. Структура включає блоки <strong>Header</strong>, <strong>MasterFiles</strong> (зокрема TaxDifferences), <strong>GeneralLedgerEntries</strong> та <strong>SourceDocuments</strong>.',
     colA: 'SAF-T в Україні',
-    colA1: 'Файл подається <strong>великими платниками податків</strong> на запит контролюючого органу під час перевірки. Конкретні вимоги залежать від поточного законодавства, статусу платника та запитів ДПС. Файл має бути надано не пізніше <strong>2 робочих днів</strong>, наступних за днем отримання запиту (п. 85.2 ПКУ).',
+    colA1: 'Файл подається <strong>великими платниками податків</strong> на запит контролюючого органу під час документальної перевірки. Конкретні вимоги залежать від поточного законодавства, статусу платника та запитів ДПС. Файл має бути надано не пізніше <strong>2 робочих днів</strong>, наступних за днем отримання запиту (п. 85.2 ПКУ).',
     colA2: 'Файл охоплює: загальну книгу та облікові регістри, дебіторів і кредиторів, документи продажів і закупівель, платежі, необоротні та нематеріальні активи, рух товарів, податкові різниці та первинні документи.',
     fact1Val: '2 дні',
     fact1Lbl: 'термін подання після запиту ДПС',
@@ -43,6 +43,7 @@ const t = {
     mof: 'Міністерство фінансів України',
     sts: 'Державна податкова служба України',
     pku: 'Податковий кодекс України, п. 85.2',
+    dps: 'Роз’яснення ДПС щодо подання SAF-T UA',
     linkLang: undefined,
     updated: 'Оновлено:',
   },
@@ -52,7 +53,7 @@ const t = {
     lead: 'The format and structure of the file are set by the Ministry of Finance and the State Tax Service of Ukraine (STS). Below: the definition, the regulatory facts, and where SAF-T Connector fits in.',
     def: '<strong>SAF-T UA (Standard Audit File for Tax)</strong> is the standard audit file for tax purposes in Ukraine. It is an XML file with a prescribed structure that contains accounting data exported from the company\'s accounting system for a defined reporting period. The structure consists of the <strong>Header</strong>, <strong>MasterFiles</strong> (including TaxDifferences), <strong>GeneralLedgerEntries</strong> and <strong>SourceDocuments</strong> blocks.',
     colA: 'SAF-T in Ukraine',
-    colA1: 'The file is provided by <strong>large taxpayers</strong>, a category defined by the Tax Code of Ukraine, upon request from the tax authority during a tax audit. The exact requirements depend on current legislation, the taxpayer\'s status and the STS request itself. The deadline is <strong>two business days</strong> following the day the request is received (Article 85.2 of the Tax Code).',
+    colA1: 'The file is provided by <strong>large taxpayers</strong>, a category defined by the Tax Code of Ukraine, upon request from the tax authority during a documentary tax audit. The exact requirements depend on current legislation, the taxpayer\'s status and the STS request itself. The deadline is <strong>two business days</strong> following the day the request is received (Article 85.2 of the Tax Code).',
     colA2: 'The file covers the general ledger and accounting registers, customers and suppliers, sales and purchase documents, payments, fixed and intangible assets, inventory movements, tax differences and source documents.',
     fact1Val: '2 days',
     fact1Lbl: 'to respond to an STS request',
@@ -80,6 +81,7 @@ const t = {
     mof: 'Ministry of Finance of Ukraine',
     sts: 'State Tax Service of Ukraine',
     pku: 'Tax Code of Ukraine, Art. 85.2',
+    dps: 'STS guidance on submitting SAF-T UA',
     // Both official sites are Ukrainian-language by default
     linkLang: 'uk',
     updated: 'Updated:',
@@ -173,6 +175,8 @@ const t = {
       <a href="https://tax.gov.ua" target="_blank" rel="noopener" class="expl-src-link" hreflang={t.linkLang}>{t.sts}</a>
       <span class="expl-src-sep" aria-hidden="true">·</span>
       <a href="https://zakon.rada.gov.ua/laws/show/2755-17#n1915" target="_blank" rel="noopener" class="expl-src-link" hreflang={t.linkLang}>{t.pku}</a>
+      <span class="expl-src-sep" aria-hidden="true">·</span>
+      <a href="https://tax.gov.ua/media-tsentr/novini/1003531.html" target="_blank" rel="noopener" class="expl-src-link" hreflang={t.linkLang}>{t.dps}</a>
       <span class="expl-updated">{t.updated} {updatedLabel}</span>
     </div>
 

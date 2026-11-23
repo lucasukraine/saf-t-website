@@ -14,11 +14,11 @@ const uk: FaqItem[] = [
   },
   {
     q: "Що таке SAF-T простими словами?",
-    a: "Простими словами, SAF-T (Standard Audit File for Tax) — це стандартизований електронний файл, через який підприємство передає податковій службі свої облікові дані. Замість надання окремих виписок і регістрів компанія формує один структурований XML-файл за звітний період — із загальною книгою, контрагентами, документами продажів і закупівель, платежами, активами та податковими різницями. В Україні застосовується версія SAF-T UA, яку великі платники податків надають на запит ДПС під час перевірки — не пізніше 2 робочих днів, наступних за днем отримання запиту.",
+    a: "Простими словами, SAF-T (Standard Audit File for Tax) — це стандартизований електронний файл, через який підприємство передає податковій службі свої облікові дані. Замість надання окремих виписок і регістрів компанія формує один структурований XML-файл за звітний період — із загальною книгою, контрагентами, документами продажів і закупівель, платежами, активами та податковими різницями. В Україні застосовується версія SAF-T UA, яку великі платники податків надають на запит ДПС під час документальної перевірки — не пізніше 2 робочих днів, наступних за днем отримання запиту.",
   },
   {
     q: "Хто має подавати SAF-T UA в Україні?",
-    a: "SAF-T UA надають великі платники податків на запит контролюючого органу під час перевірки. Файл має бути надано не пізніше 2 робочих днів, наступних за днем отримання запиту (п. 85.2 Податкового кодексу України). Вимоги визначаються нормативними актами Міністерства фінансів та ДПС України.",
+    a: "SAF-T UA надають великі платники податків на запит контролюючого органу під час документальної перевірки. Файл має бути надано не пізніше 2 робочих днів, наступних за днем отримання запиту (п. 85.2 Податкового кодексу України). Вимоги визначаються нормативними актами Міністерства фінансів та ДПС України.",
   },
   {
     q: "Що робить SAF-T Connector?",
@@ -81,11 +81,11 @@ const en: FaqItem[] = [
   },
   {
     q: "What is SAF-T in simple terms?",
-    a: "In simple terms, SAF-T (Standard Audit File for Tax) is a standardized electronic file through which a company hands its accounting data to the tax authority. Instead of providing separate statements and registers, the company produces one structured XML file for the reporting period, containing the general ledger, counterparties, sales and purchase documents, payments, assets and tax differences. Ukraine uses its own version, SAF-T UA, which large taxpayers provide upon request from the State Tax Service during a tax audit, no later than two business days following the day the request is received.",
+    a: "In simple terms, SAF-T (Standard Audit File for Tax) is a standardized electronic file through which a company hands its accounting data to the tax authority. Instead of providing separate statements and registers, the company produces one structured XML file for the reporting period, containing the general ledger, counterparties, sales and purchase documents, payments, assets and tax differences. Ukraine uses its own version, SAF-T UA, which large taxpayers provide upon request from the State Tax Service during a documentary tax audit, no later than two business days following the day the request is received.",
   },
   {
     q: "Who has to submit SAF-T UA in Ukraine?",
-    a: "SAF-T UA is provided by large taxpayers (companies on the STS register of large taxpayers) upon request from the State Tax Service during a tax audit. The deadline is two business days following the day the request is received, under Article 85.2 of the Tax Code of Ukraine. The file format and procedure are set by the Ministry of Finance and the State Tax Service of Ukraine.",
+    a: "SAF-T UA is provided by large taxpayers (companies on the STS register of large taxpayers) upon request from the State Tax Service during a documentary tax audit. The deadline is two business days following the day the request is received, under Article 85.2 of the Tax Code of Ukraine. The file format and procedure are set by the Ministry of Finance and the State Tax Service of Ukraine.",
   },
   {
     q: "What does SAF-T Connector do?",
