@@ -1,7 +1,7 @@
 ---
 title: "SAF-T UA для платників ПДВ з 2027 року: що відомо, що не визначено і як готуватися"
 titleEn: "SAF-T UA for VAT payers from 2027: what is known, what is still open and how to prepare"
-summaryEn: "The STS knowledge base states that Ukraine's National Revenue Strategy provides for IT solutions to process SAF-T UA data for all VAT payers from 2027. What this means legally and in practice, the possible scenarios and what businesses should check in 2026."
+summaryEn: "In an answer on its public Q&A resource (ZIR), the STS states that Ukraine's National Revenue Strategy provides for IT solutions to process SAF-T UA data for all VAT payers from 2027. What this means legally and in practice, the possible scenarios and what businesses should check in 2026."
 description: "У ЗІР ДПС зазначено, що Національна стратегія доходів передбачає впровадження ІТ-рішень для обробки даних SAF-T UA для всіх платників ПДВ з 2027 року. Розбираємо, що це означає юридично і практично, які можливі сценарії та що варто перевірити бізнесу вже у 2026-му."
 pubDate: 2026-05-04
 label: "Зміни 2027"
