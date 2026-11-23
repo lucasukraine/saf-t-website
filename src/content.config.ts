@@ -8,6 +8,8 @@ const blog = defineCollection({
     // English gloss of the title. Articles stay Ukrainian-only; the English
     // pages (/en/ and /en/blog/) use this to tell readers what each one covers.
     titleEn: z.string(),
+    // English summary of the article (a translation of `description`), shown on /en/blog/
+    summaryEn: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),

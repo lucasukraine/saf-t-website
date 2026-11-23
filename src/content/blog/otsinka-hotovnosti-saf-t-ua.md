@@ -1,6 +1,7 @@
 ---
 title: "Оцінка готовності до SAF-T UA: чекліст і план впровадження"
 titleEn: "SAF-T UA readiness assessment: checklist and implementation plan"
+summaryEn: "A readiness assessment before a SAF-T project: five dimensions of readiness, a checklist for data and systems, typical findings and a four-phase implementation plan over 3–4 months."
 description: "Readiness assessment перед SAF-T-проєктом: п'ять вимірів готовності, чекліст перевірки даних і систем, типові знахідки та чотирифазний план впровадження на 3–4 місяці."
 pubDate: 2026-07-06
 label: "Впровадження"

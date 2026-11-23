@@ -5,12 +5,14 @@ import { getLang, homePath, blogPath } from '../i18n';
 const currentYear = new Date().getFullYear();
 const lang = getLang(Astro.url);
 const home = homePath(lang);
+// Legal names are Ukrainian in both versions; mark them on English pages
+const nameLang = lang === 'en' ? 'uk' : undefined;
 
 const t = {
   uk: {
     homeAria: 'SAF-T Connector — на головну',
     tagline: 'Формування XML-файлу та XSD-валідація відповідно до вимог е-аудиту ДПС України.',
-    legal: ['Розробка: ТОВ САФ-Т Коннектор', 'Впровадження: ТОВ Лукас Аудит'],
+    legal: [['Розробка', 'ТОВ САФ-Т Коннектор'], ['Впровадження', 'ТОВ Лукас Аудит']],
     product: 'Продукт',
     productLinks: [
       ['#explainer', 'Що таке SAF-T'],
@@ -34,13 +36,14 @@ const t = {
     phoneDisplay: '+38 (044) 344-79-15',
     address: 'Адреса',
     addressVal: 'Київ, БЦ Гулівер, вежа А, 17-й поверх',
-    copy: `© ${currentYear} ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит". Усі права захищені.`,
+    rights: 'Усі права захищені.',
     extAria: 'lucasua.com — зовнішній сайт',
   },
   en: {
     homeAria: 'SAF-T Connector — home',
     tagline: 'XML file generation and XSD validation in line with the e-audit requirements of the State Tax Service of Ukraine.',
-    legal: ['Product: SAF-T Connector LLC', 'Implementation: LUCAS Audit LLC'],
+    // Exact Ukrainian legal names until official English names are confirmed
+    legal: [['Product', 'ТОВ САФ-Т Коннектор'], ['Implementation', 'ТОВ Лукас Аудит']],
     product: 'Product',
     productLinks: [
       ['#explainer', 'What is SAF-T'],
@@ -65,7 +68,7 @@ const t = {
     phoneDisplay: '+380 44 344 7915',
     address: 'Address',
     addressVal: 'Gulliver Business Center, Tower A, 17th floor, Kyiv, Ukraine',
-    copy: `© ${currentYear} SAF-T Connector LLC. LUCAS Audit LLC. All rights reserved.`,
+    rights: 'All rights reserved.',
     extAria: 'lucasua.com — external website',
   },
 }[lang];
@@ -83,8 +86,8 @@ const t = {
           {t.tagline}
         </p>
         <p class="footer-legal">
-          {t.legal[0]}<br>
-          {t.legal[1]}
+          {t.legal[0][0]}: <span lang={nameLang}>{t.legal[0][1]}</span><br>
+          {t.legal[1][0]}: <span lang={nameLang}>{t.legal[1][1]}</span>
         </p>
       </div>
 
@@ -125,7 +128,7 @@ const t = {
     </div>
 
     <div class="footer-bot">
-      <span class="footer-bot-copy">{t.copy}</span>
+      <span class="footer-bot-copy">© {currentYear} <span lang={nameLang}>ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит".</span> {t.rights}</span>
       <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent" aria-label={t.extAria}>lucasua.com →</a>
     </div>
   </div>

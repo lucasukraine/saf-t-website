@@ -92,7 +92,7 @@ const other = langs.find((l) => l.code !== lang)!;
 </header>
 
 <!-- Mobile slide-in panel -->
-<div inert class="mob-menu" id="mob-menu" role="dialog" aria-label={t.menuAria}>
+<div inert class="mob-menu" id="mob-menu" role="dialog" aria-modal="true" aria-label={t.menuAria}>
   <span class="mob-section-label">{t.menuNav}</span>
   {links.map((l) => <a href={l.href}>{l.label}</a>)}
   <span class="mob-section-label">{t.menuAction}</span>
@@ -139,30 +139,57 @@ const other = langs.find((l) => l.code !== lang)!;
     const overlay = document.getElementById('mob-overlay');
     if (!btn || !menu || !overlay) return;
 
+    // Modal behaviour: while the menu is open, everything behind it is inert
+    // (unreachable by Tab and screen readers) and Tab cycles between the
+    // close button and the menu links. Focus returns to the button on close.
+    const background = () => [
+      document.getElementById('main-content'),
+      document.querySelector('footer'),
+      document.querySelector('.skip-link'),
+      ...document.querySelectorAll('.header .logo, .header .nav, .header .lang-switch, .header .header-cta'),
+    ].filter(Boolean);
+    const isOpen = () => menu.classList.contains('is-open');
+
     const open = () => {
       btn.classList.add('is-open');
       menu.classList.add('is-open');
       overlay.classList.add('is-open');
       menu.removeAttribute('inert');
+      background().forEach(el => { el.inert = true; });
       btn.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-label', btn.dataset.labelClose);
       document.body.style.overflow = 'hidden';
+      const first = menu.querySelector('a');
+      if (first) first.focus();
     };
-    const close = () => {
+    const close = (returnFocus) => {
+      if (!isOpen()) return;
       btn.classList.remove('is-open');
       menu.classList.remove('is-open');
       overlay.classList.remove('is-open');
       menu.setAttribute('inert', '');
+      background().forEach(el => { el.inert = false; });
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-label', btn.dataset.labelOpen);
       document.body.style.overflow = '';
+      if (returnFocus) btn.focus();
     };
 
-    btn.addEventListener('click', () =>
-      menu.classList.contains('is-open') ? close() : open()
-    );
-    overlay.addEventListener('click', close);
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    btn.addEventListener('click', () => (isOpen() ? close(true) : open()));
+    overlay.addEventListener('click', () => close(true));
+    // A link navigates (or jumps to an anchor), so focus follows it
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => close(false)));
+    document.addEventListener('keydown', e => {
+      if (!isOpen()) return;
+      if (e.key === 'Escape') { close(true); return; }
+      if (e.key !== 'Tab') return;
+      const cycle = [btn, ...menu.querySelectorAll('a')];
+      const i = cycle.indexOf(document.activeElement);
+      const next = e.shiftKey
+        ? (i <= 0 ? cycle.length - 1 : i - 1)
+        : (i === -1 || i === cycle.length - 1 ? 0 : i + 1);
+      e.preventDefault();
+      cycle[next].focus();
+    });
   })();
 </script>

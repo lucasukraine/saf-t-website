@@ -17,7 +17,7 @@ GeneralLedgerEntries та SourceDocuments. Формат і структура в
 
 Ключові факти:
 - Подається великими платниками податків на запит контролюючого органу
-- Термін надання: 2 робочі дні після отримання запиту
+- Термін надання: не пізніше 2 робочих днів, наступних за днем отримання запиту під час перевірки (п. 85.2 ПКУ)
 - Формат: XML на основі офіційної XSD-схеми ДПС
 - Файл охоплює: загальну книгу та облікові регістри, дебіторів і кредиторів,
   документи продажів і закупівель, платежі, необоротні та нематеріальні активи,
@@ -76,8 +76,10 @@ Standard Audit File for Tax (SAF-T UA) from a company's accounting data. It
 extracts data from ERP systems (SAP, BAS/1C, Microsoft Dynamics, Oracle, Odoo,
 databases, structured Excel/CSV exports), maps it to the SAF-T UA structure,
 generates the XML file, validates it against the official XSD schema of the
-State Tax Service of Ukraine, runs mathematical and cross-section checks, and
+State Tax Service of Ukraine, runs arithmetic checks and cross-checks between
+file sections, and
 provides an Excel view for review. SAF-T UA is submitted by large taxpayers in
-Ukraine upon request of the tax authority within 2 business days. Typical
+Ukraine upon request of the tax authority during a tax audit, no later than two
+business days following the day the request is received (Tax Code, Art. 85.2). Typical
 implementation takes about 3–4 months and is deployed on the client's
 infrastructure (Docker). Site: [saftconnector.com](https://saftconnector.com), English version: [saftconnector.com/en/](https://saftconnector.com/en/).

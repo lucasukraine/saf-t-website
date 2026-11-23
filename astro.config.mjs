@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { copyFileSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { alternatesFor } from './src/i18n/index.ts';
+import { execSync } from 'node:child_process';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DEPLOYMENT CONFIGURATION
@@ -35,6 +36,24 @@ for (const file of readdirSync(blogDir).filter((f) => f.endsWith('.md'))) {
   blogLastmods[file.replace(/\.md$/, '')] = iso;
   if (!latestBlogLastmod || iso > latestBlogLastmod) latestBlogLastmod = iso;
 }
+
+// /en/blog/ changes when an article is added/updated, when the page itself is
+// edited, or when an English title/summary (titleEn/summaryEn) changes. The
+// last two come from git history (CI checks out with fetch-depth: 0). If git
+// is unavailable, fall back to the build time rather than under-report.
+const gitIso = (args) => {
+  try {
+    const out = execSync(`git log -1 --format=%cI ${args}`, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    return out ? new Date(out).toISOString() : null;
+  } catch {
+    return undefined;
+  }
+};
+const enBlogPage = gitIso('-- src/pages/en/blog/index.astro');
+const enBlogGloss = gitIso("-G '^(titleEn|summaryEn):' -- src/content/blog");
+const enBlogLastmod = enBlogPage === undefined || enBlogGloss === undefined
+  ? buildIso
+  : [latestBlogLastmod, enBlogPage, enBlogGloss].filter(Boolean).sort().at(-1) ?? buildIso;
 
 const sitemapAlias = {
   name: 'sitemap-alias',
@@ -81,9 +100,11 @@ export default defineConfig({
         if (slug && blogLastmods[slug]) {
           return { ...item, lastmod: blogLastmods[slug] };
         }
-        // Both blog indexes list the same articles
-        if (path === '/blog/' || path === '/en/blog/') {
+        if (path === '/blog/') {
           return { ...item, links, lastmod: latestBlogLastmod ?? buildIso };
+        }
+        if (path === '/en/blog/') {
+          return { ...item, links, lastmod: enBlogLastmod };
         }
         return { ...item, links, lastmod: buildIso };
       },

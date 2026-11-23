@@ -1,6 +1,7 @@
 ---
 title: "SAF-T UA для SAP: ECC, S/4HANA, Cloud і Business One"
 titleEn: "SAF-T UA from SAP: ECC, S/4HANA, Cloud and Business One"
+summaryEn: "Why SAF-T from SAP means consolidating data from FI, SD, MM and AA rather than a simple XML export: specifics of ECC, S/4HANA, cloud editions and Business One, typical transformations and the ECC → S/4HANA migration."
 description: "Чому SAF-T із SAP — це зведення даних із FI, SD, MM і AA, а не простий експорт XML: особливості ECC, S/4HANA, хмарних редакцій і Business One, типові трансформації та міграція ECC → S/4HANA."
 pubDate: 2026-09-21
 label: "ERP: SAP"

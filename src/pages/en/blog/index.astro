@@ -61,7 +61,7 @@ const listSchema = JSON.stringify({
       </div>
 
       <div class="sect-cols">
-        <h1 class="sect-h2">SAF-T UA guides and insights</h1>
+        <h1 class="sect-h2">SAF-T requirements in Ukraine: practical guides</h1>
         <p class="sect-lead">
           Requirements and deadlines, file structure, validation, preparing accounting
           data and ERP integration: practical guides from the LUCAS team, the developers
@@ -76,7 +76,7 @@ const listSchema = JSON.stringify({
           <p>
             They are written for accounting, tax and IT teams in Ukraine and track Ukrainian
             regulation closely, so we keep them in the original language rather than risk an
-            imprecise translation. Each entry below says in English what the article covers.
+            imprecise translation. Each entry below summarizes in English what the article covers.
             Your browser's built-in translation is fine for a first read; before acting on
             anything, <a href="/en/#contact">talk to our team</a> and we'll walk you through it
             in English.
@@ -92,6 +92,7 @@ const listSchema = JSON.stringify({
               <span class="blog-main">
                 <span class="blog-label">Article in Ukrainian</span>
                 <span class="blog-title">{post.data.titleEn}</span>
+                <span class="blog-desc">{post.data.summaryEn}</span>
                 <span class="blog-orig" lang="uk">{post.data.title}</span>
               </span>
               <span class="blog-side">
@@ -196,11 +197,18 @@ const listSchema = JSON.stringify({
   color: var(--ink);
   transition: color .2s var(--ease);
 }
-.blog-orig {
+.blog-desc {
   font-family: var(--body);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--ink-soft);
+  max-width: 68ch;
+}
+.blog-orig {
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-mute);
   max-width: 68ch;
 }
 .blog-side {
@@ -232,6 +240,7 @@ const listSchema = JSON.stringify({
 @media (max-width: 720px) {
   .blog-index { padding: 104px 0 72px; }
   .blog-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .blog-side { grid-column: 1; }
   .blog-no { display: none; }
   .lang-note { padding: 18px 18px; gap: 14px; margin-bottom: 36px; }
 }

@@ -1,6 +1,7 @@
 ---
 title: "Типові технічні помилки SAF-T UA: 116 FE- і 18 RE-перевірок ДПС"
 titleEn: "Common SAF-T UA technical errors: the STS’s 116 FE and 18 RE checks"
+summaryEn: "The STS has published its list of automated checks for SAF-T UA files: 116 referential-integrity checks (FE) and 18 logical-consistency checks (RE), with a UAH 100 tolerance for five balance control ratios."
 description: "ДПС оприлюднила перелік автоматизованих перевірок файлу SAF-T UA: 116 перевірок посилальної цілісності (FE) і 18 перевірок логічної узгодженості (RE), з допустимим відхиленням 100 грн для п'яти балансових контрольних співвідношень."
 pubDate: 2026-10-02
 label: "Перевірки ДПС"

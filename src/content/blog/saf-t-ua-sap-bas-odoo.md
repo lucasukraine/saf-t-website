@@ -1,6 +1,7 @@
 ---
 title: "SAF-T UA для SAP, BAS та Odoo: підходи для різних ERP"
 titleEn: "SAF-T UA with SAP, BAS and Odoo: approaches for different ERPs"
+summaryEn: "How to produce SAF-T UA depending on the accounting platform: what SAP can and cannot do, the legal context of BAS/1C, Odoo's open API, and what to do when data is spread across several systems."
 description: "Як формувати SAF-T UA залежно від облікової платформи: можливості й обмеження SAP, правовий контекст BAS/1С, відкритий API Odoo і що робити, коли дані розподілені між кількома системами."
 pubDate: 2026-06-15
 label: "ERP-інтеграція"

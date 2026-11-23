@@ -1,6 +1,7 @@
 ---
 title: "Що таке SAF-T UA: структура, вимоги та підготовка файлу"
 titleEn: "What is SAF-T UA: structure, requirements and file preparation"
+summaryEn: "A complete guide to SAF-T UA: how the standard audit file differs from regular reporting, who submits it, what the file consists of and how to prepare data so it passes validation."
 description: "Повний гайд по SAF-T UA: чим стандартний аудиторський файл відрізняється від звичайної звітності, хто його подає, з чого складається файл і як підготувати дані, щоб пройти валідацію."
 pubDate: 2026-03-23
 label: "Основи"

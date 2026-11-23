@@ -1,6 +1,7 @@
 ---
 title: "Валідація SAF-T UA: XSD-схема, бізнес-правила і типові помилки"
 titleEn: "SAF-T UA validation: XSD schema, business rules and common errors"
+summaryEn: "The two levels of SAF-T file checks: structural XSD validation and logical data checks. The most common errors in MasterFiles, journal entries and source documents, and how to fix them."
 description: "Два рівні перевірки SAF-T-файлу — структурна XSD-валідація і логічна перевірка даних. Найчастіші помилки у MasterFiles, проводках і первинних документах та як їх виправляти."
 pubDate: 2026-05-25
 label: "Валідація"

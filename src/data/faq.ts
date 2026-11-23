@@ -14,11 +14,11 @@ const uk: FaqItem[] = [
   },
   {
     q: "Що таке SAF-T простими словами?",
-    a: "Простими словами, SAF-T (Standard Audit File for Tax) — це стандартизований електронний файл, через який підприємство передає податковій службі свої облікові дані. Замість надання окремих виписок і регістрів компанія формує один структурований XML-файл за звітний період — із загальною книгою, контрагентами, документами продажів і закупівель, платежами, активами та податковими різницями. В Україні застосовується версія SAF-T UA, яку великі платники податків надають на запит ДПС протягом 2 робочих днів.",
+    a: "Простими словами, SAF-T (Standard Audit File for Tax) — це стандартизований електронний файл, через який підприємство передає податковій службі свої облікові дані. Замість надання окремих виписок і регістрів компанія формує один структурований XML-файл за звітний період — із загальною книгою, контрагентами, документами продажів і закупівель, платежами, активами та податковими різницями. В Україні застосовується версія SAF-T UA, яку великі платники податків надають на запит ДПС під час перевірки — не пізніше 2 робочих днів, наступних за днем отримання запиту.",
   },
   {
     q: "Хто має подавати SAF-T UA в Україні?",
-    a: "SAF-T UA подається великими платниками податків на запит контролюючого органу. Файл має бути надано протягом 2 робочих днів з моменту отримання запиту. Вимоги визначаються нормативними актами Міністерства фінансів та ДПС України.",
+    a: "SAF-T UA надають великі платники податків на запит контролюючого органу під час перевірки. Файл має бути надано не пізніше 2 робочих днів, наступних за днем отримання запиту (п. 85.2 Податкового кодексу України). Вимоги визначаються нормативними актами Міністерства фінансів та ДПС України.",
   },
   {
     q: "Що робить SAF-T Connector?",
@@ -77,19 +77,19 @@ const uk: FaqItem[] = [
 const en: FaqItem[] = [
   {
     q: "What is SAF-T UA?",
-    a: "SAF-T UA (Standard Audit File for Tax) is Ukraine's version of the OECD-originated standard audit file for tax purposes. It is an XML file with a prescribed structure containing accounting data exported from a company's accounting system for a defined reporting period. The structure consists of the Header, MasterFiles (including TaxDifferences), GeneralLedgerEntries and SourceDocuments blocks. The file covers the general ledger and accounting registers, customers and suppliers, sales and purchase documents, payments, fixed and intangible assets, inventory movements, tax differences and source documents. Its format and structure are set by the Ministry of Finance and the State Tax Service (STS) of Ukraine.",
+    a: "SAF-T UA is Ukraine's adaptation of the Standard Audit File for Tax, based on OECD guidance. It is an XML file with a prescribed structure containing accounting data exported from a company's accounting system for a defined reporting period. The structure consists of the Header, MasterFiles (including TaxDifferences), GeneralLedgerEntries and SourceDocuments blocks. The file covers the general ledger and accounting registers, customers and suppliers, sales and purchase documents, payments, fixed and intangible assets, inventory movements, tax differences and source documents. Its format and structure are set by the Ministry of Finance and the State Tax Service (STS) of Ukraine.",
   },
   {
     q: "What is SAF-T in simple terms?",
-    a: "In simple terms, SAF-T (Standard Audit File for Tax) is a standardized electronic file through which a company hands its accounting data to the tax authority. Instead of providing separate statements and registers, the company produces one structured XML file for the reporting period, containing the general ledger, counterparties, sales and purchase documents, payments, assets and tax differences. Ukraine uses its own version, SAF-T UA, which large taxpayers provide within 2 business days of a request from the State Tax Service.",
+    a: "In simple terms, SAF-T (Standard Audit File for Tax) is a standardized electronic file through which a company hands its accounting data to the tax authority. Instead of providing separate statements and registers, the company produces one structured XML file for the reporting period, containing the general ledger, counterparties, sales and purchase documents, payments, assets and tax differences. Ukraine uses its own version, SAF-T UA, which large taxpayers provide upon request from the State Tax Service during a tax audit, no later than two business days following the day the request is received.",
   },
   {
     q: "Who has to submit SAF-T UA in Ukraine?",
-    a: "SAF-T UA is submitted by large taxpayers upon request from the tax authority. The file must be provided within 2 business days of receiving the request. The requirements are set by regulations of the Ministry of Finance and the State Tax Service of Ukraine.",
+    a: "SAF-T UA is provided by large taxpayers (companies on the STS register of large taxpayers) upon request from the State Tax Service during a tax audit. The deadline is two business days following the day the request is received, under Article 85.2 of the Tax Code of Ukraine. The file format and procedure are set by the Ministry of Finance and the State Tax Service of Ukraine.",
   },
   {
     q: "What does SAF-T Connector do?",
-    a: "SAF-T Connector is a software solution by LUCAS for producing SAF-T UA audit files. It reads data from accounting systems and other agreed sources, transforms it according to a configured mapping, generates the XML file and provides an Excel view for convenient review. Built-in validation checks the file against the official STS schema and runs mathematical and cross-section checks before submission.",
+    a: "SAF-T Connector is a software solution by LUCAS for producing SAF-T UA audit files. It reads data from accounting systems and other agreed sources, transforms it according to a configured mapping, generates the XML file and provides an Excel view for convenient review. Built-in validation checks the file against the official STS schema and runs arithmetic checks and cross-checks between file sections before submission.",
   },
   {
     q: "Who develops and supports SAF-T Connector?",
@@ -105,7 +105,7 @@ const en: FaqItem[] = [
   },
   {
     q: "What does a SAF-T Connector implementation include?",
-    a: "The implementation covers: an assessment of the quality and completeness of accounting data; mapping the client's accounting data to the structure of the reporting file; configuring SAF-T Connector and integrating it with the data sources; deployment on the client's infrastructure; testing on real data with XSD validation and mathematical checks; user training and handover of the process. LUCAS delivers the implementation with its own finance consultants and developers, without splitting responsibility between a separate software vendor and consultants.",
+    a: "The implementation covers: an assessment of the quality and completeness of accounting data; mapping the client's accounting data to the structure of the reporting file; configuring SAF-T Connector and integrating it with the data sources; deployment on the client's infrastructure; testing on real data with XSD validation and arithmetic checks; user training and handover of the process. LUCAS delivers the implementation with its own finance consultants and developers, without splitting responsibility between a separate software vendor and consultants.",
   },
   {
     q: "How long does implementation take?",
@@ -113,7 +113,7 @@ const en: FaqItem[] = [
   },
   {
     q: "What checks does SAF-T Connector run?",
-    a: "SAF-T Connector runs three levels of checks: 1) XSD validation: the XML file is checked against the official STS schema (structure, data types, mandatory fields); 2) mathematical and accounting controls: balances, turnovers and consistency of journal entries; 3) cross-section controls: reconciliation of data that appears in several blocks of the file at once. Errors can be reviewed in the interface and in Excel.",
+    a: "SAF-T Connector runs three levels of checks: 1) XSD validation: the XML file is checked against the official STS schema (structure, data types, mandatory fields); 2) arithmetic and accounting consistency checks: account balances, debit and credit totals, and consistency of journal entries; 3) cross-checks between file sections: reconciliation of data that appears in several blocks of the file at once. Errors can be reviewed in the interface and in Excel.",
   },
   {
     q: "What happens when the STS updates the XSD schema?",
@@ -121,11 +121,11 @@ const en: FaqItem[] = [
   },
   {
     q: "Can the SAF-T file be reviewed in Excel?",
-    a: "Yes. SAF-T Connector generates not only the XML but also an Excel representation of the file. XML is impractical to review by hand, so the Excel version lets the client's team check the data, filter rows with errors and confirm the file is correct before submission.",
+    a: "Yes. SAF-T Connector generates not only the XML but also an Excel representation of the file. XML is impractical to review by hand, so the Excel version lets the client's team check the data, filter for rows with errors and confirm the file is correct before submission.",
   },
   {
-    q: "Can IFRS transformation spreadsheets be used as an additional data source?",
-    a: "Yes, provided the Excel files have a fixed structure agreed during implementation. Excel files can serve as additional structured data sources, for example for IFRS transformation adjustments.",
+    q: "Can Excel schedules of IFRS adjustments be used as an additional data source?",
+    a: "Yes, provided the Excel files have a fixed structure agreed during implementation. Excel files can serve as additional structured data sources, for example for adjustments made when converting the accounts to IFRS.",
   },
   {
     q: "Do you populate only the mandatory SAF-T UA fields?",
