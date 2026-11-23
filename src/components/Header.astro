@@ -16,7 +16,6 @@ const t = {
     menuAria: 'Навігаційне меню',
     menuNav: 'Навігація',
     menuAction: 'Дія',
-    menuLang: 'Мова',
     langAria: 'Мова сайту',
   },
   en: {
@@ -29,7 +28,6 @@ const t = {
     menuAria: 'Navigation menu',
     menuNav: 'Navigation',
     menuAction: 'Action',
-    menuLang: 'Language',
     langAria: 'Site language',
   },
 }[lang];
@@ -49,7 +47,6 @@ const langs = [
   { code: 'uk', short: 'UA', name: 'Українська', href: switchTarget(Astro.url.pathname, 'uk') },
   { code: 'en', short: 'EN', name: 'English', href: switchTarget(Astro.url.pathname, 'en') },
 ] as const;
-const other = langs.find((l) => l.code !== lang)!;
 ---
 
 <header class="header" id="header">
@@ -73,7 +70,7 @@ const other = langs.find((l) => l.code !== lang)!;
           {i > 0 && <span class="lang-sep" aria-hidden="true"></span>}
           {l.code === lang
             ? <span class="lang-opt is-current" lang={l.code} aria-current="true" title={l.name}>{l.short}</span>
-            : <a class="lang-opt" href={l.href} hreflang={l.code} lang={l.code} title={l.name} aria-label={l.name}>{l.short}</a>}
+            : <a class="lang-opt" href={l.href} hreflang={l.code} lang={l.code} title={l.name} aria-label={l.name} data-set-lang={l.code}>{l.short}</a>}
         </>))}
       </div>
       <a class="header-cta" href={`${home}#contact`}>{t.cta}</a>
@@ -93,17 +90,74 @@ const other = langs.find((l) => l.code !== lang)!;
 
 <!-- Mobile slide-in panel -->
 <div inert class="mob-menu" id="mob-menu" role="dialog" aria-modal="true" aria-label={t.menuAria}>
+  <!-- Top row: language switch first, then the close button (the burger
+       sits under the panel while it is open) -->
+  <div class="mob-top">
+    <div class="mob-lang" role="group" aria-label={t.langAria}>
+      {langs.map((l) => (
+        l.code === lang
+          ? <span class="mob-lang-opt is-current" lang={l.code} aria-current="true">{l.name}</span>
+          : <a class="mob-lang-opt" href={l.href} hreflang={l.code} lang={l.code} data-set-lang={l.code}>{l.name}</a>
+      ))}
+    </div>
+    <button type="button" class="mob-close" id="mob-close" aria-label={t.close}>
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
   <span class="mob-section-label">{t.menuNav}</span>
   {links.map((l) => <a href={l.href}>{l.label}</a>)}
   <span class="mob-section-label">{t.menuAction}</span>
   <a href={`${home}#contact`} class="mob-cta-link">{t.cta} →</a>
-  <span class="mob-section-label">{t.menuLang}</span>
-  <a href={other.href} hreflang={other.code} lang={other.code}>{other.name}</a>
 </div>
 
 <div class="mob-overlay" id="mob-overlay"></div>
 
 <style>
+  .mob-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(215,228,248,.08);
+  }
+  .mob-lang {
+    display: inline-flex;
+    border: 1px solid rgba(215,228,248,.16);
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .mob-menu .mob-lang-opt {
+    display: block;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--body);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: rgba(232,238,250,.62);
+  }
+  .mob-menu .mob-lang-opt.is-current { background: rgba(255,255,255,.10); color: #fff; }
+  .mob-menu a.mob-lang-opt:hover { color: #fff; }
+  .mob-close {
+    flex: none;
+    width: 40px; height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid rgba(215,228,248,.16);
+    border-radius: 8px;
+    color: rgba(232,238,250,.82);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .mob-close:hover { color: #fff; border-color: rgba(215,228,248,.32); }
+  .mob-close:focus-visible,
+  .mob-menu a.mob-lang-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   .mob-menu .mob-cta-link {
     color: #fff;
     font-weight: 600;
@@ -141,7 +195,7 @@ const other = langs.find((l) => l.code !== lang)!;
 
     // Modal behaviour: while the menu is open, everything behind it is inert
     // (unreachable by Tab and screen readers) and Tab cycles between the
-    // close button and the menu links. Focus returns to the button on close.
+    // menu's own controls. Focus returns to the burger button on close.
     const background = () => [
       document.getElementById('main-content'),
       document.querySelector('footer'),
@@ -175,6 +229,8 @@ const other = langs.find((l) => l.code !== lang)!;
       if (returnFocus) btn.focus();
     };
 
+    const closeBtn = document.getElementById('mob-close');
+    if (closeBtn) closeBtn.addEventListener('click', () => close(true));
     btn.addEventListener('click', () => (isOpen() ? close(true) : open()));
     overlay.addEventListener('click', () => close(true));
     // A link navigates (or jumps to an anchor), so focus follows it
@@ -183,7 +239,7 @@ const other = langs.find((l) => l.code !== lang)!;
       if (!isOpen()) return;
       if (e.key === 'Escape') { close(true); return; }
       if (e.key !== 'Tab') return;
-      const cycle = [btn, ...menu.querySelectorAll('a')];
+      const cycle = [...menu.querySelectorAll('a, button')];
       const i = cycle.indexOf(document.activeElement);
       const next = e.shiftKey
         ? (i <= 0 ? cycle.length - 1 : i - 1)
@@ -192,4 +248,12 @@ const other = langs.find((l) => l.code !== lang)!;
       cycle[next].focus();
     });
   })();
+
+  // An explicit language choice wins over the automatic redirect to /en/
+  // (see BaseLayout): remember it for later visits.
+  document.querySelectorAll('[data-set-lang]').forEach((a) => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('saft-lang', a.dataset.setLang); } catch (e) {}
+    });
+  });
 </script>

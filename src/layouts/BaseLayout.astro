@@ -59,6 +59,10 @@ const ogImage = Astro.props.ogImage ?? `${siteUrl}/${lang === 'en' ? 'og-image-e
 // index). Ukrainian articles have no English counterpart, so they get none.
 const alternates = alternatesFor(Astro.url.pathname);
 
+// Automatic switch to English applies only to Ukrainian pages that have an
+// English counterpart (home, blog index) — never to articles.
+const autoEnTarget = lang === 'uk' && alternates ? alternates.en : null;
+
 // Automatically add noindex when deployed to a *.github.io preview URL.
 // On production (saftconnector.com) noindex is never added unless explicitly set.
 const isGithubPages = Astro.site?.hostname.endsWith('.github.io') ?? false;
@@ -205,6 +209,37 @@ const combinedSchema = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {autoEnTarget && (
+      <script is:inline define:vars={{ target: autoEnTarget }}>
+        // Send visitors who are not in Ukraine and don't use Ukrainian or
+        // Russian to the English counterpart. Runs before first paint.
+        // Never for: crawlers and audit tools (Google advises against
+        // locale redirects for bots), navigation within the site, or anyone
+        // who picked a language with the switcher (localStorage 'saft-lang').
+        // "In Ukraine" is inferred from the device time zone — a static site
+        // has no IP geolocation; unknown time zone means no redirect.
+        try {
+          var ua = navigator.userAgent || '';
+          var ref = document.referrer;
+          var internal = ref && new URL(ref).origin === location.origin;
+          var pref = null;
+          try { pref = localStorage.getItem('saft-lang'); } catch (e) {}
+          var go = false;
+          if (/bot|crawl|spider|slurp|lighthouse|headless|preview|inspection|validator/i.test(ua) || internal || pref === 'uk') {
+            go = false;
+          } else if (pref === 'en') {
+            go = true;
+          } else {
+            var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+            var ukOrRu = langs.some(function (l) { return /^(uk|ru)(-|$)/i.test(l); });
+            var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
+            var inUkraine = /^Europe\/(Kyiv|Kiev|Uzhgorod|Zaporozhye|Simferopol)$/.test(tz);
+            go = !!tz && !inUkraine && !ukOrRu;
+          }
+          if (go) location.replace(target + location.search + location.hash);
+        } catch (e) {}
+      </script>
+    )}
     <meta name="theme-color" content="#03a9f4" />
     <title>{title}</title>
     <meta name="description" content={description} />
