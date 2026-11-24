@@ -93,7 +93,6 @@ const listSchema = JSON.stringify({
                 <span class="blog-label">Article in Ukrainian</span>
                 <span class="blog-title">{post.data.titleEn}</span>
                 <span class="blog-desc">{post.data.summaryEn}</span>
-                <span class="blog-orig" lang="uk">{post.data.title}</span>
               </span>
               <span class="blog-side">
                 <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
@@ -202,13 +201,6 @@ const listSchema = JSON.stringify({
   font-size: 14px;
   line-height: 1.65;
   color: var(--ink-soft);
-  max-width: 68ch;
-}
-.blog-orig {
-  font-family: var(--body);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--ink-mute);
   max-width: 68ch;
 }
 .blog-side {

@@ -5,8 +5,6 @@ import { getLang, homePath, blogPath } from '../i18n';
 const currentYear = new Date().getFullYear();
 const lang = getLang(Astro.url);
 const home = homePath(lang);
-// Legal names are Ukrainian in both versions; mark them on English pages
-const nameLang = lang === 'en' ? 'uk' : undefined;
 
 const t = {
   uk: {
@@ -36,14 +34,15 @@ const t = {
     phoneDisplay: '+38 (044) 344-79-15',
     address: 'Адреса',
     addressVal: 'Київ, БЦ Гулівер, вежа А, 17-й поверх',
+    copyright: 'ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит".',
     rights: 'Усі права захищені.',
     extAria: 'lucasua.com — зовнішній сайт',
   },
   en: {
     homeAria: 'SAF-T Connector — home',
     tagline: 'XML file generation and XSD validation in line with the e-audit requirements of the State Tax Service of Ukraine.',
-    // Exact Ukrainian legal names until official English names are confirmed
-    legal: [['Product', 'ТОВ САФ-Т Коннектор'], ['Implementation', 'ТОВ Лукас Аудит']],
+    // Lucas Audit LLC — as on lucasua.com/en/; SAF-T Connector LLC — pending owner confirmation
+    legal: [['Product', 'SAF-T Connector LLC'], ['Implementation', 'Lucas Audit LLC']],
     product: 'Product',
     productLinks: [
       ['#explainer', 'What is SAF-T'],
@@ -68,6 +67,7 @@ const t = {
     phoneDisplay: '+380 44 344 7915',
     address: 'Address',
     addressVal: 'Gulliver Business Center, Tower A, 17th floor, Kyiv, Ukraine',
+    copyright: 'SAF-T Connector LLC. Lucas Audit LLC.',
     rights: 'All rights reserved.',
     extAria: 'lucasua.com — external website',
   },
@@ -86,8 +86,8 @@ const t = {
           {t.tagline}
         </p>
         <p class="footer-legal">
-          {t.legal[0][0]}: <span lang={nameLang}>{t.legal[0][1]}</span><br>
-          {t.legal[1][0]}: <span lang={nameLang}>{t.legal[1][1]}</span>
+          {t.legal[0][0]}: {t.legal[0][1]}<br>
+          {t.legal[1][0]}: {t.legal[1][1]}
         </p>
       </div>
 
@@ -128,7 +128,7 @@ const t = {
     </div>
 
     <div class="footer-bot">
-      <span class="footer-bot-copy">© {currentYear} <span lang={nameLang}>ТОВ "САФ-Т Коннектор". ТОВ "Лукас Аудит".</span> {t.rights}</span>
+      <span class="footer-bot-copy">© {currentYear} {t.copyright} {t.rights}</span>
       <a href="https://www.lucasua.com" target="_blank" rel="noopener" class="footer-bot-accent" aria-label={t.extAria}>lucasua.com →</a>
     </div>
   </div>
